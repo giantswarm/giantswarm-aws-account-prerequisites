@@ -25,10 +25,7 @@ Get the output for aws-admin-role and aws-operator-role.
 
 ## Configure organizations 
 
-`gsctl update organization set-credentials --aws-operator-role $(terraform output aws-operator-role)` 
-
-`gsctl update organization set-credentials --aws-admin-role $(terraform output aws-admin-role)`
-
+`gsctl update organization set-credentials --aws-operator-role $(terraform output aws-operator-role) --aws-admin-role $(terraform output giantswarm-admin-role)`
 
 It is explained here.
 https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/#configure-org
