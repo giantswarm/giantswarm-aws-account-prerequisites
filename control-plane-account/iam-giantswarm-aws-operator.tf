@@ -1,7 +1,7 @@
 # control-plane account-specific resources
 
 # import the generic resources module
-module "giantswarm-prerequisites-generic" {
+module "generic-resources" {
   source = "../generic-resources"
 }
 
@@ -11,7 +11,7 @@ resource "aws_iam_user" "giantswarm-aws-operator" {
 
 resource "aws_iam_user_policy_attachment" "giantswarm-aws-operator-user" {
   user       = aws_iam_user.giantswarm-aws-operator.name
-  policy_arn = module.giantswarm-prerequisites-generic.iam-policy-arn
+  policy_arn = module.generic-resources.iam-policy-arn
 }
 
 resource "aws_iam_access_key" "giantswarm-aws-operator-user" {
