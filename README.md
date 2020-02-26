@@ -1,29 +1,49 @@
-# giantswarm-aws-account-prerequisites 
+# giantswarm-aws-account-prerequisites
 This repo contains a terraform module configuration to prepare an AWS account to run Giant Swarm tenant clusters.
 
-## Before start.
+## Before starting
 Read the docs [here](https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/) and be sure we are fine in terms of AWS account limits.
 
-## Run the module
-Run the terraform module like this.
+## Prepare the control plane account
+
+Run the module in the **control plane account**:
 
 ```hcl
-module "giantswarm-prerequisites" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites"
+module "giantswarm-cp-prereqs" {
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//control-plane-account"
 }
 
-output "aws-operator-role" {
-  value = module.giantswarm-prerequisites.aws-operator-role
+output "user-access-key-id" {
+  value = "${module.giantswarm-cp-prereqs.user-access-key-id}"
 }
 
-output "giantswarm-admin-role" {
-  value = module.giantswarm-prerequisites.giantswarm-admin-role
+output "user-access-key-secret" {
+  value = "${module.giantswarm-cp-prereqs.user-access-key-secret}"
 }
-
 ```
-Get the output for aws-admin-role and aws-operator-role.
 
-## Configure organizations 
+Get the access key ID and secret from the output - these must be provided to Giant Swarm.
+
+## Prepare the tenant cluster account
+
+Ensure you set the `main_account_id` variable to the ID of the main account used in the previous step.
+
+Run the module in the **tenant cluster account**:
+
+```hcl
+module "giantswarm-tc-prereqs" {
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-cluster-account"
+  main_account_id = "111111111111"
+}
+
+output "aws-operator-role-arn" {
+  value = "${module.giantswarm-tc-prereqs.aws-operator-role}"
+}
+```
+
+Get the AWSOperator role ARN from the output - this must be provided to Giant Swarm.
+
+## Configure organizations
 
 `gsctl update organization set-credentials --aws-operator-role $(terraform output aws-operator-role) --aws-admin-role $(terraform output giantswarm-admin-role)`
 
