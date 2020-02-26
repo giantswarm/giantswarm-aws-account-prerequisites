@@ -43,6 +43,9 @@ output "aws-operator-role-arn" {
 
 Get the AWSOperator role ARN from the output - this must be provided to Giant Swarm.
 
+Note: the control plane account _must_ be prepared first, otherwise the tenant cluster module will fail
+because the control plane AWSOperator user ARN will not exist yet.
+
 ## Configure organizations
 
 `gsctl update organization set-credentials --aws-operator-role $(terraform output aws-operator-role) --aws-admin-role $(terraform output giantswarm-admin-role)`
