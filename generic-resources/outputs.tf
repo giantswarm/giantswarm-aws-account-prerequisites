@@ -3,5 +3,5 @@ output "iam-policy-arn" {
 }
 
 output "iam-staff-policy-arn" {
-  value = "${aws_iam_policy.giantswarm-staff.arn}"
+  value = "${aws_iam_policy.giantswarm-staff-policy.arn}"
 }
