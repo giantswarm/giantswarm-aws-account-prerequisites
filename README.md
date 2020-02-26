@@ -24,6 +24,10 @@ output "user-access-key-secret" {
 
 Get the access key ID and secret from the output - these must be provided to Giant Swarm.
 
+Note: as the access key ID and secret are output in plaintext, they will also be included in your
+Terraform state file. Please take this into consideration when using this module. If this isn't
+acceptable then it is possible to encrypt the secret using a [PGP key, or a keybase user](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html#pgp_key)
+
 ## Prepare the tenant cluster account
 
 Ensure you set the `main_account_id` variable to the ID of the main account used in the previous step.
