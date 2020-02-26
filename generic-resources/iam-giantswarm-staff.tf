@@ -16,12 +16,12 @@ data "aws_iam_policy_document" "giantswarm-staff" {
   }
 }
 
-resource "aws_iam_policy" "giantswarm-staff" {
+resource "aws_iam_policy" "giantswarm-staff-policy" {
   name   = "GiantSwarmAdminPolicy"
   policy = file("${path.module}/iam-policy.json")
 }
 
-resource "aws_iam_role_policy_attachment" "giantswarm-staff" {
+resource "aws_iam_role_policy_attachment" "giantswarm-staff-policy-attachment" {
     role       = aws_iam_role.giantswarm-staff.name
-    policy_arn = aws_iam_policy.giantswarm-staff.arn
+    policy_arn = aws_iam_policy.giantswarm-staff-policy.arn
 }
