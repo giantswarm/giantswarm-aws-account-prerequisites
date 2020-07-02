@@ -7,6 +7,7 @@
                 "autoscaling:*",
                 "cloudformation:*",
                 "cloudwatch:*",
+                "dynamodb:*",
                 "ec2:*",
                 "ecr:*",
                 "elasticloadbalancing:*",
