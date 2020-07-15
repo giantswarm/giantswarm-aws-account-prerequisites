@@ -1,5 +1,13 @@
 # tenant cluster account-specific resources
 
+# get latest policy
+resource "null_resource" "aws-operator-policy" {
+  provisioner "local-exec" {
+    # Download last upgrade policy
+    command = "${path.module}/upgrade_policy.sh ${var.tenant_account_id}"
+  }
+}
+
 # import the generic resources module
 module "generic-resources" {
   source = "../generic-resources"
@@ -21,7 +29,7 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.main_account_id}:user/GiantSwarmAWSOperator"]
+      identifiers = ["arn:aws:iam::${var.main_account_id}:role/GiantSwarmAWSOperator"]
     }
 
     actions = ["sts:AssumeRole"]
