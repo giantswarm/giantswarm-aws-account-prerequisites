@@ -4,9 +4,11 @@ This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm 
 ## Before starting
 Read the docs [here](https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/) and be sure we are fine in terms of AWS account limits.
 
+If you plan on having Tenant Clusters on the same AWS account as your Control Plane you will need to execute both modules **control plane account** and **tenant cluster account** against the same AWS account. Additionaly you can execute **tenant cluster account** module on sepparate accounts to have unique credentials per organization.
+
 ## Prepare the control plane account
 
-Run the module in the **control plane account**:
+Run the module in the **control plane account** :
 
 ```hcl
 module "giantswarm-cp-prereqs" {
