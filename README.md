@@ -30,7 +30,7 @@ acceptable then it is possible to encrypt the secret using a [PGP key, or a keyb
 
 ## Prepare the tenant cluster account
 
-Ensure you set the `main_account_id` variable to the ID of the main account used in the previous step.
+Ensure you set the `main_account_id` variable to the ID of the main account used in the previous step and the same time you set `tenant_account_id` with the target AWS account ID you will use for run your tenant clusters.
 
 Run the module in the **tenant cluster account**:
 
@@ -38,6 +38,7 @@ Run the module in the **tenant cluster account**:
 module "giantswarm-tc-prereqs" {
   source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-cluster-account"
   main_account_id = "111111111111"
+  tenant_account_id = "22222222222"
 }
 
 output "aws-operator-role-arn" {
