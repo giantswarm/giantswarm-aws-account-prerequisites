@@ -8,8 +8,7 @@ variable "tenant_account_id" {
   description = "AWS account ID of the tenant account"
 }
 
-variable "principal_arns_giantswarm_staff" {
-  type        = list(string)
-  description = "ARNs of accounts, groups, or users with the ability to assume this role."
-  default =["arn:aws:iam::084190472784:root"]
+variable "operator_role_name" {
+  type    = string
+  default = "GiantSwarmRoleAWSOperator"
 }

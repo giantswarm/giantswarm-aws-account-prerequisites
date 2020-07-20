@@ -8,12 +8,12 @@ resource "null_resource" "aws-operator-policy" {
 }
 
 resource "aws_iam_role" "giantswarm-aws-operator" {
-  name = "GiantSwarmAWSOperator"
+  name = var.operator_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-operator.json
 }
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
-  name   = "GiantSwarmAWSOperatorPolicy"
+  name   = "GiantSwarmRoleAWSOperator"
   policy = file("${path.module}/iam-policy.json")
 }
 
@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.main_account_id}:root]
+      identifiers = ["arn:aws:iam::${var.main_account_id}:root"]
     }
 
     actions = ["sts:AssumeRole"]
