@@ -52,6 +52,7 @@
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",
+                "servicequotas:*",
                 "support:*",
                 "trustedadvisor:*"
             ],
