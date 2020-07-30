@@ -4,6 +4,7 @@ resource "null_resource" "aws-operator-policy" {
   provisioner "local-exec" {
     # Download last upgrade policy
     command = "${path.module}/upgrade_policy.sh ${var.tenant_account_id}"
+    working_dir = "${path.module}"
   }
 }
 
@@ -15,6 +16,10 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 resource "aws_iam_policy" "giantswarm-aws-operator" {
   name   = "GiantSwarmRoleAWSOperator"
   policy = file("${path.module}/iam-policy.json")
+
+  depends_on = [
+    null_resource.aws-operator-policy,
+  ]
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {
@@ -28,7 +33,7 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.main_account_id}:root"]
+      identifiers = ["arn:aws:iam::${var.main_account_id}:user/${aws_iam_role.giantswarm-aws-operator.name}"]
     }
 
     actions = ["sts:AssumeRole"]
