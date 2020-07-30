@@ -12,7 +12,7 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
   name   = "GiantSwarmAWSOperator"
-  policy = replace(data.http.policy-file.body,"<CUSTOMER_ACCOUNT_ID>",var.tenant_account_id)
+  policy = replace(data.http.policy-file.body, "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {
