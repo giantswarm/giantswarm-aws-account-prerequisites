@@ -1,11 +1,8 @@
 ### AWS Operator Role ###
 # Get latest policy
-resource "null_resource" "aws-operator-policy" {
-  provisioner "local-exec" {
-    # Download last upgrade policy
-    command     = "${path.module}/upgrade_policy.sh ${var.tenant_account_id}"
-    working_dir = path.module
-  }
+
+data "http" "policy-file" {
+  url = "https://raw.githubusercontent.com/giantswarm/aws-operator/master/policies/tenant_cluster.json"
 }
 
 resource "aws_iam_role" "giantswarm-aws-operator" {
@@ -14,12 +11,8 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 }
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
-  name   = var.operator_role_name
-  policy = file("${path.module}/iam-policy.json")
-
-  depends_on = [
-    null_resource.aws-operator-policy,
-  ]
+  name   = "GiantSwarmAWSOperator"
+  policy = replace(data.http.policy-file.body,"<CUSTOMER_ACCOUNT_ID>",var.tenant_account_id)
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {
@@ -33,7 +26,7 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.main_account_id}:user/${var.operator_role_name}"]
+      identifiers = ["arn:aws:iam::${var.main_account_id}:user/GiantSwarmAWSOperator"]
     }
 
     actions = ["sts:AssumeRole"]
