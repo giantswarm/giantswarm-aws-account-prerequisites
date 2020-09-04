@@ -1,8 +1,8 @@
 ### AWS Operator Role ###
 # Get latest policy
 
-data "http" "policy-file" {
-  url = "https://raw.githubusercontent.com/giantswarm/aws-operator/master/policies/tenant_cluster.json"
+data "local_file" "policy" {
+  filename = "${path.module}/files/policy.json"
 }
 
 resource "aws_iam_role" "giantswarm-aws-operator" {
@@ -12,7 +12,7 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
   name   = var.operator_role_name
-  policy = replace(data.http.policy-file.body, "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
+  policy = replace(data.local_file.policy.content, "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {
