@@ -8,7 +8,7 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
   name   = var.operator_role_name
-  policy = replace(file("${path.module}/iam-policy.json"), "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
+  policy = replace(file("${path.module}/iam-policy.json"), "<CUSTOMER_ACCOUNT_ID>", var.target_account_id)
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {

@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add IAM `role/*-vpc-peer-access` resource management to the aws-operator
+  policy in `aws-operator-role` policy.
 - Rename `tenant-aws-role` module to `aws-operator-role`. It should be run on
   Control Plane account as well now.
+- Rename variable `tenant_accout_id` to `target_account_id` in
+  `aws-operator-role` module.
 
 ### Fixed
 
