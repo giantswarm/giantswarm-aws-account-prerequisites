@@ -1,16 +1,21 @@
 # giantswarm-aws-account-prerequisites
 This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm clusters.
 
+## Migration from v1.x.x
+
+To migrate from version v1.x.x change the source of the module from "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-aws-role" to "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-role" and make sure to go trough (3. Control Plane and Tenant aws-operator Role)[#3-control-plane-and-tenant-aws-operator-role].
+
 ## Before starting
+
 Read the docs [here](https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/) and be sure we are fine in terms of AWS account limits.
 
 There are three modules in this repository:
 
 1) [Admin access](./admin-access) which provisions a role and a policy for our staff to be able to operate the infrastructure created by our automation in case of failures.
 
-2) [Control Plane AWS user](./control-plane-aws-user) which creates a user and a policy to be used for our automation to manage the infrastructure in the AWS account of the control plane.
+2) [aws-operator role](./aws-operator-role) which takes care of provisioning the role and policy to be assumed for the automation to create and manage resources on both the Tenant AWS account where clusters will run and the AWS account of the control plane.
 
-1) [Tenant AWS role](./tenant-aws-role) which takes care of provisioning the role and policy to be assumed for the automation to create and manage resources on the Tenant AWS account where clusters will run. 
+3) [Control Plane AWS user](./control-plane-aws-user) which creates a user and a policy to be used for our automation to manage the infrastructure in the AWS account of the control plane.
 
 ## 1. Admin Access
 
@@ -54,15 +59,15 @@ Note: as the access key ID and secret are output in plaintext, they will also be
 Terraform state file. Please take this into consideration when using this module. If this isn't
 acceptable then it is possible to encrypt the secret using a [PGP key, or a keybase user](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html#pgp_key)
 
-## 3. Tenant AWS Role
+## 3. Control Plane and Tenant aws-operator Role
 
-Now, for each AWS Tenant account you need to run this module to enable our automation to assume the role in order to manage all clusters resources. You will need to provide the `main_account_id` used in step before for the Control Plane and the `tenant_account_id` with the target AWS account ID you need to setup.
+Now, for the Control Plane account and each AWS Tenant account you need to run this module to enable our automation to assume the role in order to manage all clusters resources. You will need to provide the `main_account_id` used in step before for the Control Plane and the `account_id` with the target AWS account ID you need to setup. When running for Control Plane account values for `main_account_id` and `target_account_id` are equal.
 
 ```hcl
 module "giantswarm-tc-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-aws-role"
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-role"
   main_account_id = "111111111111"
-  tenant_account_id = "22222222222"
+  target_account_id = "22222222222"
 }
 
 output "aws-operator-role-arn" {
@@ -70,7 +75,7 @@ output "aws-operator-role-arn" {
 }
 ```
 
-The role name is by default `GiantSwarmRoleAWSOperator` but it can be replaced passing a variable `operator_role_name` in case it is needed.
+The role and policy name is by default `GiantSwarmRoleAWSOperator` but it can be replaced passing a variable `operator_role_name` and `operator_policy_name` in case it is needed.
 
 The AWS Operator Role ARN needs to be supplied to Giant Swarm.
 

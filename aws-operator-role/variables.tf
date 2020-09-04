@@ -3,9 +3,9 @@ variable "main_account_id" {
   description = "AWS account ID of the control plane account"
 }
 
-variable "tenant_account_id" {
+variable "target_account_id" {
   type        = string
-  description = "AWS account ID of the tenant account"
+  description = "AWS account ID of the tenant or the control plane account"
 }
 
 variable "operator_role_name" {
