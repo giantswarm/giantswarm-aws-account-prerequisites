@@ -70,7 +70,7 @@ output "aws-operator-role-arn" {
 }
 ```
 
-The role name is by default `GiantSwarmRoleAWSOperator` but it can be replaced passing a variable `operator_role_name` in case it is needed.
+The role and policy name is by default `GiantSwarmRoleAWSOperator` but it can be replaced passing a variable `operator_role_name` and `operator_policy_name` in case it is needed.
 
 The AWS Operator Role ARN needs to be supplied to Giant Swarm.
 

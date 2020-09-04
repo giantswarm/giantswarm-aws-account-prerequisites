@@ -12,3 +12,8 @@ variable "operator_role_name" {
   type    = string
   default = "GiantSwarmRoleAWSOperator"
 }
+
+variable "operator_policy_name" {
+  type    = string
+  default = "GiantSwarmRoleAWSOperator"
+}
