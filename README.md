@@ -3,7 +3,7 @@ This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm 
 
 ## Migration from v1.x.x
 
-To migrate from version v1.x.x change the source of the module from "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-aws-role" to "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-role" and make sure to go trough (3. Control Plane and Tenant aws-operator Role)[#3-control-plane-and-tenant-aws-operator-role].
+To migrate from version v1.x.x change the source of the module from "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//tenant-aws-role" to "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-role" and make sure to go trough [3. Control Plane and Tenant aws-operator Role](#3-control-plane-and-tenant-aws-operator-role).
 
 ## Before starting
 
