@@ -1,10 +1,6 @@
 ### AWS Operator Role ###
 # Get latest policy
 
-data "local_file" "policy" {
-  filename = "${path.module}/files/policy.json"
-}
-
 resource "aws_iam_role" "giantswarm-aws-operator" {
   name               = var.operator_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-operator.json
@@ -12,7 +8,7 @@ resource "aws_iam_role" "giantswarm-aws-operator" {
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
   name   = var.operator_role_name
-  policy = replace(data.local_file.policy.content, "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
+  policy = replace(file("${path.module}/iam-policy.json"), "<CUSTOMER_ACCOUNT_ID>", var.tenant_account_id)
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-operator" {
