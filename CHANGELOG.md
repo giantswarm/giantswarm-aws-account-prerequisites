@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `operator_policy_name` variable to `aws-operator-role` module.
+
+### Changed
+
+- Rename `tenant-aws-role` module to `aws-operator-role`. It should be run on
+  Control Plane account as well now.
+
 ## [1.0.0] - 2020-09-04
 
 ### Added
