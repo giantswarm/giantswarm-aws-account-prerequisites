@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Extend aws-operator policy with permissions required on control-plane
+  account.
+
 ### Changed
 
 - Update aws-operator policy with additional IAM `role/*-vpc-peer-access`
