@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Extract `operator_user_name` variable in `aws-operator-role` module.
+
 ### Changed
 
 - Update aws-operator policy with additional IAM `role/*-vpc-peer-access`
-  resource to the  in `aws-operator-role` module.
+  resource to the in `aws-operator-role` module.
 - Rename `tenant-aws-role` module to `aws-operator-role`. It should be run on
   Control Plane account as well now.
 - Rename variable `tenant_accout_id` to `target_account_id` in
