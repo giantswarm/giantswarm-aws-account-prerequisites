@@ -57,11 +57,11 @@
                 "iam:UpdateRoleDescription"
             ],
             "Resource": [
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-EC2-K8S-Role",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-IAMManager-Role",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-Route53Manager-Role",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-vpc-peer-access",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/gs-*"
+                "${arn_prefix}:iam::${account_id}:role/*-EC2-K8S-Role",
+                "${arn_prefix}:iam::${account_id}:role/*-IAMManager-Role",
+                "${arn_prefix}:iam::${account_id}:role/*-Route53Manager-Role",
+                "${arn_prefix}:iam::${account_id}:role/*-vpc-peer-access",
+                "${arn_prefix}:iam::${account_id}:role/gs-*"
             ]
         },
         {
@@ -73,8 +73,8 @@
                 "iam:RemoveRoleFromInstanceProfile"
             ],
             "Resource": [
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:instance-profile/*-EC2-K8S-Role",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:instance-profile/gs-*"
+                "${arn_prefix}:iam::${account_id}:instance-profile/*-EC2-K8S-Role",
+                "${arn_prefix}:iam::${account_id}:instance-profile/gs-*"
             ]
         },
         {
@@ -84,9 +84,9 @@
                 "iam:TagRole"
             ],
             "Resource": [
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/gs-*",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-IAMManager-Role",
-                "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/*-Route53Manager-Role"
+                "${arn_prefix}:iam::${account_id}:role/gs-*",
+                "${arn_prefix}:iam::${account_id}:role/*-IAMManager-Role",
+                "${arn_prefix}:iam::${account_id}:role/*-Route53Manager-Role"
             ]
         },
         {
@@ -94,7 +94,7 @@
             "Action": [
                 "iam:CreateServiceLinkedRole"
             ],
-            "Resource": "arn:aws:iam::<CUSTOMER_ACCOUNT_ID>:role/aws-service-role/*"
+            "Resource": "${arn_prefix}:iam::${account_id}:role/aws-service-role/*"
         }
     ]
 }
