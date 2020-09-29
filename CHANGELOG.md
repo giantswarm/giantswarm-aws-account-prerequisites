@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Extract `arn_prefix` variable in `aws-operator-role` module to support CN
+  regions.
+
 ### Changed
 
 - Update aws-operator policy with additional IAM `role/*-vpc-peer-access`
