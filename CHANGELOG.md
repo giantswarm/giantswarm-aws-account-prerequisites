@@ -9,9 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Extract `operator_user_name` variable in `aws-operator-role` module.
+- Extend aws-operator policy with permissions required on control-plane
+  account.
 - Extract `arn_prefix` variable in `aws-operator-role` module to support CN
   regions.
+- Extract `operator_user_name` variable in `aws-operator-role` module.
 
 ### Changed
 
