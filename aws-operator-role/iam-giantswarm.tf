@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.arn_prefix}:iam::${var.main_account_id}:user/GiantSwarmAWSOperator"]
+      identifiers = ["${var.arn_prefix}:iam::${var.main_account_id}:user/${var.operator_user_name}"]
     }
 
     actions = ["sts:AssumeRole"]
