@@ -17,12 +17,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Set role name to fixed value `GiantSwarmAWSOperator` in `aws-operator-role`
+  module.
 - Update aws-operator policy with additional IAM `role/*-vpc-peer-access`
   resource to the in `aws-operator-role` module.
 - Rename `tenant-aws-role` module to `aws-operator-role`. It should be run on
   Control Plane account as well now.
 - Rename variable `tenant_accout_id` to `target_account_id` in
   `aws-operator-role` module.
+
+### Removed
+
+- Remove `operator_role_name` variable from `aws-operator-role` module.
 
 ### Fixed
 
