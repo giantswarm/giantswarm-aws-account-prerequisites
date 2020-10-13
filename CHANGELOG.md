@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extract `arn_prefix` variable in `aws-operator-role` module to support CN
   regions.
 - Extract `operator_user_name` variable in `aws-operator-role` module.
+- Add `LisUsers` and `GetPolicyVersion` in `admin-access` policy.
 
 ### Changed
 
