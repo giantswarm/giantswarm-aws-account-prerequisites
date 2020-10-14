@@ -1,6 +1,0 @@
-aws_account_id         = "084190472784"
-aws_arn_prefix         = "arn:aws"
-aws_profile            = "ginger"
-aws_region             = "eu-west-1"
-aws_operator_role_name = ""
-aws_operator_user_name = "GiantSwarmAWSOperator"
