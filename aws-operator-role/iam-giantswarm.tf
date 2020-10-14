@@ -1,8 +1,9 @@
-### AWS Operator Role ###
-# Get latest policy
+locals {
+  operator_role_name = "GiantSwarmAWSOperator"
+}
 
 resource "aws_iam_policy" "giantswarm-aws-operator" {
-  name = var.operator_role_name
+  name = local.operator_role_name
   policy = templatefile("${path.module}/iam-policy.json", {
     account_id = "${var.target_account_id}"
     arn_prefix = "${var.arn_prefix}"
@@ -10,7 +11,7 @@ resource "aws_iam_policy" "giantswarm-aws-operator" {
 }
 
 resource "aws_iam_role" "giantswarm-aws-operator" {
-  name               = var.operator_role_name
+  name               = local.operator_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-operator.json
 }
 
@@ -31,4 +32,3 @@ data "aws_iam_policy_document" "giantswarm-aws-operator" {
     actions = ["sts:AssumeRole"]
   }
 }
-### AWS Operator Role ###
