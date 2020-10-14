@@ -1,6 +1,5 @@
-### Admin Staff Role ###
 resource "aws_iam_role" "giantswarm-admin" {
-  name = var.admin_role_name
+  name               = var.admin_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-admin.json
 }
 
@@ -23,7 +22,6 @@ resource "aws_iam_policy" "giantswarm-admin-policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-policy-attachment" {
-    role       = aws_iam_role.giantswarm-admin.name
-    policy_arn = aws_iam_policy.giantswarm-admin-policy.arn
+  role       = aws_iam_role.giantswarm-admin.name
+  policy_arn = aws_iam_policy.giantswarm-admin-policy.arn
 }
-### END Admin Staff Role ###
