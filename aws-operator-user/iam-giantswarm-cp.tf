@@ -1,4 +1,3 @@
-### Control Plane AWS operator User ###
 resource "aws_iam_user" "giantswarm-aws-operator" {
   name = "GiantSwarmAWSOperator"
 }
@@ -14,6 +13,5 @@ resource "aws_iam_user_policy_attachment" "giantswarm-aws-operator-user" {
 }
 
 resource "aws_iam_access_key" "giantswarm-aws-operator-user" {
-  user    = aws_iam_user.giantswarm-aws-operator.name
+  user = aws_iam_user.giantswarm-aws-operator.name
 }
-### END Control Plane AWS operator User ###
