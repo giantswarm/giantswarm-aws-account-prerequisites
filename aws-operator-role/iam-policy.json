@@ -27,6 +27,7 @@
                 "iam:DetachRolePolicy",
                 "iam:GetAccount*",
                 "iam:GetInstanceProfile",
+                "iam:GetPolicyVersion",
                 "iam:GetRole",
                 "iam:GetRolePolicy",
                 "iam:GetServiceLinkedRoleDeletionStatus",
