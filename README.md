@@ -28,7 +28,7 @@ account:
 
 ```hcl
 module "giantswarm-cp-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//admin-access"
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//admin-role"
 }
 
 output "giantswarm-admin-role" {
@@ -48,7 +48,7 @@ please run this module in the target account:
 
 ```hcl
 module "giantswarm-cp-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//control-plane-aws-user"
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-user"
 }
 
 output "user-access-key-id" {
