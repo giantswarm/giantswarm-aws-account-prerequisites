@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Limit S3 permissions for `GiantSwarmAWSOperator`
+
 ## [2.0.0] - 2020-09-04
 
 ### Added
