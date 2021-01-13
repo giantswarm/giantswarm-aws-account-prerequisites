@@ -6,12 +6,8 @@
             "Action": [
                 "autoscaling:*",
                 "cloudformation:*",
-                "cloudwatch:*",
-                "dynamodb:*",
                 "ec2:*",
-                "ecr:*",
                 "elasticloadbalancing:*",
-                "events:*",
                 "iam:AddRoleToInstanceProfile",
                 "iam:AttachRolePolicy",
                 "iam:CreateInstanceProfile",
@@ -44,17 +40,13 @@
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:UpdateAssumeRolePolicy",
                 "iam:UpdateRoleDescription",
-                "kms:*",
                 "logs:*",
                 "route53:*",
-                "route53domains:*",
-                "s3:*",
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",
                 "servicequotas:*",
-                "support:*",
-                "trustedadvisor:*"
+                "support:*"
             ],
             "Resource": "*"
         }
