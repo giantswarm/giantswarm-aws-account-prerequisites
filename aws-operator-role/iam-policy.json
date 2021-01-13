@@ -6,11 +6,8 @@
             "Action": [
                 "autoscaling:*",
                 "cloudformation:*",
-                "cloudwatch:*",
                 "ec2:*",
-                "ecr:*",
                 "elasticloadbalancing:*",
-                "events:*",
                 "iam:AddRoleToInstanceProfile",
                 "iam:AttachRolePolicy",
                 "iam:CreateInstanceProfile",
@@ -46,14 +43,12 @@
                 "kms:*",
                 "logs:*",
                 "route53:*",
-                "route53domains:*",
                 "s3:*",
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",
                 "servicequotas:*",
-                "support:*",
-                "trustedadvisor:*"
+                "support:*"
             ],
             "Resource": "*"
         },
