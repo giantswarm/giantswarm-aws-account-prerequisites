@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Extend `GiantSwarmAdmin` policy with permissions for policy view and last access service.
 
+### Removed
+
+- Remove unused service permissions in `GiantSwarmAWSOperator`.
+
 ### Fixed
 
 - Updated README with correct directories
