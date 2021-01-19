@@ -52,6 +52,7 @@
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:UpdateAssumeRolePolicy",
                 "iam:UpdateRoleDescription",
+                "iam:TagRole",
                 "kms:*",
                 "logs:*",
                 "route53:*",
