@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Extend all policies with `iam:TagRole` to fix missing tags.
+
+### Added
+
 - Extend `GiantSwarmAdmin` policy with permissions for policy view and last access service.
 
 ### Removed
