@@ -43,6 +43,7 @@
                 "iam:PutRolePolicy",
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:UpdateAssumeRolePolicy",
+                "iam:TagRole",
                 "iam:UpdateRoleDescription",
                 "kms:*",
                 "logs:*",
