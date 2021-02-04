@@ -10,6 +10,7 @@
                 "dynamodb:*",
                 "ec2:*",
                 "ecr:*",
+                "elasticfilesystem:*",
                 "elasticloadbalancing:*",
                 "events:*",
                 "iam:AddRoleToInstanceProfile",
