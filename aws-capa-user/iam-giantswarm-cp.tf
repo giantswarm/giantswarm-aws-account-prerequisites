@@ -12,6 +12,6 @@ resource "aws_iam_user_policy_attachment" "giantswarm-aws-capa-controller-user" 
   policy_arn = aws_iam_policy.giantswarm-policy.arn
 }
 
-resource "aws_iam_access_key" "giantswarm-aws-operator-user" {
-  user = aws_iam_user.giantswarm-aws-operator.name
+resource "aws_iam_access_key" "giantswarm-aws-capa-controller-user" {
+  user = aws_iam_user.giantswarm-aws-capa-controller.name
 }

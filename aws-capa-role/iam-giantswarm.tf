@@ -10,14 +10,14 @@ resource "aws_iam_policy" "giantswarm-aws-capa-controller" {
   })
 }
 
-resource "aws_iam_controller_role" "giantswarm-aws-capa-controller" {
+resource "aws_iam_role" "giantswarm-aws-capa-controller" {
   name               = local.controller_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-capa-controller.json
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm-aws-capa-controller" {
-  role       = aws_iam_role.giantswarm-aws-operator.name
-  policy_arn = aws_iam_policy.giantswarm-aws-operator.arn
+  role       = aws_iam_role.giantswarm-aws-capa-controller.name
+  policy_arn = aws_iam_policy.giantswarm-aws-capa-controller.arn
 }
 
 data "aws_iam_policy_document" "giantswarm-aws-capa-controller" {
