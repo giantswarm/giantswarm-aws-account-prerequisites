@@ -48,6 +48,19 @@ resource "aws_iam_role" "giantswarm-aws-capa-controlplane" {
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-capa-controlplane.json
 }
 
+data "aws_iam_policy_document" "giantswarm-aws-capa-controlplane" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
 resource "aws_iam_policy" "giantswarm-aws-capa-node" {
   name = local.node_role_name
   policy = templatefile("${path.module}/iam-node-policy.json", {
@@ -59,4 +72,17 @@ resource "aws_iam_policy" "giantswarm-aws-capa-node" {
 resource "aws_iam_role" "giantswarm-aws-capa-node" {
   name               = local.node_role_name
   assume_role_policy = data.aws_iam_policy_document.giantswarm-aws-capa-node.json
+}
+
+data "aws_iam_policy_document" "giantswarm-aws-capa-node" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
 }
