@@ -65,6 +65,13 @@ The created user name is `GiantSwarmAWSOperator` and its policy name is
 
 Get the access key ID and secret from the output - these must be provided to Giant Swarm.
 
+When `sensitive = true` in output.tf, the secret value will be redacted. You can however 
+find it directly from the state file by running:
+
+```bash
+cat terraform.tfstate | grep secret
+```
+
 **Note:** as the access key ID and secret are output in plaintext, they will
 also be included in your Terraform state file. Please take this into
 consideration when using this module. If this isn't acceptable then it is
