@@ -62,6 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v1.0.0...v2.0.0
-[1.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/releases/tag/v1.0.0
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites-aws-account-prerequisites/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites-aws-account-prerequisites/compare/v1.0.0...v2.0.0
+[1.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites-aws-account-prerequisites/releases/tag/v1.0.0
