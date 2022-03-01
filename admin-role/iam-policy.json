@@ -63,7 +63,8 @@
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",
                 "support:*",
-                "trustedadvisor:*"
+                "trustedadvisor:*",
+                "sqs:*"
             ],
             "Resource": "*"
         }
