@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Extend `GiantSwarmAdmin` policy to allow EFS service.
 - Extend all policies with `iam:TagRole` to fix missing tags.
 - Extend `GiantSwarmAdmin` policy with permissions for policy view and last access service.
+- Add `sqs:*` permission to admin role.
 
 ### Changed
 
