@@ -71,6 +71,7 @@
                 "s3:PutBucketLogging",
                 "s3:PutBucketLifecycle",
                 "s3:PutBucketTagging",
+                "s3:PutObjectAcl",
                 "s3:PutObject",
                 "s3:PutBucketPolicy",
                 "s3:PutBucketPublicAccessBlock",
