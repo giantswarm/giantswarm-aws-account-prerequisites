@@ -34,6 +34,7 @@
                 "iam:ListAttachedRolePolicies",
                 "iam:ListAttachedUserPolicies",
                 "iam:ListInstanceProfilesForRole",
+                "iam:ListOpenIDConnectProviderTags",
                 "iam:ListPolicies",
                 "iam:ListRolePolicies",
                 "iam:ListRoles",
