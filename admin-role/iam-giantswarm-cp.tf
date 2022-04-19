@@ -13,6 +13,12 @@ data "aws_iam_policy_document" "giantswarm-admin" {
     }
 
     actions = ["sts:AssumeRole"]
+
+    condition {
+      test     = "Bool"
+      variable = "aws:MultiFactorAuthPresent"
+      values   = ["true"]
+    }
   }
 }
 
