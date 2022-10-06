@@ -49,6 +49,7 @@
                 "kms:*",
                 "logs:*",
                 "route53:*",
+		"route53resolver:*",
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",

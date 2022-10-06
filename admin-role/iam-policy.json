@@ -58,6 +58,7 @@
                 "logs:*",
                 "route53:*",
                 "route53domains:*",
+		"route53resolver:*",
                 "s3:*",
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
