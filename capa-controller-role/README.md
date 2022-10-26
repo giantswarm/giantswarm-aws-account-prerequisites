@@ -1,4 +1,4 @@
-# Cluster API role 
+# Cluster API AWS provider role
 If you don't know what the `INSTALLATION_NAME` value is supposed to be, ask Giant Swarm staff and they will provide it.
 
 ## with aws cli
