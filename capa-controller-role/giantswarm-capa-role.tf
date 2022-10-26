@@ -1,5 +1,5 @@
 resource "aws_iam_role" "giantswarm-capa-controller-role" {
-  name               = var.capa_controller_role_name
+  name               = "giantswarm-${var.installation_name}-capa-controller"
   assume_role_policy = data.aws_iam_policy_document.giantswarm-capa-controller.json
 }
 
@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "giantswarm-capa-controller" {
 }
 
 resource "aws_iam_policy" "giantswarm-capa-controller-policy" {
-  name   = "giantswarm-capa-controller-policy"
+  name   = "giantswarm-${var.installation_name}-capa-controller-policy"
   policy = file("${path.module}/capa-controller-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-attachment" {
@@ -26,7 +26,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-att
 }
 
 resource "aws_iam_policy" "giantswarm-dns-controller-policy" {
-  name   = "giantswarm-dns-controller-policy"
+  name   = "giantswarm-${var.installation_name}-dns-controller-policy"
   policy = file("${path.module}/dns-controller-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-dns-controller-policy-attachment" {
@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm-dns-controller-policy-atta
 }
 
 resource "aws_iam_policy" "giantswarm-eks-controller-policy" {
-  name   = "giantswarm-eks-controller-policy"
+  name   = "giantswarm-${var.installation_name}-eks-controller-policy"
   policy = file("${path.module}/eks-controller-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-eks-controller-policy-attachment" {
@@ -44,7 +44,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm-eks-controller-policy-atta
 }
 
 resource "aws_iam_policy" "giantswarm-iam-controller-policy" {
-  name   = "giantswarm-iam-controller-policy"
+  name   = "giantswarm-${var.installation_name}-iam-controller-policy"
   policy = file("${path.module}/iam-controller-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-iam-controller-policy-attachment" {
@@ -53,8 +53,8 @@ resource "aws_iam_role_policy_attachment" "giantswarm-iam-controller-policy-atta
 }
 
 resource "aws_iam_policy" "giantswarm-irsa-controller-policy" {
-  name   = "giantswarm-irsa-controller-policy"
-  policy = file("${path.module}/irsa-controller-policy.json")
+  name   = "giantswarm-${var.installation_name}-irsa-controller-policy"
+  policy = file("${path.module}/irsa-operator-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-irsa-controller-policy-attachment" {
   role       = aws_iam_role.giantswarm-capa-controller-role.name
@@ -62,7 +62,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm-irsa-controller-policy-att
 }
 
 resource "aws_iam_policy" "giantswarm-network-topology-controller-policy" {
-  name   = "giantswarm-network-topology-controller-policy"
+  name   = "giantswarm-${var.installation_name}-network-topology-controller-policy"
   policy = file("${path.module}/network-topology-operator-policy.json")
 }
 resource "aws_iam_role_policy_attachment" "giantswarm-network-topology-controller-policy-attachment" {
