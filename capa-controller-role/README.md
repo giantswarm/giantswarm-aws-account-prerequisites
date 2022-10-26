@@ -1,10 +1,8 @@
 # Cluster API role 
-If you dont know what `INSTALLATION_NAME` value is suppose to be, ask Giant Swarm staff and they will provide it.
-
-# Create role and policy
+If you don't know what the `INSTALLATION_NAME` value is supposed to be, ask Giant Swarm staff and they will provide it.
 
 ## with aws cli
-### requirement
+### requirements
 - `awscli` installed 
 - `envsubst` tool
 - `jq` installed
