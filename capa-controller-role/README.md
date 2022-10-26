@@ -1,10 +1,5 @@
 # Cluster API role 
-role name should be `${INSTALLATION_NAME}-capa-controller`
-
-the role should have `Trust relationship` so it can be assumed with the user `arn:aws:iam::084190472784:user/${INSTALLATION_NAME}-capa-controller`
-
-If you dont know what `INSTALLATION_NAME` value is suppsoe to be ask Giant Swarm staff and they will provide it.
-
+If you dont know what `INSTALLATION_NAME` value is suppose to be, ask Giant Swarm staff and they will provide it.
 
 # Create role and policy
 
@@ -20,7 +15,7 @@ If you dont know what `INSTALLATION_NAME` value is suppsoe to be ask Giant Swarm
 ### commands to execute
 ```
 export INSTALLATION_NAME=test
-export ROLE_NAME="giantswarm-${INSTALLATION_NAME}capa-controller"
+export ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 
 envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
 aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
@@ -47,3 +42,4 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${NETWORK_TO
 ```
 
 ## with terraform
+TODO
