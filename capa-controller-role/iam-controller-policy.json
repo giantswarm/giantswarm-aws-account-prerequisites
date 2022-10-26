@@ -1,0 +1,37 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:GetRole",
+                "iam:ListAttachedRolePolicies",
+                "iam:DetachRolePolicy",
+                "iam:DeleteRole",
+                "iam:CreateRole",
+                "iam:TagRole",
+                "iam:AttachRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:ListRolePolicies",
+                "iam:DeleteRolePolicy",
+                "iam:*"
+            ],
+            "Resource": [
+                "arn:*:iam::*:role/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateInstanceProfile",
+                "iam:AddRoleToInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "iam:*"
+            ],
+            "Resource": [
+                "arn:*:iam::*:instance-profile/*"
+            ]
+        }
+    ]
+}
