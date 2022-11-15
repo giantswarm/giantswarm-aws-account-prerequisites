@@ -12,6 +12,12 @@
                 "iam:AttachRolePolicy",
                 "iam:CreateInstanceProfile",
                 "iam:CreateOpenIDConnectProvider",
+		"iam:DeleteOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviderTags",
+                "iam:TagOpenIDConnectProvider",
+                "iam:UntagOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviders",
+                "iam:GetOpenIDConnectProvider",
                 "iam:CreatePolicy",
                 "iam:CreatePolicyVersion",
                 "iam:CreateRole",
@@ -34,16 +40,13 @@
                 "iam:ListAttachedRolePolicies",
                 "iam:ListAttachedUserPolicies",
                 "iam:ListInstanceProfilesForRole",
-                "iam:ListOpenIDConnectProviderTags",
                 "iam:ListPolicies",
                 "iam:ListRolePolicies",
                 "iam:ListRoles",
                 "iam:PassRole",
                 "iam:PutRolePolicy",
                 "iam:RemoveRoleFromInstanceProfile",
-                "iam:TagOpenIDConnectProvider",
                 "iam:TagRole",
-                "iam:UntagOpenIDConnectProvider",
                 "iam:UpdateAssumeRolePolicy",
                 "iam:UpdateRoleDescription",
                 "kms:*",
@@ -139,6 +142,34 @@
                 "iam:CreateServiceLinkedRole"
             ],
             "Resource": "${arn_prefix}:iam::${account_id}:role/aws-service-role/*"
+        },
+	{
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:TagResource",
+                "cloudfront:UntagResource",
+                "cloudfront:GetCloudFrontOriginAccessIdentity",
+                "cloudfront:CreateCloudFrontOriginAccessIdentity",
+                "cloudfront:DeleteCloudFrontOriginAccessIdentity",
+                "cloudfront:GetDistribution",
+                "cloudfront:CreateDistribution",
+                "cloudfront:UpdateDistribution",
+                "cloudfront:DeleteDistribution",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "acm:RequestCertificate",
+                "acm:AddTagsToCertificate",
+                "acm:DescribeCertificate",
+                "acm:ListCertificates",
+                "acm:DeleteCertificate"
+            ],
+            "Resource": "*"
         }
     ]
 }

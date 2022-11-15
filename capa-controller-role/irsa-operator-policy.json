@@ -9,6 +9,8 @@
                 "iam:ListOpenIDConnectProviderTags",
                 "iam:TagOpenIDConnectProvider",
                 "iam:UntagOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviders",
+                "iam:GetOpenIDConnectProvider",
                 "cloudfront:TagResource",
                 "cloudfront:UntagResource",
                 "cloudfront:GetCloudFrontOriginAccessIdentity",
@@ -17,7 +19,9 @@
                 "cloudfront:GetDistribution",
                 "cloudfront:CreateDistribution",
                 "cloudfront:UpdateDistribution",
-                "cloudfront:DeleteDistribution"
+                "cloudfront:DeleteDistribution",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListTagsForResource"
             ],
             "Resource": "*"
         },
@@ -44,6 +48,17 @@
                 "s3:PutObjectAcl"
             ],
             "Resource": "arn:aws:s3:::*-g8s-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "acm:RequestCertificate",
+                "acm:AddTagsToCertificate",
+                "acm:DescribeCertificate",
+                "acm:ListCertificates",
+                "acm:DeleteCertificate"
+            ],
+            "Resource": "*"
         }
     ]
 }
