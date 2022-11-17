@@ -4,8 +4,10 @@
         {
             "Effect": "Allow",
             "Action": [
+		"acm:*",
                 "autoscaling:*",
                 "cloudformation:*",
+		"cloudfront:*",
                 "cloudwatch:*",
                 "dynamodb:*",
                 "ec2:*",
