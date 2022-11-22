@@ -77,7 +77,8 @@
 		"iam:GetOpenIDConnectProvider",
 		"iam:UpdateOpenIDConnectProviderThumbprint",
 		"iam:RemoveClientIDFromOpenIDConnectProvider",
-		"iam:AddClientIDToOpenIDConnectProvider"
+		"iam:AddClientIDToOpenIDConnectProvider",
+		"iam:ListSAMLProviders"
             ],
             "Resource": "*"
         }
