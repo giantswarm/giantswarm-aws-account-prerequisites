@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Limit S3 permissions for `GiantSwarmAWSOperator`
+- Added `sns:Publish` permission to network-topology-operator policy
 
 ### Removed
 

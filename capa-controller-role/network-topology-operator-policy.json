@@ -19,7 +19,8 @@
                 "ec2:GetManagedPrefixListEntries",
                 "ec2:DeleteRoute",
                 "ec2:CreateRoute",
-                "ec2:DescribeRouteTables"
+                "ec2:DescribeRouteTables",
+                "sns:Publish"
             ],
             "Resource": "*"
         }
