@@ -37,6 +37,9 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${IRSA_POLIC
 NETWORK_TOPOLOGY_POLICY_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-network-topology-controller-policy" --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://network-topology-operator-policy.json | jq -r '.Policy.Arn')
 aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${NETWORK_TOPOLOGY_POLICY_ARN}"
 
+RESOLVER_RULES_POLICY_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-resolver-rule-operator-policy" --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://resolver-rules-operator-policy.json | jq -r '.Policy.Arn')
+aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${RESOLVER_RULES_POLICY_ARN}"
+
 ```
 
 ## with terraform

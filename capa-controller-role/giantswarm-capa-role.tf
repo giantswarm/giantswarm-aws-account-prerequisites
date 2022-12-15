@@ -69,3 +69,12 @@ resource "aws_iam_role_policy_attachment" "giantswarm-network-topology-controlle
   role       = aws_iam_role.giantswarm-capa-controller-role.name
   policy_arn = aws_iam_policy.giantswarm-network-topology-controller-policy.arn
 }
+
+resource "aws_iam_policy" "giantswarm-resolver-rules-operator-policy" {
+  name   = "giantswarm-${var.installation_name}-resolver-rules-operator-policy"
+  policy = file("${path.module}/resolver-rules-operator-policy.json")
+}
+resource "aws_iam_role_policy_attachment" "giantswarm-resolver-rules-operator-policy-attachment" {
+  role       = aws_iam_role.giantswarm-capa-controller-role.name
+  policy_arn = aws_iam_policy.giantswarm-resolver-rules-operator-policy.arn
+}
