@@ -15,6 +15,7 @@
                 "elasticfilesystem:*",
                 "elasticloadbalancing:*",
                 "events:*",
+		"ram:*",
                 "iam:AddRoleToInstanceProfile",
                 "iam:AttachRolePolicy",
                 "iam:CreateInstanceProfile",
