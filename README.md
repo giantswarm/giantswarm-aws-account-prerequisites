@@ -3,12 +3,18 @@
 This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm
 clusters.
 
+# Cluster API
+TODO
+ 
+
+
+# Vintage
 ## Before starting
 
 Make sure to adjust AWS account limits according to [these
 docs](https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/#limits).
 
-There are three modules in this repository:
+For Vintage take a look at theese three modules in this repository:
 
 1. [admin-role](./admin-role) which creates a role and a policy for our
    staff to be able to operate the infrastructure created by our automation in
