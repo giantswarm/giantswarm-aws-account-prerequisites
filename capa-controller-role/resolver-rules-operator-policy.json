@@ -11,6 +11,7 @@
 		"ec2:RevokeSecurityGroupIngress",
 		"ec2:AuthorizeSecurityGroupIngress",
                 "ram:*",
+		"sts:AssumeRole",
 		"route53resolver:*"
             ],
             "Resource": [
