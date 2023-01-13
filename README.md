@@ -4,8 +4,40 @@ This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm
 clusters.
 
 # Cluster API
-TODO
- 
+## Before starting
+Make sure to adjust AWS account limits according to [these
+docs](https://docs.giantswarm.io/getting-started/cloud-provider-accounts/cluster-api/aws/#limits). 
+
+For Cluster API take a look at theese three modules in this repository:
+1. [admin-role](./admin-role) which creates a role and a policy for our
+   staff to be able to operate the infrastructure created by our automation in
+   case of failures.
+3. [capa-controller-role](./capa-controller-role) which creates
+   the role and policies that the controllers assume to create and manage the kubernetes clusters.
+
+## 1. admin-role
+
+For all AWS accounts part of the platform, does not matter if they are for
+management or workload clusters, we need to have access in order to debug and
+manage and operate the infrastructure. To do so, please run this module in the target
+account:
+
+```hcl
+module "giantswarm-cp-prereqs" {
+  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites/admin-role"
+}
+
+output "giantswarm-admin-role" {
+  value = "${module.giantswarm-cp-prereqs.giantswarm-admin-role}"
+}
+```
+
+The created role and policy name is `GiantSwarmAdmin`.
+
+The created role ARN needs to be supplied to Giant Swarm.
+
+## 2. capa-controller-role
+Please read the [README.md](./capa-controller-role/README.md) of the capa-controller-role module.
 
 
 # Vintage
