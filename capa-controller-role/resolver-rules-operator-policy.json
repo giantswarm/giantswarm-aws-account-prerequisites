@@ -12,7 +12,8 @@
 		"ec2:AuthorizeSecurityGroupIngress",
                 "ram:*",
 		"sts:AssumeRole",
-		"route53resolver:*"
+		"route53resolver:*",
+		"ec2:CreateNetworkInterface"
             ],
             "Resource": [
                 "*"
