@@ -51,6 +51,8 @@
                 "iam:ListRoles",
                 "iam:ListUsers",
                 "iam:ListUserPolicies",
+		"iam:ListEntitiesForPolicy",
+                "iam:ListPolicyVersions",
                 "iam:PassRole",
                 "iam:PutRolePolicy",
                 "iam:RemoveRoleFromInstanceProfile",
