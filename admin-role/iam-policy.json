@@ -20,7 +20,7 @@
                 "iam:AttachRolePolicy",
                 "iam:CreateAccessKey",
                 "iam:CreateInstanceProfile",
-                "iam:CreatePolicy",,
+                "iam:CreatePolicy",
                 "iam:CreatePolicyVersion",
                 "iam:CreateRole",
                 "iam:CreateServiceLinkedRole",
