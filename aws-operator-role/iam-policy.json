@@ -61,7 +61,8 @@
                 "sts:GetFederationToken",
                 "servicequotas:*",
                 "support:*",
-                "trustedadvisor:*"
+                "trustedadvisor:*",
+		"sqs:*",
             ],
             "Resource": "*"
         },
