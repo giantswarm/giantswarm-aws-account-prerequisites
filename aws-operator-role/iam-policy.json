@@ -62,7 +62,7 @@
                 "servicequotas:*",
                 "support:*",
                 "trustedadvisor:*",
-		"sqs:*",
+		"sqs:*"
             ],
             "Resource": "*"
         },
