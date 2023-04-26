@@ -159,7 +159,7 @@
             ],
             "Resource": "${arn_prefix}:iam::${account_id}:role/aws-service-role/*"
         },
-    {
+        {
             "Effect": "Allow",
             "Action": [
                 "cloudfront:TagResource",
