@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `ec2:CreateNetworkInterface` permission for resolver rules operator.
 - Add `s3:PutBucketOwnershipControls` permissions for `GiantSwarmAWSOperator`.
 - Add SQS permission for NodeTerminationHandler/Karpenter.
+- Add Events permissions for NodeTerminationHandler/Karpenter.
+- Add `ssm:GetParameter` for NodeTerminationHandler/Karpenter.
 
 ### Changed
 
