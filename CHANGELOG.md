@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add SQS permission for NodeTerminationHandler/Karpenter.
+- Add Events permissions for NodeTerminationHandler/Karpenter.
+- Add `ssm:GetParameter` for NodeTerminationHandler/Karpenter.
+
 ## [3.0.0] - 2023-04-27
 
 ### Added
@@ -73,7 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First release.
 
 [Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...HEAD
-[3.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...v3.0.0
 [3.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/releases/tag/v1.0.0
