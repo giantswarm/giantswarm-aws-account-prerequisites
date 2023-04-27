@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2023-04-27
+
 ### Added
 
 - Add s3:PutBucketOwnershipControls permissions for GiantSwarmAWSOperator.
@@ -76,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.1.0...v3.0.0
 [3.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v2.0.0...v3.0.0
