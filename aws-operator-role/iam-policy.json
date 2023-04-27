@@ -81,7 +81,8 @@
                 "s3:PutBucketPolicy",
                 "s3:PutBucketPublicAccessBlock",
                 "s3:PutEncryptionConfiguration",
-                "s3:PutLifecycleConfiguration"
+                "s3:PutLifecycleConfiguration",
+                "s3:PutBucketOwnershipControls"
             ],
             "Resource": "arn:aws:s3:::*-g8s-*"
         },
