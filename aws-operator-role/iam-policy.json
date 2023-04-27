@@ -60,24 +60,9 @@
                 "sts:GetFederationToken",
                 "servicequotas:*",
                 "support:*",
-                "trustedadvisor:*",
-                "ssm:GetParameter"
+                "trustedadvisor:*"
             ],
             "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sqs:*"
-            ],
-            "Resource": "arn:aws:sqs:::*-g8s-*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "events:*"
-            ],
-            "Resource": "arn:aws:events:::*-g8s-*"
         },
         {
             "Effect": "Allow",
