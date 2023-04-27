@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add SQS permission for NodeTerminationHandler/Karpenter.
+- Add Events permissions for NodeTerminationHandler/Karpenter.
+- Add ssm:GetParameter for NodeTerminationHandler/Karpenter.
+
 ## [3.1.0] - 2023-04-27
 
 ### Added
