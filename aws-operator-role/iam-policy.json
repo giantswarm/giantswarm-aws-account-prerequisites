@@ -70,14 +70,14 @@
             "Action": [
                 "sqs:*"
             ],
-            "Resource": "arn:aws:sqs:::*-g8s-*"
+            "Resource": "${arn_prefix}:sqs:*::*-g8s-*"
         },
         {
             "Effect": "Allow",
             "Action": [
                 "events:*"
             ],
-            "Resource": "arn:aws:events:::*-g8s-*"
+            "Resource": "${arn_prefix}:events:*::*-g8s-*"
         },
         {
             "Effect": "Allow",
@@ -99,7 +99,7 @@
                 "s3:PutLifecycleConfiguration",
                 "s3:PutBucketOwnershipControls"
             ],
-            "Resource": "arn:aws:s3:::*-g8s-*"
+            "Resource": "${arn_prefix}:s3:::*-g8s-*"
         },
         {
             "Effect": "Allow",
