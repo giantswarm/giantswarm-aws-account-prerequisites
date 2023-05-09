@@ -70,14 +70,14 @@
             "Action": [
                 "sqs:*"
             ],
-            "Resource": "${arn_prefix}:sqs:*::*-g8s-*"
+            "Resource": "${arn_prefix}:sqs:*:${account_id}:*-g8s-*"
         },
         {
             "Effect": "Allow",
             "Action": [
                 "events:*"
             ],
-            "Resource": "${arn_prefix}:events:*::*-g8s-*"
+            "Resource": "${arn_prefix}:events:*:${account_id}:*-g8s-*"
         },
         {
             "Effect": "Allow",
