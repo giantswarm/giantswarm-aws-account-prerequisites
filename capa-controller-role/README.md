@@ -39,7 +39,13 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${NETWORK_TO
 
 RESOLVER_RULES_POLICY_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-resolver-rule-operator-policy" --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://resolver-rules-operator-policy.json | jq -r '.Policy.Arn')
 aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${RESOLVER_RULES_POLICY_ARN}"
+```
 
+### for cleanup execute
+```
+export INSTALLATION_NAME=test
+chmod +x cleanup.sh
+./cleanup.sh
 ```
 
 ## with terraform
