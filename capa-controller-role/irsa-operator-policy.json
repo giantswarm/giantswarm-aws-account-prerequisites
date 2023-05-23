@@ -39,7 +39,7 @@
                 "s3:ListBucket",
                 "s3:PutBucketAcl",
                 "s3:PutBucketLogging",
-		"s3:PutBucketOwnershipControls",
+	        "s3:PutBucketOwnershipControls",
                 "s3:PutBucketTagging",
                 "s3:PutObjectAcl",
                 "s3:PutObject",
