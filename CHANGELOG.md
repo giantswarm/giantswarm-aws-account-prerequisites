@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add `S3` permission for CAPA polices in order to run on Flatcar.
+
+### Changed
+
 - Remove not existing IAM actions.
 
 ### Added
