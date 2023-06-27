@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `S3` permission for CAPA polices in order to run on Flatcar.
 - Remove not existing IAM actions.
+- Add `EKS` permission for managed node pools.
 
 ### Added
 

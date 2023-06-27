@@ -58,6 +58,10 @@
                 "iam:GetPolicy"
             ],
             "Resource": [
+		"arn:*:iam::*:policy/AmazonEKSClusterPolicy",
+                "arn:*:iam::*:policy/AmazonEKSWorkerNodePolicy",
+                "arn:*:iam::*:policy/AmazonEKS_CNI_Policy",
+                "arn:*:iam::*:policy/AmazonEC2ContainerRegistryReadOnly",
                 "arn:*:iam::*:policy/AmazonEKSClusterPolicy"
             ]
         },
