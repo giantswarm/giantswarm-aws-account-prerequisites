@@ -55,7 +55,17 @@
                 "sts:GetFederationToken",
                 "servicequotas:*",
                 "support:*",
-                "trustedadvisor:*"
+                "trustedadvisor:*",
+                "iam:CreateOpenIDConnectProvider",
+                "iam:DeleteOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviderTags",
+                "iam:TagOpenIDConnectProvider",
+                "iam:UntagOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviders",
+                "iam:GetOpenIDConnectProvider",
+                "iam:UpdateOpenIDConnectProviderThumbprint",
+                "iam:RemoveClientIDFromOpenIDConnectProvider",
+                "iam:AddClientIDToOpenIDConnectProvider"
             ],
             "Resource": "*"
         }
