@@ -14,6 +14,8 @@ If you don't know what the `INSTALLATION_NAME` value is supposed to be, ask Gian
 ```
 export INSTALLATION_NAME=test
 export ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
+# for china replace this with proper AWS China account, for AWS Global leave this as it is for all cases
+export AWS_ACCOUNT=084190472784
 
 envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
 aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
