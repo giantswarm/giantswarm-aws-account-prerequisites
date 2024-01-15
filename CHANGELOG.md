@@ -9,14 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Add `S3` permission for CAPA polices in order to run on Flatcar.
-- Remove not existing IAM actions.
-- Add `EKS` permission for managed node pools.
+- Add S3 permission for CAPA polices in order to run on Flatcar.
+- Remove non-existent IAM actions.
 
 ### Added
 
 - Add `s3:PutBucketOwnershipControls` to irsa policy. Needed because of [this change](https://github.com/giantswarm/irsa-operator/commit/2437798672c74cfae15162a561629c6565dbee41) in irsa-operator
 - Add `"ec2:DescribeInstanceTypes"` to the CAPA controller policy, as it's required by newest CAPA releases.
+- Add EKS permissions for managed node pools, encryption/identity provider configs, CIDR blocks, KMS.
 
 ## [3.3.0] - 2023-05-11
 
