@@ -116,7 +116,9 @@
                 "eks:TagResource",
                 "eks:DescribeFargateProfile",
                 "eks:CreateFargateProfile",
-                "eks:DeleteFargateProfile"
+                "eks:DeleteFargateProfile",
+                "eks:ListIdentityProviderConfigs",
+				"eks:DescribeIdentityProviderConfig"
             ],
             "Resource": [
                 "*"
