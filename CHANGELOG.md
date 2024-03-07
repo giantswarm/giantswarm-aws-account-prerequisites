@@ -7,16 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.4.0] - 2024-01-16
+
 ### Changed
 
-- Add `S3` permission for CAPA polices in order to run on Flatcar.
-- Remove not existing IAM actions.
-- Add `EKS` permission for managed node pools.
+- Add S3 permission for CAPA polices in order to run on Flatcar.
+- Remove non-existent IAM actions.
 
 ### Added
 
 - Add `s3:PutBucketOwnershipControls` to irsa policy. Needed because of [this change](https://github.com/giantswarm/irsa-operator/commit/2437798672c74cfae15162a561629c6565dbee41) in irsa-operator
 - Add `"ec2:DescribeInstanceTypes"` to the CAPA controller policy, as it's required by newest CAPA releases.
+- Add EKS permissions for managed node pools, encryption/identity provider configs, CIDR blocks, KMS.
 
 ## [3.3.0] - 2023-05-11
 
@@ -103,7 +105,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.4.0...HEAD
+[3.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.0.0...v3.1.0

@@ -4,6 +4,15 @@
         {
             "Effect": "Allow",
             "Action": [
+                "ssm:GetParameter"
+            ],
+            "Resource": [
+                "arn:*:ssm:*:*:parameter/aws/service/eks/optimized-ami/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
                 "iam:CreateServiceLinkedRole"
             ],
             "Resource": [
@@ -14,15 +23,6 @@
                     "iam:AWSServiceName": "eks.amazonaws.com"
                 }
             }
-        },
-	{
-            "Effect": "Allow",
-            "Action": [
-                "ssm:GetParameter"
-            ],
-            "Resource": [
-                "arn:*:ssm:*:*:parameter/aws/service/eks/optimized-ami/*"
-            ]
         },
         {
             "Effect": "Allow",
@@ -55,10 +55,20 @@
         {
             "Effect": "Allow",
             "Action": [
+                "iam:GetRole",
+                "iam:ListAttachedRolePolicies"
+            ],
+            "Resource": [
+                "arn:*:iam::*:role/*"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
                 "iam:GetPolicy"
             ],
             "Resource": [
-		"arn:*:iam::*:policy/AmazonEKSClusterPolicy",
+                "arn:*:iam::*:policy/AmazonEKSClusterPolicy",
                 "arn:*:iam::*:policy/AmazonEKSWorkerNodePolicy",
                 "arn:*:iam::*:policy/AmazonEKS_CNI_Policy",
                 "arn:*:iam::*:policy/AmazonEC2ContainerRegistryReadOnly",
@@ -80,7 +90,12 @@
                 "eks:DescribeNodegroup",
                 "eks:DeleteNodegroup",
                 "eks:UpdateNodegroupConfig",
-                "eks:CreateNodegroup"
+                "eks:CreateNodegroup",
+                "eks:AssociateEncryptionConfig",
+                "eks:ListIdentityProviderConfigs",
+                "eks:AssociateIdentityProviderConfig",
+                "eks:DescribeIdentityProviderConfig",
+                "eks:DisassociateIdentityProviderConfig"
             ],
             "Resource": [
                 "arn:*:eks:*:*:cluster/*",
@@ -90,6 +105,8 @@
         {
             "Effect": "Allow",
             "Action": [
+                "ec2:AssociateVpcCidrBlock",
+                "ec2:DisassociateVpcCidrBlock",
                 "eks:ListAddons",
                 "eks:CreateAddon",
                 "eks:DescribeAddonVersions",
@@ -99,7 +116,9 @@
                 "eks:TagResource",
                 "eks:DescribeFargateProfile",
                 "eks:CreateFargateProfile",
-                "eks:DeleteFargateProfile"
+                "eks:DeleteFargateProfile",
+                "eks:ListIdentityProviderConfigs",
+				"eks:DescribeIdentityProviderConfig"
             ],
             "Resource": [
                 "*"
@@ -116,6 +135,21 @@
             "Condition": {
                 "StringEquals": {
                     "iam:PassedToService": "eks.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:DescribeKey"
+            ],
+            "Resource": [
+                "*"
+            ],
+            "Condition": {
+                "ForAnyValue:StringLike": {
+                    "kms:ResourceAliases": "alias/cluster-api-provider-aws-*"
                 }
             }
         }
