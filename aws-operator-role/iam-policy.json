@@ -49,6 +49,8 @@
                 "iam:PutRolePolicy",
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:TagRole",
+                "iam:ListRoleTags",
+                "iam:UntagRole",
                 "iam:UpdateAssumeRolePolicy",
                 "iam:UpdateRoleDescription",
                 "kms:*",

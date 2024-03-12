@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `iam:ListRoleTags` and `iam:UntagRole` permissions to the AWS operator role.
+
 ## [3.4.0] - 2024-01-16
 
 ### Changed
