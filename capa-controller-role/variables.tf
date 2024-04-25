@@ -6,6 +6,6 @@ variable "principal_arns_giantswarm_root_account" {
 }
 
 variable "installation_name" {
-  type = string
+  type        = string
   description = "If you dont know what `installation_name` value is suppose to be, ask Giant Swarm staff and they will provide it."
 }
