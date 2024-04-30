@@ -87,3 +87,12 @@ resource "aws_iam_role_policy_attachment" "giantswarm-mc-bootstrap-policy-attach
   role       = aws_iam_role.giantswarm-capa-controller-role.name
   policy_arn = aws_iam_policy.giantswarm-mc-bootstrap-policy.arn
 }
+
+resource "aws_iam_policy" "giantswarm-crossplane-policy" {
+  name   = "giantswarm-${var.installation_name}-crossplane-policy"
+  policy = file("${path.module}/crossplane-policy.json")
+}
+resource "aws_iam_role_policy_attachment" "giantswarm-crossplane-policy-attachment" {
+  role       = aws_iam_role.giantswarm-capa-controller-role.name
+  policy_arn = aws_iam_policy.giantswarm-crossplane-policy.arn
+}
