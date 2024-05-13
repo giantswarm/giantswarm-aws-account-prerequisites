@@ -12,12 +12,20 @@
                 "iam:AttachRolePolicy",
                 "iam:CreateInstanceProfile",
                 "iam:CreateOpenIDConnectProvider",
+                "iam:DeleteOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviderTags",
+                "iam:TagOpenIDConnectProvider",
+                "iam:UntagOpenIDConnectProvider",
+                "iam:ListOpenIDConnectProviders",
+                "iam:GetOpenIDConnectProvider",
+                "iam:UpdateOpenIDConnectProviderThumbprint",
+                "iam:RemoveClientIDFromOpenIDConnectProvider",
+                "iam:AddClientIDToOpenIDConnectProvider",
                 "iam:CreatePolicy",
                 "iam:CreatePolicyVersion",
                 "iam:CreateRole",
                 "iam:CreateServiceLinkedRole",
                 "iam:DeleteInstanceProfile",
-                "iam:DeleteOpenIDConnectProvider",
                 "iam:DeletePolicy",
                 "iam:DeletePolicyVersion",
                 "iam:DeleteRole",
@@ -34,29 +42,44 @@
                 "iam:ListAttachedRolePolicies",
                 "iam:ListAttachedUserPolicies",
                 "iam:ListInstanceProfilesForRole",
-                "iam:ListOpenIDConnectProviderTags",
                 "iam:ListPolicies",
                 "iam:ListRolePolicies",
                 "iam:ListRoles",
                 "iam:PassRole",
                 "iam:PutRolePolicy",
                 "iam:RemoveRoleFromInstanceProfile",
-                "iam:TagOpenIDConnectProvider",
                 "iam:TagRole",
-                "iam:UntagOpenIDConnectProvider",
+                "iam:ListRoleTags",
+                "iam:UntagRole",
                 "iam:UpdateAssumeRolePolicy",
                 "iam:UpdateRoleDescription",
                 "kms:*",
                 "logs:*",
                 "route53:*",
+                "route53resolver:*",
                 "sts:AssumeRole",
                 "sts:DecodeAuthorizationMessage",
                 "sts:GetFederationToken",
                 "servicequotas:*",
                 "support:*",
-                "trustedadvisor:*"
+                "trustedadvisor:*",
+                "ssm:GetParameter"
             ],
             "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:*"
+            ],
+            "Resource": "${arn_prefix}:sqs:*:${account_id}:*-g8s-*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "events:*"
+            ],
+            "Resource": "${arn_prefix}:events:*:${account_id}:*-g8s-*"
         },
         {
             "Effect": "Allow",
@@ -68,18 +91,17 @@
                 "s3:GetObject",
                 "s3:ListBucket",
                 "s3:PutBucketAcl",
-                "s3:PutBucketEncryption",
                 "s3:PutBucketLogging",
-                "s3:PutBucketLifecycle",
                 "s3:PutBucketTagging",
                 "s3:PutObjectAcl",
                 "s3:PutObject",
                 "s3:PutBucketPolicy",
                 "s3:PutBucketPublicAccessBlock",
                 "s3:PutEncryptionConfiguration",
-                "s3:PutLifecycleConfiguration"
+                "s3:PutLifecycleConfiguration",
+                "s3:PutBucketOwnershipControls"
             ],
-            "Resource": "arn:aws:s3:::*-g8s-*"
+            "Resource": "${arn_prefix}:s3:::*-g8s-*"
         },
         {
             "Effect": "Allow",
@@ -138,6 +160,34 @@
                 "iam:CreateServiceLinkedRole"
             ],
             "Resource": "${arn_prefix}:iam::${account_id}:role/aws-service-role/*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudfront:TagResource",
+                "cloudfront:UntagResource",
+                "cloudfront:GetCloudFrontOriginAccessIdentity",
+                "cloudfront:CreateCloudFrontOriginAccessIdentity",
+                "cloudfront:DeleteCloudFrontOriginAccessIdentity",
+                "cloudfront:GetDistribution",
+                "cloudfront:CreateDistribution",
+                "cloudfront:UpdateDistribution",
+                "cloudfront:DeleteDistribution",
+                "cloudfront:ListDistributions",
+                "cloudfront:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "acm:RequestCertificate",
+                "acm:AddTagsToCertificate",
+                "acm:DescribeCertificate",
+                "acm:ListCertificates",
+                "acm:DeleteCertificate"
+            ],
+            "Resource": "*"
         }
     ]
 }
