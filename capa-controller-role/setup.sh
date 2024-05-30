@@ -8,10 +8,7 @@ GREEN='\033[0;32m'
 NC='\033[0m'
 
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
-AWS_ACCOUNT_ID="$(aws sts get-caller-identity --output text --query 'Account')"
-
-POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-controller" "resolver-rule-operator" "network-topology-controller" "mc-bootstrap" "crossplane")
-POL_ARN_PREFIX="arn:aws:iam::${AWS_ACCOUNT_ID}:policy"
+POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
 
 function echo_fail_or_success {
 	s=$1
@@ -23,9 +20,7 @@ function echo_fail_or_success {
 }
 
 function create_role {
-  envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
-  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
-  rm -f ${INSTALLATION_NAME}-trusted-entities.json
+  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://trusted-entities.json
 }
 
 function create_policy {
@@ -33,6 +28,7 @@ function create_policy {
   aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${policy_arn}"
 }
 
+export AWS_PAGER=""
 echo -n "|_ Creating the role ${ROLE_NAME}..."
 create_role
 echo_fail_or_success "$?"

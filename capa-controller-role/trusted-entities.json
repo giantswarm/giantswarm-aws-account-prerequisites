@@ -4,7 +4,7 @@
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:*:iam::${AWS_ACCOUNT}:user/${INSTALLATION_NAME}-capa-controller"
+                "AWS": "arn:aws:iam::084190472784:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {}

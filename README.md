@@ -89,11 +89,10 @@ terraform apply -var="installation_name=test"
 ### Requirements
 
 - `awscli` installed
-- `envsubst` tool
 - `jq` installed
 - working AWS credentials set to the desired target account
 - located on the `capa-controller-role` directory of this git repo
-- user `${INSTALLATION}-capa-controller` created in GiantSwarm account `084190472784`
+- user `${INSTALLATION}-capa-controller` created in GiantSwarm root account `084190472784`
 
 ### Setup
 
