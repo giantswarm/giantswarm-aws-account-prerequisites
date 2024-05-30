@@ -5,9 +5,6 @@ Parameters:
   AdminRoleName:
     Type: String
     Default: "GiantSwarmAdmin"
-  PrincipalArnsGiantSwarmRootAccount:
-    Type: String
-    Default: "arn:aws:iam::084190472784:root"
 
 Resources:
   GiantSwarmAdminRole:
@@ -19,7 +16,7 @@ Resources:
         Statement:
           - Effect: "Allow"
             Principal:
-              AWS: !Ref PrincipalArnsGiantSwarmRootAccount
+              AWS: "arn:aws:iam::084190472784:root"
             Action: "sts:AssumeRole"
 
   GiantSwarmAdminPolicy:

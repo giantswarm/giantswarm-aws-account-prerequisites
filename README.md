@@ -1,155 +1,112 @@
 # giantswarm-aws-account-prerequisites
 
-This repo contains Terraform modules to prepare AWS accounts to run Giant Swarm
-clusters.
+This repo contains Cloud Formation templates and Terraform modules to prepare AWS accounts to run Giant Swarm clusters.
 
 # Cluster API
-## Before starting
-Make sure to adjust AWS account limits according to [these
-docs](https://docs.giantswarm.io/getting-started/cloud-provider-accounts/cluster-api/aws/#limits). 
 
-For Cluster API take a look at theese three modules in this repository:
-1. [admin-role](./admin-role) which creates a role and a policy for our
-   staff to be able to operate the infrastructure created by our automation in
-   case of failures.
-3. [capa-controller-role](./capa-controller-role) which creates
-   the role and policies that the controllers assume to create and manage the kubernetes clusters.
+## Before starting
+
+Make sure to adjust AWS account limits according to [these docs](https://docs.giantswarm.io/getting-started/cloud-provider-accounts/cluster-api/aws/#limits).
+
+For Cluster API take a look at these two modules in this repository:
+
+1. [admin-role](./admin-role) which creates a role and a policy for our staff to be able to operate the infrastructure created by our automation in case of failures.
+2. [capa-controller-role](./capa-controller-role) which creates the role and policies that the controllers assume to create and manage the kubernetes clusters.
 
 ## 1. admin-role
 
-For all AWS accounts part of the platform, does not matter if they are for
-management or workload clusters, we need to have access in order to debug and
-manage and operate the infrastructure. To do so, please run this module in the target
-account:
+For all AWS accounts part of the platform  Giant Swarm staff need to have access in order to debug and
+manage and operate the infrastructure. To do so, please use one of the following methods to create the necessary role and policy in your AWS account.
 
-```hcl
-module "giantswarm-cp-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites/admin-role"
-}
+### AWS CloudFormation template
 
-output "giantswarm-admin-role" {
-  value = "${module.giantswarm-cp-prereqs.giantswarm-admin-role}"
-}
+You can execute directly the CloudFormation template clicking [here](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?templateURL=https://my-s3-bucket.s3.amazonaws.com/giantswarm-template.yaml&stackName=GiantSwarmAdminRoleBootstrap) or uploading the [template file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+
+You will be asked for the following parameters:
+
+- `AdminRoleName`: The name of the role that will be created. Default is `GiantSwarmAdmin`. You dont need to change this unless you have a specific requirement.
+
+Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
+
+### Terraform
+
+#### Requirements
+
+- `terraform` installed
+- working AWS credentials set to the desired target account
+- AWS region has to be set  either via aws profile or via env `AWS_REGION`
+
+### Adjust variables
+
+- `principal_arns_giantswarm_root_account` - can be adjusted to be more strict and specify user which will assume the role. Default is `arn:aws:iam::084190472784:root`. You dent need to change this unless you have a specific requirement.
+- `admin_role_name` - can be adjusted to be more strict and specify role name. You dent need to change this unless you have a specific requirement.
+
+### Execution
+
 ```
-
-The created role and policy name is `GiantSwarmAdmin`.
+terraform init .
+terraform apply -var="admin_role_name=GiantSwarmAdmin
+```
 
 The created role ARN needs to be supplied to Giant Swarm.
 
 ## 2. capa-controller-role
-Please read the [README.md](./capa-controller-role/README.md) of the capa-controller-role module.
 
+In the AWS account where you plan to run the management cluster, you need to create a role that the Cluster API controllers will assume to create and manage workload clusters and all infrastructure resources.
 
-# Vintage
-## Before starting
+### AWS CloudFormation template
 
-Make sure to adjust AWS account limits according to [these
-docs](https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/#limits).
+You can execute directly the CloudFormation template clicking [here](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?templateURL=https://my-s3-bucket.s3.amazonaws.com/giantswarm-template.yaml&stackName=GiantSwarmControllerRoleBootstrap) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
-For Vintage take a look at theese three modules in this repository:
+You will be asked for the following parameters:
 
-1. [admin-role](./admin-role) which creates a role and a policy for our
-   staff to be able to operate the infrastructure created by our automation in
-   case of failures.
-2. [aws-operator-user](./aws-operator-user) which creates a user and its policy
-   to be used for our automation to manage the infrastructure.
-3. [aws-operator-role](./aws-operator-role) which creates
-   the role and policy to be assumed for the automation user to create and manage
-   resources.
+- `InstallationName`: The name of the installation which you have agreed with Giant Swarm upfront.
 
-## 1. admin-role
+Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
-For all AWS accounts part of the platform, does not matter if they are for
-control plane or tenant clusters, we need to have access in order to debug and
-operator the infrastructure. To do so, please run this module in the target
-account:
+### Terraform
 
-```hcl
-module "giantswarm-cp-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//admin-role"
-}
+#### Requirements
 
-output "giantswarm-admin-role" {
-  value = "${module.giantswarm-cp-prereqs.giantswarm-admin-role}"
-}
+- `terraform` installed
+- working AWS credentials set to the desired target account
+- AWS region has to be set  either via aws profile or via env `AWS_REGION`
+
+### Adjust variables
+
+- `principal_arns_giantswarm_root_account` - can be adjusted to be more strict and specify user which will assume the role - ie `arn:aws:iam::084190472784:user/${INSTALLATION_NAME}-capa-controller`
+- `installation_name` - the name of the installation which you have agreed with Giant Swarm upfront.
+
+### Execution
+
+```
+terraform init .
+terraform apply -var="installation_name=test"
 ```
 
-The created role and policy name is `GiantSwarmAdmin`.
+## AWS cli
 
-The created role ARN needs to be supplied to Giant Swarm.
+### Requirements
 
-## 2. aws-operator-user
+- `awscli` installed
+- `envsubst` tool
+- `jq` installed
+- working AWS credentials set to the desired target account
+- located on the `capa-controller-role` directory of this git repo
+- user `${INSTALLATION}-capa-controller` created in GiantSwarm account `084190472784`
 
-Giant Swarm needs a IAM user to be used for the automation in AWS some account.
-This is usually the Control Plane AWS account but it doesn't have to. To do so,
-please run this module in the target account:
+### Setup
 
-```hcl
-module "giantswarm-cp-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-user"
-}
-
-output "user-access-key-id" {
-  value = "${module.giantswarm-cp-prereqs.user-access-key-id}"
-}
-
-output "user-access-key-secret" {
-  value = "${module.giantswarm-cp-prereqs.user-access-key-secret}"
-}
+```
+export INSTALLATION_NAME=test
+chmod +x setup.sh
+./setup.sh
 ```
 
-The created user name is `GiantSwarmAWSOperator` and its policy name is
-`GiantSwarmUserAWSOperator`.
+### Cleanup
 
-Get the access key ID and secret from the output - these must be provided to Giant Swarm.
-
-When `sensitive = true` in output.tf, the secret value will be redacted. You can however 
-find it directly from the state file by running:
-
-```bash
-cat terraform.tfstate | grep secret
 ```
-
-**Note:** as the access key ID and secret are output in plaintext, they will
-also be included in your Terraform state file. Please take this into
-consideration when using this module. If this isn't acceptable then it is
-possible to encrypt the secret using a [PGP key, or a keybase
-user](https://www.terraform.io/docs/providers/aws/r/iam_access_key.html#pgp_key)
-
-## 3. aws-operator-role
-
-Now, for the Control Plane account and each AWS Tenant account you need to run
-this module to enable our automation to assume the role in order to manage all
-clusters resources.
-
-You will need to provide the `main_account_id` which is the AWS account ID where
-`GiantSwarmAWSOperator` user was created (using `aws-operator-user` module) and
-`target_account_id` which is the AWS account ID of provisioned Control Plane or
-Tenant Cluster AWS account.
-
-```hcl
-module "giantswarm-tc-prereqs" {
-  source = "git@github.com:giantswarm/giantswarm-aws-account-prerequisites//aws-operator-role"
-  main_account_id = "111111111111"   # Account with GiantSwarmAWSOperator user.
-  target_account_id = "22222222222"  # Account to create role in.
-}
-
-output "aws-operator-role-arn" {
-  value = "${module.giantswarm-tc-prereqs.aws-operator-role}"
-}
+export INSTALLATION_NAME=test
+chmod +x cleanup.sh
+./cleanup.sh
 ```
-
-The role and policy name is `GiantSwarmAWSOperator`.
-
-The AWS Operator Role ARN needs to be supplied to Giant Swarm.
-
-## Adding new Tenant Cluster account
-
-In case you are adding a new organization that runs in a new AWS Account, you
-need to apply step `1` and `3`. With the outputs you can run this `gsctl`
-command to setup the new configuration.
-
-`gsctl update organization set-credentials --aws-operator-role $(terraform output aws-operator-role) --aws-admin-role $(terraform output giantswarm-admin-role)`
-
-It is explained here.
-https://docs.giantswarm.io/guides/prepare-aws-account-for-tenant-clusters/#configure-org
