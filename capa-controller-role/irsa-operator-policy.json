@@ -49,7 +49,7 @@
                 "s3:PutLifecycleConfiguration",
                 "s3:PutObjectAcl"
             ],
-            "Resource": "arn:aws:s3:::*-g8s-*"
+            "Resource": "arn:*:s3:::*-g8s-*"
         },
         {
             "Effect": "Allow",
