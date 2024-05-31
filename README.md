@@ -25,6 +25,7 @@ You can execute directly the CloudFormation template clicking [here](https://con
 You will be asked for the following parameters:
 
 - `AdminRoleName`: The name of the role that will be created. Default is `GiantSwarmAdmin`. You dont need to change this unless you have a specific requirement.
+- `ManagementClusterAccountID`: The account ID of the management cluster account. This is the account where the management cluster will be running.
 
 Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
@@ -38,7 +39,6 @@ Review the changes and click `Create stack`. In case of any error, please check 
 
 ### Adjust variables
 
-- `principal_arns_giantswarm_root_account` - can be adjusted to be more strict and specify user which will assume the role. Default is `arn:aws:iam::084190472784:root`. You dent need to change this unless you have a specific requirement.
 - `admin_role_name` - can be adjusted to be more strict and specify role name. You dent need to change this unless you have a specific requirement.
 
 ### Execution
@@ -74,7 +74,7 @@ Review the changes and click `Create stack`. In case of any error, please check 
 
 ### Adjust variables
 
-- `principal_arns_giantswarm_root_account` - can be adjusted to be more strict and specify user which will assume the role - ie `arn:aws:iam::084190472784:user/${INSTALLATION_NAME}-capa-controller`
+- `management_cluster_account_id` - the account id of the management cluster account.
 - `installation_name` - the name of the installation which you have agreed with Giant Swarm upfront.
 
 ### Execution

@@ -5,6 +5,9 @@ Parameters:
   InstallationName:
     Type: String
     Description: "The name of the management cluster."
+  ManagementClusterAccountID:
+    Type: String
+    Description: "The AWS account ID of the management cluster."
 
 Resources:
   GiantSwarmCapaControllerRole:
@@ -16,7 +19,7 @@ Resources:
         Statement:
           - Effect: "Allow"
             Principal:
-              AWS: "arn:aws:iam::084190472784:root"
+              AWS: !Sub "arn:aws:iam::${ManagementClusterAccountID}:user/${InstallationName}-capa-controller"
             Action: "sts:AssumeRole"
 
   GiantSwarmCapaControllerPolicy:

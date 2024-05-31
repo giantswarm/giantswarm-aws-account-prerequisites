@@ -13,14 +13,17 @@ POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" 
 function echo_fail_or_success {
 	s=$1
 	if [ "$s" != 0 ]; then
-		echo -e "${RED}  failed${NC}"
+		echo -e "${RED}  failed${NC}. Please review the required permissions and try again."
 	else
 		echo -e "${GREEN}  success${NC}"
 	fi
 }
 
 function create_role {
-  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://trusted-entities.json
+  export AWS_ACCOUNT="$(aws sts get-caller-identity --output text --query 'Account')"
+  envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
+  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
+  rm -f ${INSTALLATION_NAME}-trusted-entities.json
 }
 
 function create_policy {

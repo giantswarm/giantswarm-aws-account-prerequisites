@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "giantswarm-capa-controller" {
 
     principals {
       type        = "AWS"
-      identifiers = var.principal_arns_giantswarm_root_account
+      identifiers = "arn:aws:iam::${var.management_cluster_account_id}:user/${var.installation_name}-capa-controller"
     }
 
     actions = ["sts:AssumeRole"]
