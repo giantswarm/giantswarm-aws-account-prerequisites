@@ -10,7 +10,7 @@ NC='\033[0m'
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --output text --query 'Account')"
 
-POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-controller" "resolver-rule-operator" "network-topology-controller")
+POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-controller" "resolver-rule-operator" "network-topology-controller" "mc-bootstrap" "crossplane")
 POL_ARN_PREFIX="arn:aws:iam::${AWS_ACCOUNT_ID}:policy"
 
 function echo_fail_or_success {
@@ -32,7 +32,7 @@ for pol_type in ${POL_TYPES[@]}; do
 	echo_fail_or_success "$?"
 
 	echo -n "|_ Delete policy ${POL_NAME}..."
-	aws iam delete-policy --policy-arn "${POL_ARN}"	
+	aws iam delete-policy --policy-arn "${POL_ARN}"
 	echo_fail_or_success "$?"
 done
 

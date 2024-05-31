@@ -78,3 +78,21 @@ resource "aws_iam_role_policy_attachment" "giantswarm-resolver-rules-operator-po
   role       = aws_iam_role.giantswarm-capa-controller-role.name
   policy_arn = aws_iam_policy.giantswarm-resolver-rules-operator-policy.arn
 }
+
+resource "aws_iam_policy" "giantswarm-mc-bootstrap-policy" {
+  name   = "giantswarm-${var.installation_name}-mc-bootstrap-policy"
+  policy = file("${path.module}/mc-bootstrap-policy.json")
+}
+resource "aws_iam_role_policy_attachment" "giantswarm-mc-bootstrap-policy-attachment" {
+  role       = aws_iam_role.giantswarm-capa-controller-role.name
+  policy_arn = aws_iam_policy.giantswarm-mc-bootstrap-policy.arn
+}
+
+resource "aws_iam_policy" "giantswarm-crossplane-policy" {
+  name   = "giantswarm-${var.installation_name}-crossplane-policy"
+  policy = file("${path.module}/crossplane-policy.json")
+}
+resource "aws_iam_role_policy_attachment" "giantswarm-crossplane-policy-attachment" {
+  role       = aws_iam_role.giantswarm-capa-controller-role.name
+  policy_arn = aws_iam_policy.giantswarm-crossplane-policy.arn
+}

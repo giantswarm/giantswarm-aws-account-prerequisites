@@ -3,7 +3,7 @@ If you don't know what the `INSTALLATION_NAME` value is supposed to be, ask Gian
 
 ## with aws cli
 ### requirements
-- `awscli` installed 
+- `awscli` installed
 - `envsubst` tool
 - `jq` installed
 - working AWS credentials set to the desired target account
@@ -14,6 +14,8 @@ If you don't know what the `INSTALLATION_NAME` value is supposed to be, ask Gian
 ```
 export INSTALLATION_NAME=test
 export ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
+# for china replace this with proper AWS China account, for AWS Global leave this as it is for all cases
+export AWS_ACCOUNT=084190472784
 
 envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
 aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
@@ -39,6 +41,12 @@ aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${NETWORK_TO
 
 RESOLVER_RULES_POLICY_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-resolver-rule-operator-policy" --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://resolver-rules-operator-policy.json | jq -r '.Policy.Arn')
 aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${RESOLVER_RULES_POLICY_ARN}"
+
+MC_BOOTSTRAP_POLICY_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-mc-bootstrap-policy" --description "Giant Swarm managed policy for k8s cluster cleanup" --policy-document file://mc-bootstrap-policy.json | jq -r '.Policy.Arn')
+aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${MC_BOOTSTRAP_POLICY_ARN}"
+
+CROSSPLANE_ARN=$(aws iam create-policy --policy-name "giantswarm-${INSTALLATION_NAME}-crossplane-policy" --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://crossplane-policy.json  | jq -r '.Policy.Arn')
+aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${CROSSPLANE_ARN}"
 ```
 
 ### for cleanup execute
@@ -54,7 +62,7 @@ chmod +x cleanup.sh
 - working AWS credentials set to the desired target account
 - AWS region has to be set  either via aws profile or via env `AWS_REGION`
 
-### adjust `variables.tf` 
+### adjust `variables.tf`
 - `principal_arns_giantswarm_root_account` - can be adjusted to be more strict and specify user which will assume the role - ie `arn:aws:iam::084190472784:user/${INSTALLATION_NAME}-capa-controller`
 
 ### execute
