@@ -20,12 +20,11 @@ manage and operate the infrastructure. To do so, please use one of the following
 
 ### AWS CloudFormation template
 
-You can execute directly the CloudFormation template clicking [here](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?templateURL=https://my-s3-bucket.s3.amazonaws.com/giantswarm-template.yaml&stackName=GiantSwarmAdminRoleBootstrap) or uploading the [template file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+You can execute directly the CloudFormation template just clicking [the admin role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=s3://cf-templates-giantswarm/admin-role/cloud-formation-template.yaml&stackName=GiantSwarmAdminRoleBootstrap&&param_AdminRoleName=GiantSwarmAdmin) or uploading the [template file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
 You will be asked for the following parameters:
 
 - `AdminRoleName`: The name of the role that will be created. Default is `GiantSwarmAdmin`. You dont need to change this unless you have a specific requirement.
-- `ManagementClusterAccountID`: The account ID of the management cluster account. This is the account where the management cluster will be running.
 
 Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
@@ -56,11 +55,12 @@ In the AWS account where you plan to run the management cluster, you need to cre
 
 ### AWS CloudFormation template
 
-You can execute directly the CloudFormation template clicking [here](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?templateURL=https://my-s3-bucket.s3.amazonaws.com/giantswarm-template.yaml&stackName=GiantSwarmControllerRoleBootstrap) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+You can execute directly the CloudFormation template just clocking the [capa controller role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=s3://cf-templates-giantswarm/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterAccountID=MANAGEMENT_CLUSTER_ACCOUNT_ID) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
 You will be asked for the following parameters:
 
 - `InstallationName`: The name of the installation which you have agreed with Giant Swarm upfront.
+- `ManagementClusterAccountID`: The account ID of the management cluster account. This is the account where the management cluster will be running.
 
 Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
