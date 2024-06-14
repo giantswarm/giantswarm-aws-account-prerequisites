@@ -20,7 +20,7 @@ manage and operate the infrastructure. To do so, please use one of the following
 
 ### AWS CloudFormation template
 
-You can execute directly the CloudFormation template just clicking [the admin role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=s3://cf-templates-giantswarm/admin-role/cloud-formation-template.yaml&stackName=GiantSwarmAdminRoleBootstrap&&param_AdminRoleName=GiantSwarmAdmin) or uploading the [template file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+You can execute the CloudFormation template directly by clicking [the admin role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/admin-role/cloud-formation-template.yaml&stackName=GiantSwarmAdminRoleBootstrap&&param_AdminRoleName=GiantSwarmAdmin) or uploading the [template file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
 You will be asked for the following parameters:
 
@@ -55,7 +55,7 @@ In the AWS account where you plan to run the management cluster, you need to cre
 
 ### AWS CloudFormation template
 
-You can execute directly the CloudFormation template just clocking the [capa controller role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=s3://cf-templates-giantswarm/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterAccountID=MANAGEMENT_CLUSTER_ACCOUNT_ID) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+You can execute directly the CloudFormation template by clocking the [capa controller role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterAccountID=MANAGEMENT_CLUSTER_ACCOUNT_ID) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
 You will be asked for the following parameters:
 
