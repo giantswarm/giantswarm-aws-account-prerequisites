@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template for bootstrapping the admin role in your AWS account.
+
+Parameters:
+  AdminRoleName:
+    Type: String
+    Default: "GiantSwarmAdmin"
+
+Resources:
+  GiantSwarmAdminRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: !Ref AdminRoleName
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS: "arn:aws:iam::084190472784:root"
+            Action: "sts:AssumeRole"
+
+  GiantSwarmAdminPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "GiantSwarmAdmin"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - "acm:*"
+              - "autoscaling:*"
+              - "cloudformation:*"
+              - "cloudfront:*"
+              - "cloudwatch:*"
+              - "dynamodb:*"
+              - "ec2:*"
+              - "ecr:*"
+              - "elasticfilesystem:*"
+              - "elasticloadbalancing:*"
+              - "events:*"
+              - "ram:*"
+              - "iam:AddRoleToInstanceProfile"
+              - "iam:AttachRolePolicy"
+              - "iam:CreateAccessKey"
+              - "iam:CreateInstanceProfile"
+              - "iam:CreatePolicy"
+              - "iam:CreatePolicyVersion"
+              - "iam:CreateRole"
+              - "iam:CreateServiceLinkedRole"
+              - "iam:DeleteAccessKey"
+              - "iam:DeleteInstanceProfile"
+              - "iam:DeletePolicy"
+              - "iam:DeletePolicyVersion"
+              - "iam:DeleteRole"
+              - "iam:DeleteRolePolicy"
+              - "iam:DeleteServiceLinkedRole"
+              - "iam:DetachRolePolicy"
+              - "iam:GenerateServiceLastAccessedDetails"
+              - "iam:Get*"
+              - "iam:List*"
+              - "iam:PassRole"
+              - "iam:PutRolePolicy"
+              - "iam:RemoveRoleFromInstanceProfile"
+              - "iam:TagRole"
+              - "iam:UpdateAccessKey"
+              - "iam:UpdateAssumeRolePolicy"
+              - "iam:UpdateRoleDescription"
+              - "kms:*"
+              - "logs:*"
+              - "route53:*"
+              - "route53domains:*"
+              - "route53resolver:*"
+              - "s3:*"
+              - "sts:AssumeRole"
+              - "sts:DecodeAuthorizationMessage"
+              - "sts:GetFederationToken"
+              - "support:*"
+              - "trustedadvisor:*"
+              - "sqs:*"
+              - "iam:CreateOpenIDConnectProvider"
+              - "iam:DeleteOpenIDConnectProvider"
+              - "iam:TagOpenIDConnectProvider"
+              - "iam:UntagOpenIDConnectProvider"
+              - "iam:UpdateOpenIDConnectProviderThumbprint"
+              - "iam:RemoveClientIDFromOpenIDConnectProvider"
+              - "iam:AddClientIDToOpenIDConnectProvider"
+            Resource: "*"
+      Roles:
+        - !Ref GiantSwarmAdminRole
+
+Outputs:
+  GiantSwarmAdminRoleArn:
+    Description: "The ARN of the IAM role"
+    Value: !GetAtt GiantSwarmAdminRole.Arn
