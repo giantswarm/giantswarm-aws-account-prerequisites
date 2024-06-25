@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "giantswarm-admin" {
 
     principals {
       type        = "AWS"
-      identifiers = var.principal_arns_giantswarm_root_account
+      identifiers = "arn:aws:iam::084190472784:root"
     }
 
     actions = ["sts:AssumeRole"]
