@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `iam:ListRoleTags` and `iam:UntagRole` permissions to the AWS operator role.
 - CAPA: add new `mc-bootstrap` policy to `capa-controller` role.
+- Add IAM policy for use with Crossplane AWS provider. The initial permissions are meant to be used with Cilium ENI mode.
+- CAPA: add `autoscaling:CancelInstanceRefresh` permission (needed for `AWSMachinePool` reconciler [improvement](https://github.com/giantswarm/cluster-api-provider-aws/pull/598))
 
 ## [3.4.0] - 2024-01-16
 
@@ -24,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `s3:PutBucketOwnershipControls` to irsa policy. Needed because of [this change](https://github.com/giantswarm/irsa-operator/commit/2437798672c74cfae15162a561629c6565dbee41) in irsa-operator
 - Add `"ec2:DescribeInstanceTypes"` to the CAPA controller policy, as it's required by newest CAPA releases.
 - Add EKS permissions for managed node pools, encryption/identity provider configs, CIDR blocks, KMS.
+- CAPA: add `s3:GetObject` permission for CAPA (needed for new [S3 object cleanup feature](https://github.com/kubernetes-sigs/cluster-api-provider-aws/pull/4667))
 
 ## [3.3.0] - 2023-05-11
 

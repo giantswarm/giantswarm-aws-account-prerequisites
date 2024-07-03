@@ -114,6 +114,7 @@ Resources:
             Resource: "*"
           - Effect: "Allow"
             Action:
+              - "autoscaling:CancelInstanceRefresh"
               - "autoscaling:CreateAutoScalingGroup"
               - "autoscaling:UpdateAutoScalingGroup"
               - "autoscaling:CreateOrUpdateTags"
