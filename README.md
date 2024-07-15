@@ -102,6 +102,8 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
+__warning__: You may need to modify the `trusted-entities.son` to use `aws-cn` in the `Principal` field when using the China region.
+
 ### Cleanup
 
 ```
