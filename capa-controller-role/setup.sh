@@ -20,7 +20,6 @@ function echo_fail_or_success {
 }
 
 function create_role {
-  export AWS_ACCOUNT="$(aws sts get-caller-identity --output text --query 'Account')"
   envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
   aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
   rm -f ${INSTALLATION_NAME}-trusted-entities.json

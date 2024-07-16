@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CAPA: add new `mc-bootstrap` policy to `capa-controller` role.
 - Add IAM policy for use with Crossplane AWS provider. The initial permissions are meant to be used with Cilium ENI mode.
 - CAPA: add `autoscaling:CancelInstanceRefresh` permission (needed for `AWSMachinePool` reconciler [improvement](https://github.com/giantswarm/cluster-api-provider-aws/pull/598))
+- Create a CloudFormation stack to manage the IAM policies and roles.
+
+### Changed
+
+- Use a setup script to automate CAPA controller commands.
+
+### Removed
+
+- Remove vintage setup instructions.
 
 ## [3.4.0] - 2024-01-16
 
