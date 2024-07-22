@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- For cluster cleanup purposes, add the permissions `s3:GetBucketTagging` and `s3:ListAllMyBuckets` in order to scan for buckets owned by a management/workload cluster. Those buckets may not have a fixed name pattern (e.g. include AWS region or other dynamic string) and therefore searching by "owned" tag allows us to find and delete all such resources.
+
 ## [4.0.0] - 2024-07-15
 
 ### Added
