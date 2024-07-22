@@ -4,7 +4,9 @@
         {
             "Effect": "Allow",
             "Action": [
-                "ec2:DeleteVolume"
+                "ec2:DeleteVolume",
+                "s3:GetBucketTagging",
+                "s3:ListAllMyBuckets"
             ],
             "Resource": [
                 "*"
