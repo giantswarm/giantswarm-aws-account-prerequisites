@@ -22,8 +22,6 @@ Resources:
               AWS: !Sub "arn:aws:iam::${ManagementClusterAccountID}:user/${InstallationName}-capa-controller"
             Action: "sts:AssumeRole"
       Tags:
-        - Key: "giantswarm.io/cluster"
-          Value: !Ref InstallationName
         - Key: "installation"
           Value: !Ref InstallationName
 

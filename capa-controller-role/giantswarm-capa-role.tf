@@ -1,7 +1,6 @@
 locals {
   tags = {
-    "giantswarm.io/cluster" = var.installation_name
-    "installation"          = var.installation_name
+    "installation" = var.installation_name
   }
 }
 

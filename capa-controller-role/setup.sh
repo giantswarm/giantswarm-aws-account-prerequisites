@@ -9,7 +9,7 @@ NC='\033[0m'
 
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
-TAGS="Key=\"giantswarm.io/cluster\",Value=${INSTALLATION_NAME} Key=installation,Value=${INSTALLATION_NAME}"
+TAGS="Key=installation,Value=${INSTALLATION_NAME}"
 
 function echo_fail_or_success {
 	s=$1
