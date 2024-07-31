@@ -9,6 +9,7 @@ NC='\033[0m'
 
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
+TAGS="Key=installation,Value=${INSTALLATION_NAME}"
 
 function echo_fail_or_success {
 	s=$1
@@ -21,12 +22,14 @@ function echo_fail_or_success {
 
 function create_role {
   envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
-  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json
+  aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json --tags ${TAGS}
+	err=$?
   rm -f ${INSTALLATION_NAME}-trusted-entities.json
+	return $err
 }
 
 function create_policy {
-  policy_arn=$(aws iam create-policy --policy-name $2 --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://$1-policy.json  | jq -r '.Policy.Arn')
+  policy_arn=$(aws iam create-policy --policy-name $2 --description "Giant Swarm managed policy for k8s cluster creation" --policy-document file://$1-policy.json --tags ${TAGS} | jq -r '.Policy.Arn')
   aws iam attach-role-policy --role-name "${ROLE_NAME}" --policy-arn "${policy_arn}"
 }
 

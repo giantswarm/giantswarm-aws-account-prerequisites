@@ -21,6 +21,9 @@ Resources:
             Principal:
               AWS: !Sub "arn:aws:iam::${ManagementClusterAccountID}:user/${InstallationName}-capa-controller"
             Action: "sts:AssumeRole"
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmCapaControllerPolicy:
     Type: "AWS::IAM::Policy"
