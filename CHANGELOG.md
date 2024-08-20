@@ -11,13 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add `ec2:ReplaceRoute` permissions to the CAPA controller role.
-- Add `ec2:DescribeDhcpOptions` permissions to the CAPA controller role, required by CAPA releases >= `v2.4.0`.
-
-### Added
-
 - For cluster cleanup purposes, add the permissions `s3:GetBucketTagging` and `s3:ListAllMyBuckets` in order to scan for buckets owned by a management/workload cluster. Those buckets may not have a fixed name pattern (e.g. include AWS region or other dynamic string) and therefore searching by "owned" tag allows us to find and delete all such resources.
 - For cluster cleanup purposes, tag all IAM roles and policies with the installation name, so they are easily identifiable during cleanup / teardown.
+- Add `ec2:ReplaceRoute` permissions to the CAPA controller role.
+- Add `ec2:DescribeDhcpOptions` permissions to the CAPA controller role, required by CAPA releases >= `v2.4.0`.
 
 ## [4.0.0] - 2024-07-15
 
