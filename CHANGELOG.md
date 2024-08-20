@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add `ec2:ReplaceRoute` permissions to the CAPA controller role.
+- Add `ec2:ReplaceRoute` permissions to the CAPA controller role, because CAPA needs to replace Routes in certain situations.
 - Add `ec2:DescribeDhcpOptions` permissions to the CAPA controller role, required by CAPA releases >= `v2.4.0`.
 
 ### Added
