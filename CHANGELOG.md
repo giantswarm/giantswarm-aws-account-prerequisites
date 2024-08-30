@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Add support for Crossplane usage on the CAPA controller role
+
 ### Fixed
 
 - Fixed terraform file to use correct GiantSwarm root account for the user that will assume the capa-controller role.
