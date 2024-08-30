@@ -1,11 +1,11 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Description: CloudFormation template for bootstrapping the CAPA controller role in your AWS account.
 
 Parameters:
   InstallationName:
     Type: String
     Description: "The name of the management cluster."
-  ManagementClusterAccountID:
+  ManagementClusterOidcProviderDomain:
     Type: String
     Description: "The AWS account ID of the management cluster."
 
@@ -15,12 +15,26 @@ Resources:
     Properties:
       RoleName: !Sub "giantswarm-${InstallationName}-capa-controller"
       AssumeRolePolicyDocument:
-        Version: '2012-10-17'
+        Version: "2012-10-17"
         Statement:
           - Effect: "Allow"
             Principal:
-              AWS: !Sub "arn:aws:iam::${ManagementClusterAccountID}:user/${InstallationName}-capa-controller"
+              AWS: !Sub "arn:aws:iam::084190472784:user/${InstallationName}-capa-controller"
             Action: "sts:AssumeRole"
+          - Effect: "Allow"
+            Principal:
+              Federated: !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/${ManagementClusterOidcProviderDomain}"
+            Action: "sts:AssumeRoleWithWebIdentity"
+            Condition: !Sub |
+              {
+                "ForAnyValue:StringEquals": {
+                  "${ManagementClusterOidcProviderDomain}:sub": [
+                    "system:serviceaccount:crossplane:upbound-provider-aws",
+                    "system:serviceaccount:crossplane:upbound-provider-aws-importer",
+                    "system:serviceaccount:crossplane:xfn-network-discovery"
+                  ]
+                }
+              }
       Tags:
         - Key: "installation"
           Value: !Ref InstallationName
@@ -217,6 +231,9 @@ Resources:
               - "ec2:DescribeSecurityGroups"
               - "ec2:RevokeSecurityGroupEgress"
               - "ec2:RevokeSecurityGroupIngress"
+              - "cloudwatch:*"
+              - "sqs:*"
+              - "events:*"
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
