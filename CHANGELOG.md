@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add support for Crossplane usage on the CAPA controller role
+- Add ability to import existing IAM resources into Terraform state for the CAPA controller role
 
 ### Fixed
 
