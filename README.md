@@ -84,6 +84,15 @@ terraform init
 terraform apply -var="installation_name=test" -var="management_cluster_oidc_provider_domain=irsa.test.gaws.gigantic.io"
 ```
 
+### Import existing resources
+
+To update the policies of an existing role, you can run Terraform with the extra variable `import_existing=true` to import the resources into the state:
+
+```
+terraform init
+terraform apply -var="installation_name=test" -var="management_cluster_oidc_provider_domain=irsa.test.gaws.gigantic.io" -var="import_existing=true"
+```
+
 ## AWS cli
 
 ### Requirements
