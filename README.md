@@ -43,7 +43,7 @@ Review the changes and click `Create stack`. In case of any error, please check 
 ### Execution
 
 ```
-terraform init .
+terraform init
 terraform apply -var="admin_role_name=GiantSwarmAdmin
 ```
 
@@ -55,12 +55,12 @@ In the AWS account where you plan to run the management cluster, you need to cre
 
 ### AWS CloudFormation template
 
-You can execute directly the CloudFormation template by clicking the [capa controller role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterAccountID=MANAGEMENT_CLUSTER_ACCOUNT_ID) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+You can execute directly the CloudFormation template by clicking the [capa controller role stack template](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterOidcProviderDomain=MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN) or uploading the [template file](./capa-controller-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
 
 You will be asked for the following parameters:
 
-- `InstallationName`: The name of the installation which you have agreed with Giant Swarm upfront.
-- `ManagementClusterAccountID`: The account ID of the management cluster account. This is the account where the management cluster will be running.
+- `InstallationName`: the name of the installation which you have agreed with Giant Swarm upfront.
+- `ManagementClusterOidcProviderDomain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
 
 Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
@@ -74,14 +74,14 @@ Review the changes and click `Create stack`. In case of any error, please check 
 
 ### Adjust variables
 
-- `management_cluster_account_id` - the account id of the management cluster account.
-- `installation_name` - the name of the installation which you have agreed with Giant Swarm upfront.
+- `installation_name`: the name of the installation which you have agreed with Giant Swarm upfront.
+- `management_cluster_oidc_provider_domain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
 
 ### Execution
 
 ```
-terraform init .
-terraform apply -var="installation_name=test"
+terraform init
+terraform apply -var="installation_name=test" -var="management_cluster_oidc_provider_domain=irsa.test.gaws.gigantic.io"
 ```
 
 ## AWS cli
@@ -98,6 +98,7 @@ terraform apply -var="installation_name=test"
 
 ```
 export INSTALLATION_NAME=test
+export MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN=irsa.test.gaws.gigantic.io
 chmod +x setup.sh
 ./setup.sh
 ```

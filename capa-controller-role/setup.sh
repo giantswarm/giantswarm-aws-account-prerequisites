@@ -7,6 +7,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
 TAGS="Key=installation,Value=${INSTALLATION_NAME}"
@@ -21,6 +22,7 @@ function echo_fail_or_success {
 }
 
 function create_role {
+  export AWS_ACCOUNT_ID
   envsubst < ./trusted-entities.json > ${INSTALLATION_NAME}-trusted-entities.json
   aws iam create-role --role-name "${ROLE_NAME}" --description "Giant Swarm managed role for k8s cluster creation" --assume-role-policy-document file://${INSTALLATION_NAME}-trusted-entities.json --tags ${TAGS}
 	err=$?

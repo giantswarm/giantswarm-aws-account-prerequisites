@@ -4,23 +4,16 @@ locals {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_role" "giantswarm-capa-controller-role" {
   name               = "giantswarm-${var.installation_name}-capa-controller"
-  assume_role_policy = data.aws_iam_policy_document.giantswarm-capa-controller.json
-  tags               = local.tags
-}
-
-data "aws_iam_policy_document" "giantswarm-capa-controller" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::084190472784:user/${var.installation_name}-capa-controller"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
+  assume_role_policy = templatefile("${path.module}/trusted-entities.json", {
+    INSTALLATION_NAME                       = var.installation_name
+    AWS_ACCOUNT_ID                          = data.aws_caller_identity.current.account_id
+    MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN = var.management_cluster_oidc_provider_domain
+  })
+  tags = local.tags
 }
 
 resource "aws_iam_policy" "giantswarm-capa-controller-policy" {

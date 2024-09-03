@@ -11,7 +11,10 @@
                 "ec2:DescribeSecurityGroupRules",
                 "ec2:DescribeSecurityGroups",
                 "ec2:RevokeSecurityGroupEgress",
-                "ec2:RevokeSecurityGroupIngress"
+                "ec2:RevokeSecurityGroupIngress",
+                "cloudwatch:*",
+                "sqs:*",
+                "events:*"
             ],
             "Resource": "*"
         }
