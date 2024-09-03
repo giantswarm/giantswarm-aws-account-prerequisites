@@ -14,19 +14,24 @@ Resources:
     Type: "AWS::IAM::Role"
     Properties:
       RoleName: !Sub "giantswarm-${InstallationName}-capa-controller"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Principal:
-              AWS: !Sub "arn:aws:iam::084190472784:user/${InstallationName}-capa-controller"
-            Action: "sts:AssumeRole"
-          - Effect: "Allow"
-            Principal:
-              Federated: !Sub "arn:aws:iam::${AWS::AccountId}:oidc-provider/${ManagementClusterOidcProviderDomain}"
-            Action: "sts:AssumeRoleWithWebIdentity"
-            Condition: !Sub |
-              {
+      AssumeRolePolicyDocument: !Sub |
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::084190472784:user/${InstallationName}-capa-controller"
+              },
+              "Action": "sts:AssumeRole"
+            },
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "arn:aws:iam::${AWS::AccountId}:oidc-provider/${ManagementClusterOidcProviderDomain}"
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
                 "ForAnyValue:StringEquals": {
                   "${ManagementClusterOidcProviderDomain}:sub": [
                     "system:serviceaccount:crossplane:upbound-provider-aws",
@@ -35,6 +40,9 @@ Resources:
                   ]
                 }
               }
+            }
+          ]
+        }
       Tags:
         - Key: "installation"
           Value: !Ref InstallationName
