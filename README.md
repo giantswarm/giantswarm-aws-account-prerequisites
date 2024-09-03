@@ -43,7 +43,7 @@ Review the changes and click `Create stack`. In case of any error, please check 
 ### Execution
 
 ```
-terraform init .
+terraform init
 terraform apply -var="admin_role_name=GiantSwarmAdmin
 ```
 
@@ -80,8 +80,8 @@ Review the changes and click `Create stack`. In case of any error, please check 
 ### Execution
 
 ```
-terraform init .
-terraform apply -var="installation_name=test"
+terraform init
+terraform apply -var="installation_name=test" -var="management_cluster_oidc_provider_domain=irsa.test.gaws.gigantic.io"
 ```
 
 ## AWS cli
