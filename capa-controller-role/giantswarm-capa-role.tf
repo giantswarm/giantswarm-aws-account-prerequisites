@@ -4,6 +4,12 @@ locals {
   }
 }
 
+provider "aws" {
+  ignore_tags {
+    keys = ["maintainer", "owner", "repo"]
+  }
+}
+
 data "aws_caller_identity" "current" {}
 
 resource "aws_iam_role" "giantswarm-capa-controller-role" {
