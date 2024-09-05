@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.2.0] - 2024-09-04
+
 ### Changed
 
 - Add support for Crossplane usage on the CAPA controller role
@@ -142,7 +144,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.1.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.2.0...HEAD
+[4.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.4.0...v4.0.0
 [3.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v3.3.0...v3.4.0
