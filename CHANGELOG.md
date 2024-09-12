@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use more fine-grained permissions on the IAM controller policy to reduce risks.
+
 ## [4.2.0] - 2024-09-04
 
 ### Changed
