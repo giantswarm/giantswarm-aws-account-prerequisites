@@ -110,7 +110,7 @@ terraform apply -var="installation_name=test" -var="management_cluster_oidc_prov
 ```
 export INSTALLATION_NAME=test
 export MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN=irsa.test.gaws.gigantic.io
-# Optional: only set to true if this installation is going to be used exclusively to create WCs on existing infrastructure
+# Optional: only set to true if this installation is going to be used exclusively to create WCs on existing VPCs and subnets
 # export BYOVPC=true
 chmod +x setup.sh
 ./setup.sh

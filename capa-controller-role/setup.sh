@@ -14,8 +14,8 @@ TAGS="Key=installation,Value=${INSTALLATION_NAME}"
 BYOVPC=${BYOVPC:-false}
 
 if [ "$BYOVPC" == "false" ]; then
-	# This extra policy is not needed in BYO VPC installations
-	POL_TYPES+=("capa-controller-extra")
+	# This policy is not needed in BYO VPC installations
+	POL_TYPES+=("capa-controller-vpc")
 fi
 
 function echo_fail_or_success {

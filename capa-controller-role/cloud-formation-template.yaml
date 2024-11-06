@@ -14,8 +14,8 @@ Parameters:
     Default: false
 
 Conditions:
-  # The extra policy is not needed in BYO VPC installations
-  CreateExtraPolicy: !Not
+  # The policy is not needed in BYO VPC installations
+  CreateVpcPolicy: !Not
     - !Ref ByoVpc
 
 Resources:
@@ -194,10 +194,10 @@ Resources:
         - !Ref GiantSwarmCapaControllerRole
 
   GiantSwarmCapaControllerPolicyExtra:
-    Condition: CreateExtraPolicy
+    Condition: CreateVpcPolicy
     Type: "AWS::IAM::Policy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy-extra"
+      PolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy-vpc"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
