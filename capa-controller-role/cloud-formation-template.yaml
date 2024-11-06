@@ -193,7 +193,7 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmCapaControllerPolicyExtra:
+  GiantSwarmCapaControllerPolicyVpc:
     Condition: CreateVpcPolicy
     Type: "AWS::IAM::Policy"
     Properties:
