@@ -61,6 +61,7 @@ You will be asked for the following parameters:
 
 - `InstallationName`: the name of the installation which you have agreed with Giant Swarm upfront.
 - `ManagementClusterOidcProviderDomain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
+- `ByoVpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
 
 Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
 
@@ -76,6 +77,7 @@ Review the changes and click `Create stack`. In case of any error, please check 
 
 - `installation_name`: the name of the installation which you have agreed with Giant Swarm upfront.
 - `management_cluster_oidc_provider_domain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
+- `byovpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
 
 ### Execution
 
@@ -108,6 +110,8 @@ terraform apply -var="installation_name=test" -var="management_cluster_oidc_prov
 ```
 export INSTALLATION_NAME=test
 export MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN=irsa.test.gaws.gigantic.io
+# Optional: only set to true if this installation is going to be used exclusively to create WCs on existing VPCs and subnets
+# export BYOVPC=true
 chmod +x setup.sh
 ./setup.sh
 ```
