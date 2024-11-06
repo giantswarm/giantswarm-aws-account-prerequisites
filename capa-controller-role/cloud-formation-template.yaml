@@ -9,14 +9,18 @@ Parameters:
     Type: String
     Description: "The AWS account ID of the management cluster."
   ByoVpc:
-    Type: Boolean
+    Type: String
     Description: "If true, the CAPA role will be created without the permissions needed to manage VPCs"
-    Default: false
+    Default: "false"
+    AllowedValues:
+      - "true"
+      - "false"
 
 Conditions:
   # The policy is not needed in BYO VPC installations
-  CreateVpcPolicy: !Not
+  CreateVpcPolicy: !Equals
     - !Ref ByoVpc
+    - "false"
 
 Resources:
   GiantSwarmCapaControllerRole:
