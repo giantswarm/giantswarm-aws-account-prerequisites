@@ -13,3 +13,9 @@ variable "import_existing" {
   description = "If true, import existing resources"
   default     = false
 }
+
+variable "byovpc" {
+  type        = bool
+  description = "If true, the CAPA role will be created without the permissions needed to manage VPCs"
+  default     = false
+}

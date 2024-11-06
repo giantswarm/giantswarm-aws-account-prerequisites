@@ -11,6 +11,12 @@ AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
 TAGS="Key=installation,Value=${INSTALLATION_NAME}"
+BYOVPC=${BYOVPC:-false}
+
+if [ "$BYOVPC" == "false" ]; then
+	# This extra policy is not needed in BYO VPC installations
+	POL_TYPES+=("capa-controller-extra")
+fi
 
 function echo_fail_or_success {
 	s=$1
