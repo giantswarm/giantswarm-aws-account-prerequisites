@@ -230,6 +230,9 @@ Resources:
               - "ec2:DisassociateVpcCidrBlock"
               - "ec2:ModifySubnetAttribute"
               - "ec2:ReplaceRoute"
+            Resource: "*"
+      Roles:
+        - !Ref GiantSwarmCapaControllerRole
 
   GiantSwarmDNSControllerPolicy:
     Type: "AWS::IAM::Policy"
