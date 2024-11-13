@@ -60,10 +60,10 @@ Resources:
         - Key: "installation"
           Value: !Ref InstallationName
 
-  GiantSwarmCapaControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmCapaControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -197,11 +197,11 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmCapaControllerPolicyVpc:
+  GiantSwarmCapaControllerVpcManagedPolicy:
     Condition: CreateVpcPolicy
-    Type: "AWS::IAM::Policy"
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy-vpc"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-vpc-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -230,11 +230,14 @@ Resources:
               - "ec2:DisassociateVpcCidrBlock"
               - "ec2:ModifySubnetAttribute"
               - "ec2:ReplaceRoute"
+            Resource: "*"
+      Roles:
+        - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmDNSControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmDNSControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-dns-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-dns-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -247,10 +250,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmCrossplanePolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmCrossplaneManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-crossplane-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-crossplane-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -271,10 +274,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmEKSControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmEKSControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-eks-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-eks-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -369,10 +372,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmIAMControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmIAMControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-iam-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-iam-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -401,10 +404,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmIRSAControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmIRSAControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-irsa-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-irsa-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -463,10 +466,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmMCBootstrapPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmMCBootstrapManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-mc-bootstrap-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-mc-bootstrap-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -476,10 +479,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmNetworkTopologyControllerPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmNetworkTopologyControllerManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-network-topology-controller-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-network-topology-controller-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -506,10 +509,10 @@ Resources:
       Roles:
         - !Ref GiantSwarmCapaControllerRole
 
-  GiantSwarmResolverRulesOperatorPolicy:
-    Type: "AWS::IAM::Policy"
+  GiantSwarmResolverRulesOperatorManagedPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
     Properties:
-      PolicyName: !Sub "giantswarm-${InstallationName}-resolver-rules-operator-policy"
+      ManagedPolicyName: !Sub "giantswarm-${InstallationName}-resolver-rules-operator-policy"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
