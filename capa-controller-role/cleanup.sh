@@ -9,9 +9,11 @@ NC='\033[0m'
 
 ROLE_NAME="giantswarm-${INSTALLATION_NAME}-capa-controller"
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --output text --query 'Account')"
+AWS_PARTITION=${AWS_PARTITION:-aws}
+GS_USER_ACCOUNT=${GS_USER_ACCOUNT:-"084190472784"}
 
 POL_TYPES=("capa-controller" "capa-controller-vpc" "dns-controller" "eks-controller" "iam-controller" "irsa-operator" "resolver-rules-operator" "network-topology-operator" "mc-bootstrap" "crossplane")
-POL_ARN_PREFIX="arn:aws:iam::${AWS_ACCOUNT_ID}:policy"
+POL_ARN_PREFIX="arn:${AWS_PARTITION}:iam::${AWS_ACCOUNT_ID}:policy"
 
 function echo_fail_or_success {
 	s=$1
