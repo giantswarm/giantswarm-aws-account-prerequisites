@@ -3,6 +3,18 @@ variable "installation_name" {
   description = "If you dont know what `installation_name` value is suppose to be, ask Giant Swarm staff and they will provide it."
 }
 
+variable "aws_partition" {
+  type        = string
+  description = "AWS partition used for ARN referencing, use aws-cn for China regions"
+  default     = "aws"
+}
+
+variable "gs_user_account" {
+  type        = string
+  description = "AWS account where GS staff users are located"
+  default     = "084190472784"
+}
+
 variable "management_cluster_oidc_provider_domain" {
   type        = string
   description = "OIDC provider domain of the management cluster"

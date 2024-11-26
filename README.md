@@ -112,6 +112,8 @@ export INSTALLATION_NAME=test
 export MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN=irsa.test.gaws.gigantic.io
 # Optional: only set to true if this installation is going to be used exclusively to create WCs on existing VPCs and subnets
 # export BYOVPC=true
+# Optional: only set this to aws-cn if the installation is in China
+# export AWS_PARTITION=aws-cn
 chmod +x setup.sh
 ./setup.sh
 ```

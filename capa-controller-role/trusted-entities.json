@@ -4,7 +4,7 @@
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::084190472784:user/${INSTALLATION_NAME}-capa-controller"
+                "AWS": "arn:${AWS_PARTITION}:iam::${GS_USER_ACCOUNT}:user/${INSTALLATION_NAME}-capa-controller"
             },
             "Action": "sts:AssumeRole",
             "Condition": {}
@@ -12,7 +12,7 @@
         {
             "Effect": "Allow",
             "Principal": {
-                "Federated": "arn:aws:iam::${AWS_ACCOUNT_ID}:oidc-provider/${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}"
+                "Federated": "arn:${AWS_PARTITION}:iam::${AWS_ACCOUNT_ID}:oidc-provider/${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
