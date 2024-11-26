@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CAPA role CloudFormation template: switch from inline to managed policies for the CAPA IAM role.
 - Add CAPA permissions for ASG lifecycle hooks
 - Add support for AWS China
+- Add support for custom GS staff account
 
 ## [4.2.0] - 2024-09-04
 

@@ -9,6 +9,12 @@ variable "aws_partition" {
   default     = "aws"
 }
 
+variable "gs_user_account" {
+  type        = string
+  description = "AWS account where GS staff users are located"
+  default     = "084190472784"
+}
+
 variable "management_cluster_oidc_provider_domain" {
   type        = string
   description = "OIDC provider domain of the management cluster"

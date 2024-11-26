@@ -13,6 +13,7 @@ POL_TYPES=("capa-controller" "dns-controller" "eks-controller" "iam-controller" 
 TAGS="Key=installation,Value=${INSTALLATION_NAME}"
 BYOVPC=${BYOVPC:-false}
 AWS_PARTITION=${AWS_PARTITION:-aws}
+GS_USER_ACCOUNT=${GS_USER_ACCOUNT:-"084190472784"}
 
 if [ "$BYOVPC" == "false" ]; then
 	# This policy is not needed in BYO VPC installations

@@ -19,6 +19,7 @@ resource "aws_iam_role" "giantswarm-capa-controller-role" {
     AWS_ACCOUNT_ID                          = data.aws_caller_identity.current.account_id
     MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN = var.management_cluster_oidc_provider_domain
     AWS_PARTITION = var.aws_partition
+    GS_USER_ACCOUNT = var.gs_user_account
   })
   tags = local.tags
 }
