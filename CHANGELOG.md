@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Allow `iam:TagPolicy` to GS staff in order to update prerequisites IAM policies
+
 ## [4.3.0] - 2024-12-05
 
 ### Changed
