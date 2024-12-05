@@ -34,16 +34,16 @@ resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-att
   policy_arn = aws_iam_policy.giantswarm-capa-controller-policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-capa-controller-policy-vpc" {
+resource "aws_iam_policy" "giantswarm-capa-controller-vpc-policy" {
   count  = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
-  name   = "giantswarm-${var.installation_name}-capa-controller-policy-vpc"
-  policy = file("${path.module}/capa-controller-policy-vpc.json")
+  name   = "giantswarm-${var.installation_name}-capa-controller-vpc-policy"
+  policy = file("${path.module}/capa-controller-vpc-policy.json")
   tags   = local.tags
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-vpc-attachment" {
+resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-vpc-policy-attachment" {
   count      = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
   role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-capa-controller-policy-vpc[0].arn
+  policy_arn = aws_iam_policy.giantswarm-capa-controller-vpc-policy[0].arn
 }
 
 resource "aws_iam_policy" "giantswarm-dns-controller-policy" {
