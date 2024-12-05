@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Allow `iam:TagPolicy` to GS staff in order to update prerequisites IAM policies
+- Avoid Terraform replacing IAM role/policies if only description field changed
 
 ## [4.3.0] - 2024-12-05
 
