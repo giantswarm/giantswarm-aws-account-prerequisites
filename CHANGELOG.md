@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.1] - 2024-12-18
+
 ### Changed
 
 - Allow `iam:TagPolicy` to GS staff in order to update prerequisites IAM policies
@@ -159,7 +161,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.1...HEAD
+[4.3.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.1.0...v4.2.0
 [4.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.0.0...v4.1.0
