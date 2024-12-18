@@ -36,9 +36,12 @@ locals {
   }
 }
 
-provider "aws" {
-  ignore_tags {
-    keys = ["maintainer", "owner", "repo"]
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
   }
 }
 
