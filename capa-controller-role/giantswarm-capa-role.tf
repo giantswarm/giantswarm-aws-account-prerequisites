@@ -1,3 +1,35 @@
+variable "installation_name" {
+  type        = string
+  description = "Name of the installation (= name of management cluster). Please ask Giant Swarm staff to provide it."
+}
+
+variable "gs_user_account" {
+  type        = string
+  description = "Account of Giant Swarm IAM users (`084190472784`, except for China)"
+  default     = "084190472784"
+
+  validation {
+    condition     = can(regex("^[0-9]{12}$", var.gs_user_account))
+    error_message = "AWS account ID must consist of exactly 12 digits"
+  }
+}
+
+variable "management_cluster_oidc_provider_domain" {
+  type        = string
+  description = "OIDC provider domain of the management cluster"
+
+  validation {
+    condition     = can(regex("^([0-9a-z-]+)(\\.[0-9a-z-]+)+$", var.management_cluster_oidc_provider_domain))
+    error_message = "Invalid OIDC provider domain"
+  }
+}
+
+variable "byovpc" {
+  type        = bool
+  description = "If true, the CAPA role will be created without the permissions needed to manage VPCs"
+  default     = false
+}
+
 locals {
   tags = {
     "installation" = var.installation_name
@@ -10,173 +42,17 @@ provider "aws" {
   }
 }
 
-data "aws_caller_identity" "current" {}
+resource "aws_cloudformation_stack" "giantswarm_capa_controller" {
+  name          = "CAPAControllerRoleBootstrap"
+  template_body = file("${path.module}/cloud-formation-template.yaml")
 
-resource "aws_iam_role" "giantswarm-capa-controller-role" {
-  name = "giantswarm-${var.installation_name}-capa-controller"
-  assume_role_policy = templatefile("${path.module}/trusted-entities.json", {
-    INSTALLATION_NAME                       = var.installation_name
-    AWS_ACCOUNT_ID                          = data.aws_caller_identity.current.account_id
-    MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN = var.management_cluster_oidc_provider_domain
-    AWS_PARTITION                           = var.aws_partition
-    GS_USER_ACCOUNT                         = var.gs_user_account
-  })
-  tags        = local.tags
-  description = "Giant Swarm managed role for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
+  parameters = {
+    InstallationName = var.installation_name
 
-resource "aws_iam_policy" "giantswarm-capa-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-capa-controller-policy"
-  policy      = file("${path.module}/capa-controller-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
+    ByoVpc                              = var.byovpc
+    ManagementClusterOidcProviderDomain = var.management_cluster_oidc_provider_domain
+    GiantSwarmUserAccount               = var.gs_user_account
   }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-capa-controller-policy.arn
-}
 
-resource "aws_iam_policy" "giantswarm-capa-controller-vpc-policy" {
-  count       = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
-  name        = "giantswarm-${var.installation_name}-capa-controller-vpc-policy"
-  policy      = file("${path.module}/capa-controller-vpc-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-vpc-policy-attachment" {
-  count      = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-capa-controller-vpc-policy[0].arn
-}
-
-resource "aws_iam_policy" "giantswarm-dns-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-dns-controller-policy"
-  policy      = file("${path.module}/dns-controller-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-dns-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-dns-controller-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-eks-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-eks-controller-policy"
-  policy      = file("${path.module}/eks-controller-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-eks-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-eks-controller-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-iam-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-iam-controller-policy"
-  policy      = file("${path.module}/iam-controller-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-iam-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-iam-controller-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-irsa-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-irsa-controller-policy"
-  policy      = file("${path.module}/irsa-operator-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-irsa-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-irsa-controller-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-network-topology-controller-policy" {
-  name        = "giantswarm-${var.installation_name}-network-topology-controller-policy"
-  policy      = file("${path.module}/network-topology-operator-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-network-topology-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-network-topology-controller-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-resolver-rules-operator-policy" {
-  name        = "giantswarm-${var.installation_name}-resolver-rules-operator-policy"
-  policy      = file("${path.module}/resolver-rules-operator-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-resolver-rules-operator-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-resolver-rules-operator-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-mc-bootstrap-policy" {
-  name        = "giantswarm-${var.installation_name}-mc-bootstrap-policy"
-  policy      = file("${path.module}/mc-bootstrap-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-mc-bootstrap-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-mc-bootstrap-policy.arn
-}
-
-resource "aws_iam_policy" "giantswarm-crossplane-policy" {
-  name        = "giantswarm-${var.installation_name}-crossplane-policy"
-  policy      = file("${path.module}/crossplane-policy.json")
-  tags        = local.tags
-  description = "Giant Swarm managed policy for k8s cluster creation"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
-}
-resource "aws_iam_role_policy_attachment" "giantswarm-crossplane-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-crossplane-policy.arn
+  tags = local.tags
 }

@@ -2,21 +2,24 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: CloudFormation template for bootstrapping the admin role in your AWS account.
 
 Parameters:
-  AdminRoleName:
+  GiantSwarmUserAccount:
     Type: String
-    Default: "GiantSwarmAdmin"
+    Description: "Account of Giant Swarm IAM users (`084190472784`, except for China). Assumed to be in the same partition as the CloudFormation stack account (`aws`, or `aws-cn` for China)."
+    Default: "084190472784"
+    # No `AllowedValues` here, since we don't publish the identifiers of other accounts
+    AllowedPattern: "^[0-9]{12}$"
 
 Resources:
   GiantSwarmAdminRole:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: !Ref AdminRoleName
+      RoleName: GiantSwarmAdmin
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: "Allow"
             Principal:
-              AWS: "arn:aws:iam::084190472784:root"
+              AWS: !Sub "arn:${AWS::Partition}:iam::${GiantSwarmUserAccount}:root"
             Action: "sts:AssumeRole"
 
   GiantSwarmAdminPolicy:

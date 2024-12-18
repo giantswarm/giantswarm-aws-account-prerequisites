@@ -5,9 +5,7 @@ Parameters:
   InstallationName:
     Type: String
     Description: "The name of the management cluster."
-  ManagementClusterOidcProviderDomain:
-    Type: String
-    Description: "The AWS account ID of the management cluster."
+
   ByoVpc:
     Type: String
     Description: "If true, the CAPA role will be created without the permissions needed to manage VPCs"
@@ -15,6 +13,16 @@ Parameters:
     AllowedValues:
       - "true"
       - "false"
+  GiantSwarmUserAccount:
+    Type: String
+    Description: "Account of Giant Swarm IAM users (`084190472784`, except for China). Assumed to be in the same partition as the CloudFormation stack account (`aws`, or `aws-cn` for China)."
+    Default: "084190472784"
+    # No `AllowedValues` here, since we don't publish the identifiers of other accounts
+    AllowedPattern: "^[0-9]{12}$"
+  ManagementClusterOidcProviderDomain:
+    Type: String
+    Description: "The OIDC domain of the management cluster, typically `irsa.<MC>.<base domain>`, for example `irsa.golem.gaws.gigantic.io`."
+    AllowPattern: "^([0-9a-z-]+)(\\.[0-9a-z-]+)+$"
 
 Conditions:
   # The policy is not needed in BYO VPC installations
@@ -27,6 +35,7 @@ Resources:
     Type: "AWS::IAM::Role"
     Properties:
       RoleName: !Sub "giantswarm-${InstallationName}-capa-controller"
+      Description: "Giant Swarm managed role for k8s cluster creation"
       AssumeRolePolicyDocument: !Sub |
         {
           "Version": "2012-10-17",
@@ -34,14 +43,14 @@ Resources:
             {
               "Effect": "Allow",
               "Principal": {
-                "AWS": "arn:aws:iam::084190472784:user/${InstallationName}-capa-controller"
+                "AWS": "arn:${AWS::Partition}:iam::${GiantSwarmUserAccount}:user/${InstallationName}-capa-controller"
               },
               "Action": "sts:AssumeRole"
             },
             {
               "Effect": "Allow",
               "Principal": {
-                "Federated": "arn:aws:iam::${AWS::AccountId}:oidc-provider/${ManagementClusterOidcProviderDomain}"
+                "Federated": "arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/${ManagementClusterOidcProviderDomain}"
               },
               "Action": "sts:AssumeRoleWithWebIdentity",
               "Condition": {
@@ -64,6 +73,7 @@ Resources:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -199,12 +209,16 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmCapaControllerVpcManagedPolicy:
     Condition: CreateVpcPolicy
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-capa-controller-vpc-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -236,11 +250,15 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmDNSControllerManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-dns-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -252,11 +270,15 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmCrossplaneManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-crossplane-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -276,11 +298,15 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmEKSControllerManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-eks-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -317,7 +343,6 @@ Resources:
               - "arn:*:iam::*:policy/AmazonEKSWorkerNodePolicy"
               - "arn:*:iam::*:policy/AmazonEKS_CNI_Policy"
               - "arn:*:iam::*:policy/AmazonEC2ContainerRegistryReadOnly"
-              - "arn:*:iam::*:policy/AmazonEKSClusterPolicy"
           - Effect: "Allow"
             Action:
               - "eks:DescribeCluster"
@@ -374,11 +399,15 @@ Resources:
                 "kms:ResourceAliases": "alias/cluster-api-provider-aws-*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmIAMControllerManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-iam-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -406,11 +435,15 @@ Resources:
             Resource: "arn:*:iam::*:instance-profile/*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmIRSAControllerManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-irsa-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -456,7 +489,6 @@ Resources:
               - "s3:PutBucketPublicAccessBlock"
               - "s3:PutEncryptionConfiguration"
               - "s3:PutLifecycleConfiguration"
-              - "s3:PutObjectAcl"
             Resource: "arn:*:s3:::*-g8s-*"
           - Effect: "Allow"
             Action:
@@ -468,24 +500,35 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmMCBootstrapManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-mc-bootstrap-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
           - Effect: "Allow"
-            Action: "ec2:DeleteVolume"
+            Action:
+              - "ec2:DeleteVolume"
+              - "s3:GetBucketTagging"
+              - "s3:ListAllMyBuckets"
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmNetworkTopologyControllerManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-network-topology-controller-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -511,11 +554,15 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
   GiantSwarmResolverRulesOperatorManagedPolicy:
     Type: "AWS::IAM::ManagedPolicy"
     Properties:
       ManagedPolicyName: !Sub "giantswarm-${InstallationName}-resolver-rules-operator-policy"
+      Description: "Giant Swarm managed policy for k8s cluster creation"
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -538,6 +585,9 @@ Resources:
             Resource: "*"
       Roles:
         - !Ref GiantSwarmCapaControllerRole
+      Tags:
+        - Key: "installation"
+          Value: !Ref InstallationName
 
 Outputs:
   GiantSwarmCapaControllerRoleArn:

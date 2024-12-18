@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Reduce setup options to only CloudFormation stacks
+
 ## [4.3.1] - 2024-12-18
 
 ### Changed
