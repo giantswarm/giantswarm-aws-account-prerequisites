@@ -2,7 +2,6 @@ variable "management_clusters" {
   type = map(object({
     aws_account = list(object({
       account_id = string
-      region = string
       aws_partition = string
       byovpc = bool
       additional_policies = list(string)

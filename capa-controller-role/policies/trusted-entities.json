@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:${AWS_PARTITION}:iam::${GS_USER_ACCOUNT}:user/${INSTALLATION_NAME}-capa-controller"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {}
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:${AWS_PARTITION}:iam::${AWS_ACCOUNT_ID}:oidc-provider/${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}:sub": [
+                        "system:serviceaccount:crossplane:upbound-provider-aws",
+                        "system:serviceaccount:crossplane:upbound-provider-aws-importer",
+                        "system:serviceaccount:crossplane:xfn-network-discovery"
+                    ]
+                }
+            }
+        }
+    ]
+}
