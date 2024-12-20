@@ -1,0 +1,33 @@
+name: OpenTofu checks
+on:
+  push:
+
+jobs:
+  tofu_checks:
+    name: OpenTofu checks
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: opentofu/setup-opentofu@592200bd4b9bbf4772ace78f887668b1aee8f716 # v1.0.5
+        with:
+          tofu_version: 1.8.7
+
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Checks
+        run: |
+          set -eu
+
+          for d in admin-role capa-controller-role; do (
+              cd "${d}"
+
+              echo "Initializing Tofu for ${d}"
+              tofu init
+
+              echo "Validating Tofu code for ${d}"
+              tofu validate -no-color
+
+              echo "Formatting Tofu code for ${d}"
+              tofu fmt
+              echo "Checking differences in Tofu code formatting for ${d}"
+              git diff --exit-code || { >&2 echo "Tofu code isn't formatted, please run 'tofu fmt'"; exit 1; }
+          ); done
