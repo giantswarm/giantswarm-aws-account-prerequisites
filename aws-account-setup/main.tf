@@ -8,7 +8,15 @@ terraform {
 }
 
 locals {
-  gs_user_account = "084190472784"
+  gs_user_accounts_map = {
+    "aws" = "084190472784"
+    "aws-cn" = "306934455918"
+  }
+
+  workspace_partition_map = {
+    "default" = "aws"
+    "china" = "aws-cn"
+  }
 
   mc_account_flat = flatten([
     for mc_name, mc in var.management_clusters : [
@@ -16,7 +24,7 @@ locals {
         name = mc_name
         aws_account = account
         oidc_provider_domain = mc.oidc_provider_domain
-      }
+      } if local.workspace_partition_map[terraform.workspace] == account.aws_partition
     ]
   ])
 
@@ -44,6 +52,7 @@ provider "aws" {
   alias = "main"
   region = "eu-west-1" # Irrelevant as we are only creating IAM stuff
   for_each = local.aws_account_map
+  profile = each.value == "aws" ? var.aws_profile : var.aws_cn_profile
 
   assume_role {
     role_arn = "arn:${each.value}:iam::${each.key}:role/GiantSwarmAdmin"
@@ -63,7 +72,7 @@ provider "aws" {
 #     aws = aws.main[each.key]
 #   }
 
-#   gs_user_account = local.gs_user_account
+#   gs_user_account = local.gs_user_accounts_map[each.value]
 #   aws_partition = each.value
 # }
 
@@ -77,7 +86,7 @@ module "capa_controller_role" {
   installation_name = each.value.name
   management_cluster_oidc_provider_domain = each.value.oidc_provider_domain
   byovpc = each.value.aws_account.byovpc
-  gs_user_account = local.gs_user_account
+  gs_user_account = local.gs_user_accounts_map[each.value.aws_account.aws_partition]
   aws_partition = each.value.aws_account.aws_partition
 
   # TBD
