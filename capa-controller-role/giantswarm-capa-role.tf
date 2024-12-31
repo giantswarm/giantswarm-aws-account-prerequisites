@@ -183,3 +183,16 @@ resource "aws_iam_role_policy_attachment" "giantswarm_crossplane_policy_attachme
   role       = aws_iam_role.giantswarm_capa_controller_role.name
   policy_arn = aws_iam_policy.giantswarm_crossplane_policy.arn
 }
+
+resource "aws_iam_role_policy" "additional_inline_policies" {
+  for_each = var.additional_policies
+  name     = each.key
+  role     = aws_iam_role.giantswarm_capa_controller_role.name
+  policy   = each.value
+}
+
+resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
+  for_each   = toset(var.additional_policies_arns)
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = each.value
+}

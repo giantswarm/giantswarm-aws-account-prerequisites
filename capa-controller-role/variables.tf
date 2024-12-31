@@ -41,3 +41,15 @@ variable "import_existing" {
   description = "If true, the existing role and policies will be imported instead of created"
   default     = false
 }
+
+variable "additional_policies" {
+  type        = map(string)
+  description = "Map of additional policy documents to attach to the IAM role"
+  default     = {}
+}
+
+variable "additional_policies_arns" {
+  type        = list(string)
+  description = "List of ARNs of additional managed policies to attach to the role"
+  default     = []
+}
