@@ -1,34 +1,46 @@
 # giantswarm-aws-account-prerequisites
 
-This repo contains Cloud Formation templates to prepare AWS accounts for running Giant Swarm clusters based on Cluster API Provider for AWS (CAPA).
+This repo contains OpenTofu / Terraform configuration to prepare AWS accounts for running Giant Swarm clusters based on Cluster API Provider for AWS (CAPA).
 
 ## Before starting
 
 Make sure to adjust AWS account limits according to [these docs](https://docs.giantswarm.io/getting-started/prepare-your-provider-infrastructure/aws/#quotas). Then please create the admin role for Giant Swarm staff access, as shown below.
 
-## 1. admin-role
+## admin-role
 
 In all AWS accounts where you plan to run a management cluster and workload clusters, Giant Swarm staff need to have access in order to manage, operate and troubleshoot the infrastructure.
 
-Therefore, please create the admin CloudFormation stack in each of those accounts. That can be done either from our [admin role stack template (direct link to AWS Console dialog)](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/admin-role/cloud-formation-template.yaml&stackName=GiantSwarmAdminRoleBootstrap&&param_AdminRoleName=GiantSwarmAdmin), or by uploading the [admin role stack definition file](./admin-role/cloud-formation-template.yaml) when creating a new stack in the AWS console.
+Therefore, please run OpenTofu or Terraform using the configuration provided in the `admin-role` directory, using AWS credentials for the account where the role needs to be created.
 
-Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
+```console
+export AWS_PROFILE=example
+tofu init
+tofu apply # review the proposed changes before approving
+```
 
-## 2. capa-controller-role
+**Once the admin role is created, Giant Swarm staff will take over the maintenance of it and the CAPA controller roles for all the MCs that operate under that account, so there is no further action needed by customers.**
 
-In the AWS account where you plan to run the management cluster, you need to create a role that the Cluster API Provider AWS (CAPA) controller will assume to create and manage workload clusters and all infrastructure resources.
+## capa-controller-role
 
-The same applies to all accounts where CAPA should be able to create workload clusters, since they don't necessarily need to run in the same account as your management cluster. The `AWSClusterRoleIdentity` objects on the management cluster define in which accounts you want to create workload clusters.
+The Cluster API Provider AWS (CAPA) controller requires an IAM role to assume in order to create and manage clusters and all infrastructure resources in a specific AWS account. As mentioned above, the lifecycle of this role is normally managed by Giant Swarm once the admin role is provisioned.
 
-**Once the admin role is created (see above), Giant Swarm staff takes over creating and maintaining the CloudFormation stack for each of your desired accounts and there is no further action needed by customers. Only if for some reason, you want to manage them yourself**, you can use these instructions:
+But in case that for some reason the CAPA controller role needs to be managed individually by the customer, the OpenTofu / Terraform configuration in the `capa-controller-role` directory can be used, using AWS credentials for the account where the role needs to be created.
 
-- Creation: Log into the right account in AWS Console, choose your desired region and create the CloudFormation stack from our [capa-controller-role stack template (direct link to AWS Console dialog)](https://eu-central-1.console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/quickcreate?templateURL=https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/capa-controller-role/cloud-formation-template.yaml&stackName=CAPAControllerRoleBootstrap&param_InstallationName=CHANGE_THIS_FOR_THE_INSTALLATION_NAME&param_ManagementClusterOidcProviderDomain=MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN). Alternatively, you can upload the [capa-controller-role stack definition file](./capa-controller-role/cloud-formation-template.yaml) in this repository.
+### Adjust variables
 
-  You will be asked for the following parameters:
+Note that for this stack there are some additional variables that you need to provide:
 
-  - `InstallationName`: the name of the installation which you have agreed with Giant Swarm upfront.
-  - `ByoVpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs. Turn this on if you only want to create clusters in VPCs that you have already created, without requiring CAPA to create or manage VPCs and its networking resources (like NAT/internet gateways, subnets, etc.).
-  - `ManagementClusterOidcProviderDomain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
+- `installation_name`: the name of the installation which you have agreed with Giant Swarm upfront.
+- `management_cluster_oidc_provider_domain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
+- `byovpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
 
-  Review the changes and click `Create stack`. In case of any error, please check the `Events` tab in the CloudFormation console and report the error to the Giant Swarm staff.
-- Update: Select the CloudFormation stack in AWS Console, then `Update > Replace existing template` and use the latest released definition `https://cf-templates-giantswarm.s3.eu-central-1.amazonaws.com/capa-controller-role/cloud-formation-template.yaml` as source (or the [stack definition file](./capa-controller-role/cloud-formation-template.yaml) in this repository).
+### Execution
+
+```console
+export AWS_PROFILE=example
+export TF_VAR_installation_name=foo
+export TF_VAR_management_cluster_oidc_provider_domain=irsa.foo.bar.com
+export TF_VAR_byovpc=false
+tofu init
+tofu apply # review the proposed changes before approving
+```

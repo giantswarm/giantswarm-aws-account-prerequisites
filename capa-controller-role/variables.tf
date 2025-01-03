@@ -30,18 +30,6 @@ variable "byovpc" {
   default     = false
 }
 
-variable "aws_partition" {
-  type        = string
-  description = "AWS partition (e.g. `aws` or `aws-cn`)"
-  default     = "aws"
-}
-
-variable "import_existing" {
-  type        = bool
-  description = "If true, the existing role and policies will be imported instead of created"
-  default     = false
-}
-
 variable "additional_policies" {
   type        = map(string)
   description = "Map of additional policy documents to attach to the IAM role"

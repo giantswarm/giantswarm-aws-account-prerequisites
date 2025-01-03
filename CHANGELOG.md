@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Reduce setup options to only CloudFormation stacks
+- Reduce setup options to only OpenTofu / Terraform
 
 ## [4.3.1] - 2024-12-18
 
