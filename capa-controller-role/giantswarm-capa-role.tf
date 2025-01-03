@@ -7,7 +7,7 @@ locals {
 terraform {
   required_providers {
     aws = {
-      source  = "opentofu/aws"
+      source  = "hashicorp/aws"
       version = "5.81.0"
     }
   }
