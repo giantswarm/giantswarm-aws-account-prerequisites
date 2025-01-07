@@ -1,33 +1,43 @@
 variable "installation_name" {
   type        = string
-  description = "If you dont know what `installation_name` value is suppose to be, ask Giant Swarm staff and they will provide it."
-}
-
-variable "aws_partition" {
-  type        = string
-  description = "AWS partition used for ARN referencing, use aws-cn for China regions"
-  default     = "aws"
+  description = "Name of the installation (= name of management cluster). Please ask Giant Swarm staff to provide it."
 }
 
 variable "gs_user_account" {
   type        = string
-  description = "AWS account where GS staff users are located"
+  description = "Account of Giant Swarm IAM users (`084190472784`, except for China)"
   default     = "084190472784"
+
+  validation {
+    condition     = can(regex("^[0-9]{12}$", var.gs_user_account))
+    error_message = "AWS account ID must consist of exactly 12 digits"
+  }
 }
 
 variable "management_cluster_oidc_provider_domain" {
   type        = string
   description = "OIDC provider domain of the management cluster"
-}
 
-variable "import_existing" {
-  type        = bool
-  description = "If true, import existing resources"
-  default     = false
+  validation {
+    condition     = can(regex("^([0-9a-z-]+)(\\.[0-9a-z-]+)+$", var.management_cluster_oidc_provider_domain))
+    error_message = "Invalid OIDC provider domain"
+  }
 }
 
 variable "byovpc" {
   type        = bool
   description = "If true, the CAPA role will be created without the permissions needed to manage VPCs"
   default     = false
+}
+
+variable "additional_policies" {
+  type        = map(string)
+  description = "Map of additional policy documents to attach to the IAM role"
+  default     = {}
+}
+
+variable "additional_policies_arns" {
+  type        = list(string)
+  description = "List of ARNs of additional managed policies to attach to the role"
+  default     = []
 }

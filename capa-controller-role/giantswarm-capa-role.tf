@@ -4,21 +4,25 @@ locals {
   }
 }
 
-provider "aws" {
-  ignore_tags {
-    keys = ["maintainer", "owner", "repo"]
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
   }
 }
 
 data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
 
-resource "aws_iam_role" "giantswarm-capa-controller-role" {
+resource "aws_iam_role" "giantswarm_capa_controller_role" {
   name = "giantswarm-${var.installation_name}-capa-controller"
-  assume_role_policy = templatefile("${path.module}/trusted-entities.json", {
+  assume_role_policy = templatefile("${path.module}/policies/trusted-entities.json", {
     INSTALLATION_NAME                       = var.installation_name
     AWS_ACCOUNT_ID                          = data.aws_caller_identity.current.account_id
     MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN = var.management_cluster_oidc_provider_domain
-    AWS_PARTITION                           = var.aws_partition
+    AWS_PARTITION                           = data.aws_partition.current.partition
     GS_USER_ACCOUNT                         = var.gs_user_account
   })
   tags        = local.tags
@@ -29,9 +33,9 @@ resource "aws_iam_role" "giantswarm-capa-controller-role" {
   }
 }
 
-resource "aws_iam_policy" "giantswarm-capa-controller-policy" {
+resource "aws_iam_policy" "giantswarm_capa_controller_policy" {
   name        = "giantswarm-${var.installation_name}-capa-controller-policy"
-  policy      = file("${path.module}/capa-controller-policy.json")
+  policy      = file("${path.module}/policies/capa-controller-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -39,15 +43,15 @@ resource "aws_iam_policy" "giantswarm-capa-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-capa-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_capa_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_capa_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-capa-controller-vpc-policy" {
+resource "aws_iam_policy" "giantswarm_capa_controller_vpc_policy" {
   count       = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
   name        = "giantswarm-${var.installation_name}-capa-controller-vpc-policy"
-  policy      = file("${path.module}/capa-controller-vpc-policy.json")
+  policy      = file("${path.module}/policies/capa-controller-vpc-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -55,15 +59,15 @@ resource "aws_iam_policy" "giantswarm-capa-controller-vpc-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-capa-controller-vpc-policy-attachment" {
+resource "aws_iam_role_policy_attachment" "giantswarm_capa_controller_vpc_policy_attachment" {
   count      = var.byovpc ? 0 : 1 # This policy is not needed in BYO VPC installations
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-capa-controller-vpc-policy[0].arn
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_capa_controller_vpc_policy[0].arn
 }
 
-resource "aws_iam_policy" "giantswarm-dns-controller-policy" {
+resource "aws_iam_policy" "giantswarm_dns_controller_policy" {
   name        = "giantswarm-${var.installation_name}-dns-controller-policy"
-  policy      = file("${path.module}/dns-controller-policy.json")
+  policy      = file("${path.module}/policies/dns-controller-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -71,14 +75,14 @@ resource "aws_iam_policy" "giantswarm-dns-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-dns-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-dns-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_dns_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_dns_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-eks-controller-policy" {
+resource "aws_iam_policy" "giantswarm_eks_controller_policy" {
   name        = "giantswarm-${var.installation_name}-eks-controller-policy"
-  policy      = file("${path.module}/eks-controller-policy.json")
+  policy      = file("${path.module}/policies/eks-controller-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -86,14 +90,14 @@ resource "aws_iam_policy" "giantswarm-eks-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-eks-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-eks-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_eks_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_eks_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-iam-controller-policy" {
+resource "aws_iam_policy" "giantswarm_iam_controller_policy" {
   name        = "giantswarm-${var.installation_name}-iam-controller-policy"
-  policy      = file("${path.module}/iam-controller-policy.json")
+  policy      = file("${path.module}/policies/iam-controller-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -101,14 +105,14 @@ resource "aws_iam_policy" "giantswarm-iam-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-iam-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-iam-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_iam_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_iam_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-irsa-controller-policy" {
+resource "aws_iam_policy" "giantswarm_irsa_controller_policy" {
   name        = "giantswarm-${var.installation_name}-irsa-controller-policy"
-  policy      = file("${path.module}/irsa-operator-policy.json")
+  policy      = file("${path.module}/policies/irsa-operator-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -116,14 +120,14 @@ resource "aws_iam_policy" "giantswarm-irsa-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-irsa-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-irsa-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_irsa_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_irsa_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-network-topology-controller-policy" {
+resource "aws_iam_policy" "giantswarm_network_topology_controller_policy" {
   name        = "giantswarm-${var.installation_name}-network-topology-controller-policy"
-  policy      = file("${path.module}/network-topology-operator-policy.json")
+  policy      = file("${path.module}/policies/network-topology-operator-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -131,14 +135,14 @@ resource "aws_iam_policy" "giantswarm-network-topology-controller-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-network-topology-controller-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-network-topology-controller-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_network_topology_controller_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_network_topology_controller_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-resolver-rules-operator-policy" {
+resource "aws_iam_policy" "giantswarm_resolver_rules_operator_policy" {
   name        = "giantswarm-${var.installation_name}-resolver-rules-operator-policy"
-  policy      = file("${path.module}/resolver-rules-operator-policy.json")
+  policy      = file("${path.module}/policies/resolver-rules-operator-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -146,14 +150,14 @@ resource "aws_iam_policy" "giantswarm-resolver-rules-operator-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-resolver-rules-operator-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-resolver-rules-operator-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_resolver_rules_operator_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_resolver_rules_operator_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-mc-bootstrap-policy" {
+resource "aws_iam_policy" "giantswarm_mc_bootstrap_policy" {
   name        = "giantswarm-${var.installation_name}-mc-bootstrap-policy"
-  policy      = file("${path.module}/mc-bootstrap-policy.json")
+  policy      = file("${path.module}/policies/mc-bootstrap-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -161,14 +165,14 @@ resource "aws_iam_policy" "giantswarm-mc-bootstrap-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-mc-bootstrap-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-mc-bootstrap-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_mc_bootstrap_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_mc_bootstrap_policy.arn
 }
 
-resource "aws_iam_policy" "giantswarm-crossplane-policy" {
+resource "aws_iam_policy" "giantswarm_crossplane_policy" {
   name        = "giantswarm-${var.installation_name}-crossplane-policy"
-  policy      = file("${path.module}/crossplane-policy.json")
+  policy      = file("${path.module}/policies/crossplane-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for k8s cluster creation"
   lifecycle {
@@ -176,7 +180,20 @@ resource "aws_iam_policy" "giantswarm-crossplane-policy" {
     ignore_changes = [description]
   }
 }
-resource "aws_iam_role_policy_attachment" "giantswarm-crossplane-policy-attachment" {
-  role       = aws_iam_role.giantswarm-capa-controller-role.name
-  policy_arn = aws_iam_policy.giantswarm-crossplane-policy.arn
+resource "aws_iam_role_policy_attachment" "giantswarm_crossplane_policy_attachment" {
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = aws_iam_policy.giantswarm_crossplane_policy.arn
+}
+
+resource "aws_iam_role_policy" "additional_inline_policies" {
+  for_each = var.additional_policies
+  name     = each.key
+  role     = aws_iam_role.giantswarm_capa_controller_role.name
+  policy   = each.value
+}
+
+resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
+  for_each   = toset(var.additional_policies_arns)
+  role       = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arn = each.value
 }
