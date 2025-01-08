@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
+  }
+}
+
 variable "gs_user_account" {
   type        = string
   description = "Account of Giant Swarm IAM users (`084190472784`, except for China)"
