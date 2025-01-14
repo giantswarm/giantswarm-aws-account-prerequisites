@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2025-01-14
+
 ### Changed
 
 - Reduce setup options to only OpenTofu / Terraform
@@ -165,7 +167,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.1...v5.0.0
 [4.3.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v4.1.0...v4.2.0
