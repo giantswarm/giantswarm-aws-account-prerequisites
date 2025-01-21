@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `directconnect:*` permissions to admin role.
+- Add `cloudtrail:*` permissions to admin role.
 
 ## [5.0.0] - 2025-01-14
 

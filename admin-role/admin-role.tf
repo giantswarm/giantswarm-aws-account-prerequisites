@@ -30,8 +30,9 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "autoscaling:*",
       "cloudformation:*",
       "cloudfront:*",
+      "cloudtrail:*",
       "cloudwatch:*",
-      "directconnect:*",
+      "directconnect:*", # @TODO: https://github.com/giantswarm/giantswarm/issues/32452
       "dynamodb:*",
       "ec2:*",
       "ecr:*",
