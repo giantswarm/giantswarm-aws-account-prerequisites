@@ -31,6 +31,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudformation:*",
       "cloudfront:*",
       "cloudwatch:*",
+      "directconnect:*",
       "dynamodb:*",
       "ec2:*",
       "ecr:*",
