@@ -33,7 +33,7 @@ But in case that for some reason the CAPA controller role needs to be managed in
 Note that for this stack there are some additional variables that you need to provide:
 
 - `installation_name`: the name of the installation which you have agreed with Giant Swarm upfront.
-- `management_cluster_oidc_provider_domain`: the domain name used by the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
+- `management_cluster_oidc_provider`: the name of the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
 - `byovpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
 
 ### Execution
@@ -41,7 +41,7 @@ Note that for this stack there are some additional variables that you need to pr
 ```console
 export AWS_PROFILE=example
 export TF_VAR_installation_name=foo
-export TF_VAR_management_cluster_oidc_provider_domain=irsa.foo.bar.com
+export TF_VAR_management_cluster_oidc_provider=irsa.foo.bar.com
 export TF_VAR_byovpc=false
 tofu init
 tofu apply # review the proposed changes before approving

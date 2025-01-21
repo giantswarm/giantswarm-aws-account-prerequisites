@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `directconnect:*` permissions to admin role.
 - Add `cloudtrail:*` permissions to admin role.
 
+### Changed
+
+- Rename the `management_cluster_oidc_provider` variable of the `capa-controller-role` module to match its definition.
+
 ## [5.0.0] - 2025-01-14
 
 ### Changed

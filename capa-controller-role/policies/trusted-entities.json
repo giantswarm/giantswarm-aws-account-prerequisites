@@ -12,12 +12,12 @@
         {
             "Effect": "Allow",
             "Principal": {
-                "Federated": "arn:${AWS_PARTITION}:iam::${AWS_ACCOUNT_ID}:oidc-provider/${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}"
+                "Federated": "arn:${AWS_PARTITION}:iam::${AWS_ACCOUNT_ID}:oidc-provider/${MANAGEMENT_CLUSTER_OIDC_PROVIDER}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "ForAnyValue:StringEquals": {
-                    "${MANAGEMENT_CLUSTER_OIDC_PROVIDER_DOMAIN}:sub": [
+                    "${MANAGEMENT_CLUSTER_OIDC_PROVIDER}:sub": [
                         "system:serviceaccount:crossplane:upbound-provider-aws",
                         "system:serviceaccount:crossplane:upbound-provider-aws-importer",
                         "system:serviceaccount:crossplane:xfn-network-discovery"

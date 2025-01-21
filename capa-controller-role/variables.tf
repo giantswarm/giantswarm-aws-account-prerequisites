@@ -14,13 +14,13 @@ variable "gs_user_account" {
   }
 }
 
-variable "management_cluster_oidc_provider_domain" {
+variable "management_cluster_oidc_provider" {
   type        = string
-  description = "OIDC provider domain of the management cluster"
+  description = "OIDC provider name of the management cluster"
 
   validation {
-    condition     = can(regex("^([0-9a-z-]+)(\\.[0-9a-z-]+)+$", var.management_cluster_oidc_provider_domain))
-    error_message = "Invalid OIDC provider domain"
+    condition     = can(regex("^([0-9a-z-]+)(\\.[0-9a-z-]+)+(\\/[0-9a-z-]+)*$", var.management_cluster_oidc_provider))
+    error_message = "Invalid OIDC provider name"
   }
 }
 
