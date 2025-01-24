@@ -44,7 +44,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudfront:*",
       "cloudtrail:*",
       "cloudwatch:*",
-      "directconnect:*", # @TODO: https://github.com/giantswarm/giantswarm/issues/32452
       "dynamodb:*",
       "ec2:*",
       "ecr:*",
