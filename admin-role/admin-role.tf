@@ -18,6 +18,18 @@ variable "gs_user_account" {
   }
 }
 
+variable "additional_policies" {
+  type        = map(string)
+  description = "Map of additional policy documents to attach to the IAM role"
+  default     = {}
+}
+
+variable "additional_policies_arns" {
+  type        = list(string)
+  description = "List of ARNs of additional managed policies to attach to the IAM role"
+  default     = []
+}
+
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "giantswarm_admin" {
@@ -32,7 +44,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudfront:*",
       "cloudtrail:*",
       "cloudwatch:*",
-      "directconnect:*", # @TODO: https://github.com/giantswarm/giantswarm/issues/32452
       "dynamodb:*",
       "ec2:*",
       "ecr:*",
@@ -116,4 +127,17 @@ resource "aws_iam_policy" "giantswarm_admin_policy" {
 resource "aws_iam_role_policy_attachment" "giantswarm_policy_attachment" {
   role       = aws_iam_role.giantswarm_admin.name
   policy_arn = aws_iam_policy.giantswarm_admin_policy.arn
+}
+
+resource "aws_iam_role_policy" "additional_inline_policies" {
+  for_each = var.additional_policies
+  name     = each.key
+  role     = aws_iam_role.giantswarm_admin.name
+  policy   = each.value
+}
+
+resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
+  for_each   = toset(var.additional_policies_arns)
+  role       = aws_iam_role.giantswarm_admin.name
+  policy_arn = each.value
 }
