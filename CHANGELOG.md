@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rename the `management_cluster_oidc_provider` variable of the `capa-controller-role` module to match its definition.
 - Add support for attaching additional policies to the admin IAM role.
+- Add `prevent_destroy = true` lifecycle attribute in GS admin IAM role and policy.
 
 ## [5.0.0] - 2025-01-14
 
