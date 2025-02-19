@@ -75,6 +75,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "iam:RemoveRoleFromInstanceProfile",
       "iam:TagPolicy",
       "iam:TagRole",
+      "iam:TagInstanceProfile",
       "iam:UpdateAccessKey",
       "iam:UpdateAssumeRolePolicy",
       "iam:UpdateRoleDescription",
