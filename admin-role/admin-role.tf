@@ -117,16 +117,28 @@ data "aws_iam_policy_document" "giantswarm_admin_assume" {
 resource "aws_iam_role" "giantswarm_admin" {
   name               = "GiantSwarmAdmin"
   assume_role_policy = data.aws_iam_policy_document.giantswarm_admin_assume.json
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_iam_policy" "giantswarm_admin_policy" {
   name   = "GiantSwarmAdmin"
   policy = data.aws_iam_policy_document.giantswarm_admin.json
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm_policy_attachment" {
   role       = aws_iam_role.giantswarm_admin.name
   policy_arn = aws_iam_policy.giantswarm_admin_policy.arn
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_iam_role_policy" "additional_inline_policies" {
