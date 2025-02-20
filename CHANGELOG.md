@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `directconnect:*` permissions to admin role.
 - Add `cloudtrail:*` permissions to admin role.
+- Add `iam:TagInstanceProfile`, `iam:UntagInstanceProfile`, `iam:UntagPolicy`, `iam:UntagRole` permissions to admin role.
 
 ### Changed
 
