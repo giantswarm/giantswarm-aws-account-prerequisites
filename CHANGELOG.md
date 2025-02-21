@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow to override the principal ARN to assume the capa controller role.
+
 ## [5.1.0] - 2025-02-20
 
 ### Added

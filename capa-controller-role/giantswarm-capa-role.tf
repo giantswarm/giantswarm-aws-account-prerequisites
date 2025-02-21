@@ -2,6 +2,8 @@ locals {
   tags = {
     "installation" = var.installation_name
   }
+
+  principal_arn = coalesce(var.principal_arn_override, "arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:user/${var.installation_name}-capa-controller")
 }
 
 terraform {
@@ -19,11 +21,10 @@ data "aws_partition" "current" {}
 resource "aws_iam_role" "giantswarm_capa_controller_role" {
   name = "giantswarm-${var.installation_name}-capa-controller"
   assume_role_policy = templatefile("${path.module}/policies/trusted-entities.json", {
-    INSTALLATION_NAME                = var.installation_name
+    PRINCIPAL_ARN                    = local.principal_arn
     AWS_ACCOUNT_ID                   = data.aws_caller_identity.current.account_id
     MANAGEMENT_CLUSTER_OIDC_PROVIDER = var.management_cluster_oidc_provider
     AWS_PARTITION                    = data.aws_partition.current.partition
-    GS_USER_ACCOUNT                  = var.gs_user_account
   })
   tags        = local.tags
   description = "Giant Swarm managed role for k8s cluster creation"

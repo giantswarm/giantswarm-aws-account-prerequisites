@@ -14,6 +14,12 @@ variable "gs_user_account" {
   }
 }
 
+variable "principal_arn_override" {
+  type        = string
+  description = "ARN of the principal that will assume the role. If omitted it will be inferred as 'arn:$${data.aws_partition.current.partition}:iam::$${var.gs_user_account}:user/$${var.installation_name}-capa-controller'."
+  default     = null
+}
+
 variable "management_cluster_oidc_provider" {
   type        = string
   description = "OIDC provider name of the management cluster"
