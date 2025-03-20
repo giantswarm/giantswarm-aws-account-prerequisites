@@ -35,6 +35,7 @@ Note that for this stack there are some additional variables that you need to pr
 - `installation_name`: the name of the installation which you have agreed with Giant Swarm upfront.
 - `management_cluster_oidc_provider`: the name of the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
 - `byovpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
+- `eks` (optional - defaults to `false`): if `true`, the CAPA role will be created with the permissions needed to manage EKS clusters
 
 ### Execution
 

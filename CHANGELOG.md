@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Allow to override the principal ARN to assume the capa controller role.
 
+### Changed
+
+- Add support for removing IAM permissions from the capa controller role when EKS support is not required.
+
 ## [5.1.0] - 2025-02-20
 
 ### Added
