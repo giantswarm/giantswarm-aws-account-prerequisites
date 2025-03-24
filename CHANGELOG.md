@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add support for removing IAM permissions from the capa controller role when EKS support is not required.
 - Add support for removing IAM permissions from the capa controller role when resolver rules support is not required.
+- Instead of using `iam:*` for capa-iam-operator, specify precisely what it needs.
 
 ## [5.1.0] - 2025-02-20
 
