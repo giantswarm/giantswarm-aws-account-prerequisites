@@ -42,6 +42,12 @@ variable "eks" {
   default     = false
 }
 
+variable "resolverrules" {
+  type        = bool
+  description = "If true, the CAPA role will be created with the permissions needed to manage route53 resolver rules"
+  default     = false
+}
+
 variable "additional_policies" {
   type        = map(string)
   description = "Map of additional policy documents to attach to the IAM role"
