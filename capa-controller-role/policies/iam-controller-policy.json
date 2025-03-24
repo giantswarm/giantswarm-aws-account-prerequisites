@@ -5,16 +5,17 @@
             "Effect": "Allow",
             "Action": [
                 "iam:GetRole",
-                "iam:ListAttachedRolePolicies",
-                "iam:DetachRolePolicy",
-                "iam:DeleteRole",
                 "iam:CreateRole",
+                "iam:DeleteRole",
                 "iam:TagRole",
-                "iam:AttachRolePolicy",
+                "iam:GetRolePolicy",
                 "iam:PutRolePolicy",
                 "iam:ListRolePolicies",
                 "iam:DeleteRolePolicy",
-                "iam:*"
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:UpdateAssumeRolePolicy"
             ],
             "Resource": [
                 "arn:*:iam::*:role/*"
@@ -27,7 +28,7 @@
                 "iam:AddRoleToInstanceProfile",
                 "iam:RemoveRoleFromInstanceProfile",
                 "iam:DeleteInstanceProfile",
-                "iam:*"
+                "iam:TagInstanceProfile"
             ],
             "Resource": [
                 "arn:*:iam::*:instance-profile/*"
