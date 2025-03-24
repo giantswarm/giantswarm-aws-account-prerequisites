@@ -144,6 +144,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm_network_topology_controlle
 }
 
 resource "aws_iam_policy" "giantswarm_resolver_rules_operator_policy" {
+  count       = var.resolverrules ? 1 : 0 # This policy is only needed in installations that require route53 resolver rules support
   name        = "giantswarm-${var.installation_name}-resolver-rules-operator-policy"
   policy      = file("${path.module}/policies/resolver-rules-operator-policy.json")
   tags        = local.tags
@@ -154,8 +155,9 @@ resource "aws_iam_policy" "giantswarm_resolver_rules_operator_policy" {
   }
 }
 resource "aws_iam_role_policy_attachment" "giantswarm_resolver_rules_operator_policy_attachment" {
+  count      = var.resolverrules ? 1 : 0 # This policy is only needed in installations that require route53 resolver rules support
   role       = aws_iam_role.giantswarm_capa_controller_role.name
-  policy_arn = aws_iam_policy.giantswarm_resolver_rules_operator_policy.arn
+  policy_arn = aws_iam_policy.giantswarm_resolver_rules_operator_policy[count.index].arn
 }
 
 resource "aws_iam_policy" "giantswarm_mc_bootstrap_policy" {

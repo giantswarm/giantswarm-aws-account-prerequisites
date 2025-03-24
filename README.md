@@ -36,6 +36,7 @@ Note that for this stack there are some additional variables that you need to pr
 - `management_cluster_oidc_provider`: the name of the MC OIDC provider. Normally `irsa.<cluster-base-domain>`.
 - `byovpc` (optional - defaults to `false`): if `true`, the CAPA role will be created without the permissions needed to manage VPCs
 - `eks` (optional - defaults to `false`): if `true`, the CAPA role will be created with the permissions needed to manage EKS clusters
+- `resolverrules` (optional - defaults to `false`): if `true`, the CAPA role will be created with the permissions needed to manage route53 resolver rules
 
 ### Execution
 
