@@ -82,6 +82,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm_dns_controller_policy_atta
 }
 
 resource "aws_iam_policy" "giantswarm_eks_controller_policy" {
+  count       = var.eks ? 1 : 0 # This policy is only needed in installations that require EKS support
   name        = "giantswarm-${var.installation_name}-eks-controller-policy"
   policy      = file("${path.module}/policies/eks-controller-policy.json")
   tags        = local.tags
@@ -92,8 +93,9 @@ resource "aws_iam_policy" "giantswarm_eks_controller_policy" {
   }
 }
 resource "aws_iam_role_policy_attachment" "giantswarm_eks_controller_policy_attachment" {
+  count      = var.eks ? 1 : 0 # This policy is only needed in installations that require EKS support
   role       = aws_iam_role.giantswarm_capa_controller_role.name
-  policy_arn = aws_iam_policy.giantswarm_eks_controller_policy.arn
+  policy_arn = aws_iam_policy.giantswarm_eks_controller_policy[count.index].arn
 }
 
 resource "aws_iam_policy" "giantswarm_iam_controller_policy" {
