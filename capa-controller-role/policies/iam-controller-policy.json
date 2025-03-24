@@ -15,7 +15,8 @@
                 "iam:AttachRolePolicy",
                 "iam:DetachRolePolicy",
                 "iam:ListAttachedRolePolicies",
-                "iam:UpdateAssumeRolePolicy"
+                "iam:UpdateAssumeRolePolicy",
+                "iam:PassRole"
             ],
             "Resource": [
                 "arn:*:iam::*:role/*"
