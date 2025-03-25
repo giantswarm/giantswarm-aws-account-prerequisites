@@ -14,7 +14,23 @@
                 "ec2:RevokeSecurityGroupIngress",
                 "cloudwatch:*",
                 "sqs:*",
-                "events:*"
+                "events:*",
+                "iam:GetRole",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:TagRole",
+                "iam:UntagRole",
+                "iam:GetRolePolicy",
+                "iam:PutRolePolicy",
+                "iam:ListRolePolicies",
+                "iam:DeleteRolePolicy",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:GetPolicyVersion",
+                "iam:TagPolicy",
+                "iam:UntagPolicy",
+                "iam:ListPolicyVersions",
+                "iam:ListInstanceProfilesForRole"
             ],
             "Resource": "*"
         }
