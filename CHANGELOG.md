@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Give `iam:ListRoles` permission to the capa-controller-role role, needed for mc-bootstrap clean up.
+
 ## [5.2.0] - 2025-03-25
 
 ### Added
