@@ -6,7 +6,9 @@
             "Action": [
                 "ec2:DeleteVolume",
                 "s3:GetBucketTagging",
-                "s3:ListAllMyBuckets"
+                "s3:ListAllMyBuckets",
+                "iam:ListRoles",
+                "iam:ListRoleTags"
             ],
             "Resource": [
                 "*"
