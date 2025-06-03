@@ -9,7 +9,8 @@
                 "s3:ListAllMyBuckets",
                 "iam:ListRoles",
                 "iam:ListRoleTags",
-                "acm:ListTagsForCertificate"
+                "acm:ListTagsForCertificate",
+                "acm:DeleteCertificate"
             ],
             "Resource": [
                 "*"

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Give `acm:ListTagsForCertificate` permission to mc-bootstrap policy so it can clean up ACM certificates.
+- Give `acm:ListTagsForCertificate` and `acm:DeleteCertificate` permissions to mc-bootstrap policy so it can clean up ACM certificates.
 
 ## [5.3.0] - 2025-04-29
 
