@@ -20,7 +20,8 @@
                     "${MANAGEMENT_CLUSTER_OIDC_PROVIDER}:sub": [
                         "system:serviceaccount:crossplane:upbound-provider-aws",
                         "system:serviceaccount:crossplane:upbound-provider-aws-importer",
-                        "system:serviceaccount:crossplane:xfn-network-discovery"
+                        "system:serviceaccount:crossplane:xfn-network-discovery",
+                        "system:serviceaccount:crossplane:xfn-irsa"
                     ]
                 }
             }
