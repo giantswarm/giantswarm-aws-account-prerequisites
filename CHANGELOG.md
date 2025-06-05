@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.4.0] - 2025-06-05
+
 ### Changed
 
 - Give `acm:ListTagsForCertificate` and `acm:DeleteCertificate` permissions to mc-bootstrap policy so it can clean up ACM certificates.
@@ -204,7 +206,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.0...HEAD
+[5.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.2.0...v5.3.0
 [5.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.1.0...v5.2.0
 [5.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.0.0...v5.1.0
