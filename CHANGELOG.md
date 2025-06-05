@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Give `acm:ListTagsForCertificate` and `acm:DeleteCertificate` permissions to mc-bootstrap policy so it can clean up ACM certificates.
+- Add S3, ACM and Cloudfront permissions to manage IRSA via Crossplane.
 
 ## [5.3.0] - 2025-04-29
 
