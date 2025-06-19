@@ -1,35 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.81.0"
-    }
-  }
-}
-
-variable "gs_user_account" {
-  type        = string
-  description = "Account of Giant Swarm IAM users (`084190472784`, except for China)"
-  default     = "084190472784"
-
-  validation {
-    condition     = can(regex("^[0-9]{12}$", var.gs_user_account))
-    error_message = "AWS account ID must consist of exactly 12 digits"
-  }
-}
-
-variable "additional_policies" {
-  type        = map(string)
-  description = "Map of additional policy documents to attach to the IAM role"
-  default     = {}
-}
-
-variable "additional_policies_arns" {
-  type        = list(string)
-  description = "List of ARNs of additional managed policies to attach to the IAM role"
-  default     = []
-}
-
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "giantswarm_admin" {
@@ -50,17 +18,19 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "elasticfilesystem:*",
       "elasticloadbalancing:*",
       "events:*",
-      "ram:*",
+      "iam:AddClientIDToOpenIDConnectProvider",
       "iam:AddRoleToInstanceProfile",
       "iam:AttachRolePolicy",
       "iam:CreateAccessKey",
       "iam:CreateInstanceProfile",
+      "iam:CreateOpenIDConnectProvider",
       "iam:CreatePolicy",
       "iam:CreatePolicyVersion",
       "iam:CreateRole",
       "iam:CreateServiceLinkedRole",
       "iam:DeleteAccessKey",
       "iam:DeleteInstanceProfile",
+      "iam:DeleteOpenIDConnectProvider",
       "iam:DeletePolicy",
       "iam:DeletePolicyVersion",
       "iam:DeleteRole",
@@ -72,35 +42,33 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "iam:List*",
       "iam:PassRole",
       "iam:PutRolePolicy",
+      "iam:RemoveClientIDFromOpenIDConnectProvider",
       "iam:RemoveRoleFromInstanceProfile",
-      "iam:TagPolicy",
-      "iam:UntagPolicy",
-      "iam:TagRole",
-      "iam:UntagRole",
       "iam:TagInstanceProfile",
+      "iam:TagOpenIDConnectProvider",
+      "iam:TagPolicy",
+      "iam:TagRole",
       "iam:UntagInstanceProfile",
+      "iam:UntagOpenIDConnectProvider",
+      "iam:UntagPolicy",
+      "iam:UntagRole",
       "iam:UpdateAccessKey",
       "iam:UpdateAssumeRolePolicy",
+      "iam:UpdateOpenIDConnectProviderThumbprint",
       "iam:UpdateRoleDescription",
       "kms:*",
       "logs:*",
+      "ram:*",
       "route53:*",
       "route53domains:*",
       "route53resolver:*",
       "s3:*",
+      "sqs:*",
       "sts:AssumeRole",
       "sts:DecodeAuthorizationMessage",
       "sts:GetFederationToken",
       "support:*",
       "trustedadvisor:*",
-      "sqs:*",
-      "iam:CreateOpenIDConnectProvider",
-      "iam:DeleteOpenIDConnectProvider",
-      "iam:TagOpenIDConnectProvider",
-      "iam:UntagOpenIDConnectProvider",
-      "iam:UpdateOpenIDConnectProviderThumbprint",
-      "iam:RemoveClientIDFromOpenIDConnectProvider",
-      "iam:AddClientIDToOpenIDConnectProvider"
     ]
   }
 }
