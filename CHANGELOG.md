@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add GiantSwarmReadOnly role for tasks that do not need write privileges.
+
 ## [5.4.1] - 2025-06-05
 
 ### Changed
