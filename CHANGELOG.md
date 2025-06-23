@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.0] - 2025-06-23
+
 ### Added
 
 - Add GiantSwarmReadOnly role for tasks that do not need write privileges.
@@ -216,7 +218,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.0...HEAD
+[5.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.1...v5.5.0
 [5.4.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.0...v5.4.1
 [5.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.3.0...v5.4.0
 [5.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.2.0...v5.3.0
