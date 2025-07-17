@@ -92,6 +92,7 @@ resource "aws_iam_role" "giantswarm_admin" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [tags]
   }
 }
 
@@ -101,6 +102,7 @@ resource "aws_iam_policy" "giantswarm_admin_policy" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes  = [tags]
   }
 }
 
