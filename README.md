@@ -8,11 +8,13 @@ Note that this repo is intended for Giant Swarm customers to setup the initial a
 
 Make sure to adjust AWS account limits according to [these docs](https://docs.giantswarm.io/getting-started/prepare-your-provider-infrastructure/aws/#quotas). Then please create the admin role for Giant Swarm staff access, as shown below.
 
-## admin-role
+## admin-role and read-role
 
 In all AWS accounts where you plan to run a management cluster and workload clusters, Giant Swarm staff need to have access in order to manage, operate and troubleshoot the infrastructure.
+The admin role is used by Giant Swarm staff and our automation for making changes.
+The read role is used by our automation to validate pull requests on our infrastructure code.
 
-Therefore, please run OpenTofu or Terraform using the configuration provided in the `admin-role` directory, using AWS credentials for the account where the role needs to be created.
+Therefore, please run OpenTofu or Terraform using the configuration provided in the `admin-role` and `read-role` directories, using AWS credentials for the account where the role needs to be created.
 
 ```console
 export AWS_PROFILE=example
@@ -20,7 +22,7 @@ tofu init
 tofu apply # review the proposed changes before approving
 ```
 
-**Once the admin role is created, Giant Swarm staff will take over the maintenance of it and the CAPA controller roles for all the MCs that operate under that account, so there is no further action needed by customers.**
+**Once the admin and read roles are created, Giant Swarm staff will take over the maintenance of it and the CAPA controller roles for all the MCs that operate under that account, so there is no further action needed by customers.**
 
 ## capa-controller-role
 
