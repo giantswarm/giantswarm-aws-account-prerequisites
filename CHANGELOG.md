@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.5.1] - 2025-08-28
+
 ### Fixed
 
 - Specify looser version requirements for the AWS provider.
@@ -222,7 +224,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.1...HEAD
+[5.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.0...v5.5.1
 [5.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.1...v5.5.0
 [5.4.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.0...v5.4.1
 [5.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.3.0...v5.4.0
