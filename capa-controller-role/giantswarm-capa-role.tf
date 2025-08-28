@@ -6,15 +6,6 @@ locals {
   principal_arn = coalesce(var.principal_arn_override, "arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:user/${var.installation_name}-capa-controller")
 }
 
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.81.0"
-    }
-  }
-}
-
 data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
