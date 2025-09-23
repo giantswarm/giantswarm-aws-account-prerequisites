@@ -10,7 +10,8 @@
                 "iam:ListRoles",
                 "iam:ListRoleTags",
                 "acm:ListTagsForCertificate",
-                "acm:DeleteCertificate"
+                "acm:DeleteCertificate",
+                "cloudfront:ListCloudFrontOriginAccessIdentities"
             ],
             "Resource": [
                 "*"
