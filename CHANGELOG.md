@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `cloudfront:ListCloudFrontOriginAccessIdentities` permission to the mc-bootstrap policy to be able to clean up cloudfront origin access identities.
+
 ## [5.5.1] - 2025-08-28
 
 ### Fixed
