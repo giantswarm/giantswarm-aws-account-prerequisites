@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.6.0] - 2025-09-23
+
 ### Added
 
 - Add `cloudfront:ListCloudFrontOriginAccessIdentities` permission to the mc-bootstrap policy to be able to clean up cloudfront origin access identities.
@@ -228,7 +230,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.6.0...HEAD
+[5.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.1...v5.6.0
 [5.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.0...v5.5.1
 [5.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.1...v5.5.0
 [5.4.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.0...v5.4.1
