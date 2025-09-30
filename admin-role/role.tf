@@ -1,6 +1,77 @@
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "giantswarm_admin" {
+  # Allow all other non-EC2 services
+  statement {
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "acm:*",
+      "autoscaling:*",
+      "cloudformation:*",
+      "cloudfront:*",
+      "cloudtrail:*",
+      "cloudwatch:*",
+      "dynamodb:*",
+      "ecr:*",
+      "elasticfilesystem:*",
+      "elasticloadbalancing:*",
+      "events:*",
+      "iam:AddClientIDToOpenIDConnectProvider",
+      "iam:AddRoleToInstanceProfile",
+      "iam:AttachRolePolicy",
+      "iam:CreateAccessKey",
+      "iam:CreateInstanceProfile",
+      "iam:CreateOpenIDConnectProvider",
+      "iam:CreatePolicy",
+      "iam:CreatePolicyVersion",
+      "iam:CreateRole",
+      "iam:CreateServiceLinkedRole",
+      "iam:DeleteAccessKey",
+      "iam:DeleteInstanceProfile",
+      "iam:DeleteOpenIDConnectProvider",
+      "iam:DeletePolicy",
+      "iam:DeletePolicyVersion",
+      "iam:DeleteRole",
+      "iam:DeleteRolePolicy",
+      "iam:DeleteServiceLinkedRole",
+      "iam:DetachRolePolicy",
+      "iam:GenerateServiceLastAccessedDetails",
+      "iam:Get*",
+      "iam:List*",
+      "iam:PassRole",
+      "iam:PutRolePolicy",
+      "iam:RemoveClientIDFromOpenIDConnectProvider",
+      "iam:RemoveRoleFromInstanceProfile",
+      "iam:TagInstanceProfile",
+      "iam:TagOpenIDConnectProvider",
+      "iam:TagPolicy",
+      "iam:TagRole",
+      "iam:UntagInstanceProfile",
+      "iam:UntagOpenIDConnectProvider",
+      "iam:UntagPolicy",
+      "iam:UntagRole",
+      "iam:UpdateAccessKey",
+      "iam:UpdateAssumeRolePolicy",
+      "iam:UpdateOpenIDConnectProviderThumbprint",
+      "iam:UpdateRoleDescription",
+      "kms:*",
+      "logs:*",
+      "ram:*",
+      "route53:*",
+      "route53domains:*",
+      "route53resolver:*",
+      "s3:*",
+      "sqs:*",
+      "sts:AssumeRole",
+      "sts:DecodeAuthorizationMessage",
+      "sts:GetFederationToken",
+      "support:*",
+      "trustedadvisor:*",
+    ]
+  }
+
   # Allow all EC2 actions
   statement {
     effect    = "Allow"
@@ -80,77 +151,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
         "ec2:ReplaceRouteTableAssociation",
       ]
     }
-  }
-
-  # Allow all other non-EC2 services
-  statement {
-    effect    = "Allow"
-    resources = ["*"]
-
-    actions = [
-      "acm:*",
-      "autoscaling:*",
-      "cloudformation:*",
-      "cloudfront:*",
-      "cloudtrail:*",
-      "cloudwatch:*",
-      "dynamodb:*",
-      "ecr:*",
-      "elasticfilesystem:*",
-      "elasticloadbalancing:*",
-      "events:*",
-      "iam:AddClientIDToOpenIDConnectProvider",
-      "iam:AddRoleToInstanceProfile",
-      "iam:AttachRolePolicy",
-      "iam:CreateAccessKey",
-      "iam:CreateInstanceProfile",
-      "iam:CreateOpenIDConnectProvider",
-      "iam:CreatePolicy",
-      "iam:CreatePolicyVersion",
-      "iam:CreateRole",
-      "iam:CreateServiceLinkedRole",
-      "iam:DeleteAccessKey",
-      "iam:DeleteInstanceProfile",
-      "iam:DeleteOpenIDConnectProvider",
-      "iam:DeletePolicy",
-      "iam:DeletePolicyVersion",
-      "iam:DeleteRole",
-      "iam:DeleteRolePolicy",
-      "iam:DeleteServiceLinkedRole",
-      "iam:DetachRolePolicy",
-      "iam:GenerateServiceLastAccessedDetails",
-      "iam:Get*",
-      "iam:List*",
-      "iam:PassRole",
-      "iam:PutRolePolicy",
-      "iam:RemoveClientIDFromOpenIDConnectProvider",
-      "iam:RemoveRoleFromInstanceProfile",
-      "iam:TagInstanceProfile",
-      "iam:TagOpenIDConnectProvider",
-      "iam:TagPolicy",
-      "iam:TagRole",
-      "iam:UntagInstanceProfile",
-      "iam:UntagOpenIDConnectProvider",
-      "iam:UntagPolicy",
-      "iam:UntagRole",
-      "iam:UpdateAccessKey",
-      "iam:UpdateAssumeRolePolicy",
-      "iam:UpdateOpenIDConnectProviderThumbprint",
-      "iam:UpdateRoleDescription",
-      "kms:*",
-      "logs:*",
-      "ram:*",
-      "route53:*",
-      "route53domains:*",
-      "route53resolver:*",
-      "s3:*",
-      "sqs:*",
-      "sts:AssumeRole",
-      "sts:DecodeAuthorizationMessage",
-      "sts:GetFederationToken",
-      "support:*",
-      "trustedadvisor:*",
-    ]
   }
 }
 
