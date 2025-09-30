@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Deny write/modify VPC-related permissions for the GiantSwarmAdmin role in bring-your-own-vpc scenarios.
+
 ## [5.6.0] - 2025-09-23
 
 ### Added
