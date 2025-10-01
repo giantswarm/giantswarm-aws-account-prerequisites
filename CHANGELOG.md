@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.0.0] - 2025-10-01
+
 ### Changed
 
 - Deny write/modify VPC-related permissions for the GiantSwarmAdmin role in bring-your-own-vpc scenarios.
@@ -238,7 +240,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v6.0.0...HEAD
+[6.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.6.0...v6.0.0
 [5.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.1...v5.6.0
 [5.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.0...v5.5.1
 [5.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.4.1...v5.5.0
