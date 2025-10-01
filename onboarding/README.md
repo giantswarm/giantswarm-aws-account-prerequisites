@@ -17,9 +17,10 @@ The following roles will be created:
 - **`GiantSwarmAdmin`** - Used by Giant Swarm staff and automation for making changes
 - **`GiantSwarmReadOnly`** - Used by automation to validate pull requests on infrastructure code
 
-To set up these roles, run OpenTofu using the configuration in this directory (`onboarding`):
+To set up these roles, run OpenTofu using the configuration in the directory `onboarding/`:
 
 ```console
+cd onboarding
 export AWS_PROFILE=example # Set the aws-cli profile for the account you are onboarding
 tofu init
 tofu apply
