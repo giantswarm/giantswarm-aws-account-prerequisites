@@ -1,4 +1,4 @@
-# 🚀 New AWS Account Onboarding
+# 🚀 New AWS account onboarding
 
 Follow these steps to onboard a new AWS account to use with the Giant Swarm platform.
 
@@ -8,7 +8,7 @@ Follow these steps to onboard a new AWS account to use with the Giant Swarm plat
 
 Make sure to adjust AWS account limits according to [these docs](https://docs.giantswarm.io/getting-started/prepare-your-provider-infrastructure/aws/#quotas).
 
-## IAM Roles Setup
+## IAM roles setup
 
 In all AWS accounts where you plan to run management clusters and workload clusters, Giant Swarm staff need access to manage, operate, and troubleshoot the infrastructure.
 
@@ -25,7 +25,7 @@ tofu init
 tofu apply
 ```
 
-## Final Step
+## Final step
 
 **Once the roles are created, provide the new AWS account ID to Giant Swarm staff.**
 

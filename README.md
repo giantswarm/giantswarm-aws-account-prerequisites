@@ -4,7 +4,7 @@ This repository contains OpenTofu configuration to prepare AWS accounts for runn
 
 Note that this repo is intended for Giant Swarm customers to setup the initial admin role and to provide some transparency on the different IAM policies that will be used by CAPA and other components. But it's not to be used by Giant Swarm staff to manage AWS IAM resources directly, head to <https://github.com/giantswarm/aws-account-setup/> for that.
 
-## Giant Swarm customers - New AWS account onboarding
+## Giant Swarm customers - new AWS account onboarding
 
 Follow the instructions in the [onboarding directory](./onboarding/README.md) to onboard a new AWS account.
 
