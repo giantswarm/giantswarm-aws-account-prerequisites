@@ -20,3 +20,9 @@ variable "additional_policies_arns" {
   description = "List of ARNs of additional managed policies to attach to the IAM role"
   default     = []
 }
+
+variable "byovpc" {
+  type        = bool
+  description = "If true, the IAM role will be created without the permissions needed to manage VPCs"
+  default     = false
+}

@@ -1,6 +1,7 @@
 data "aws_partition" "current" {}
 
 data "aws_iam_policy_document" "giantswarm_admin" {
+  # Allow all other non-EC2 services
   statement {
     effect    = "Allow"
     resources = ["*"]
@@ -13,7 +14,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudtrail:*",
       "cloudwatch:*",
       "dynamodb:*",
-      "ec2:*",
       "ecr:*",
       "elasticfilesystem:*",
       "elasticloadbalancing:*",
@@ -70,6 +70,87 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "support:*",
       "trustedadvisor:*",
     ]
+  }
+
+  # Allow all EC2 actions
+  statement {
+    effect    = "Allow"
+    resources = ["*"]
+    actions   = ["ec2:*"]
+  }
+
+  # Deny write/modify VPC-related EC2 actions when byovpc is true
+  dynamic "statement" {
+    for_each = var.byovpc ? [1] : []
+    content {
+      effect    = "Deny"
+      resources = ["*"]
+      actions = [
+        "ec2:AcceptVpcEndpointConnections",
+        "ec2:AcceptVpcPeeringConnection",
+        "ec2:AssociateRouteTable",
+        "ec2:AttachInternetGateway",
+        "ec2:AttachVpnGateway",
+        "ec2:CreateCustomerGateway",
+        "ec2:CreateEgressOnlyInternetGateway",
+        "ec2:CreateFlowLogs",
+        "ec2:CreateInternetGateway",
+        "ec2:CreateNatGateway",
+        "ec2:CreateNetworkAcl",
+        "ec2:CreateNetworkAclEntry",
+        "ec2:CreateRoute",
+        "ec2:CreateRouteTable",
+        "ec2:CreateSecurityGroup",
+        "ec2:CreateSubnet",
+        "ec2:CreateVpc",
+        "ec2:CreateVpcEndpoint",
+        "ec2:CreateVpcEndpointConnection",
+        "ec2:CreateVpcEndpointConnectionNotification",
+        "ec2:CreateVpcEndpointService",
+        "ec2:CreateVpcEndpointServiceConfiguration",
+        "ec2:CreateVpcEndpointServicePermissions",
+        "ec2:CreateVpcPeeringConnection",
+        "ec2:CreateVpnConnection",
+        "ec2:CreateVpnGateway",
+        "ec2:DeleteCustomerGateway",
+        "ec2:DeleteEgressOnlyInternetGateway",
+        "ec2:DeleteFlowLogs",
+        "ec2:DeleteInternetGateway",
+        "ec2:DeleteNatGateway",
+        "ec2:DeleteNetworkAcl",
+        "ec2:DeleteNetworkAclEntry",
+        "ec2:DeleteRoute",
+        "ec2:DeleteRouteTable",
+        "ec2:DeleteSecurityGroup",
+        "ec2:DeleteSubnet",
+        "ec2:DeleteVpc",
+        "ec2:DeleteVpcEndpointConnections",
+        "ec2:DeleteVpcEndpointConnectionNotifications",
+        "ec2:DeleteVpcEndpointService",
+        "ec2:DeleteVpcEndpointServiceConfigurations",
+        "ec2:DeleteVpcEndpointServicePermissions",
+        "ec2:DeleteVpcEndpoints",
+        "ec2:DeleteVpcPeeringConnection",
+        "ec2:DeleteVpnConnection",
+        "ec2:DeleteVpnGateway",
+        "ec2:DetachInternetGateway",
+        "ec2:DetachVpnGateway",
+        "ec2:DisassociateRouteTable",
+        "ec2:ModifyNetworkInterfaceAttribute",
+        "ec2:ModifySubnetAttribute",
+        "ec2:ModifyVpcAttribute",
+        "ec2:ModifyVpcEndpoint",
+        "ec2:ModifyVpcEndpointService",
+        "ec2:ModifyVpcEndpointServiceConfiguration",
+        "ec2:ModifyVpcEndpointServicePermissions",
+        "ec2:RejectVpcEndpointConnections",
+        "ec2:RejectVpcPeeringConnection",
+        "ec2:ReplaceNetworkAclAssociation",
+        "ec2:ReplaceNetworkAclEntry",
+        "ec2:ReplaceRoute",
+        "ec2:ReplaceRouteTableAssociation",
+      ]
+    }
   }
 }
 
