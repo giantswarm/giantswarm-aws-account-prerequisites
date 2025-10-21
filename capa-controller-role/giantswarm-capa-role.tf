@@ -193,3 +193,26 @@ resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
   role       = aws_iam_role.giantswarm_capa_controller_role.name
   policy_arn = each.value
 }
+
+// Ensure exclusivity of attached policies and inline policies
+
+resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
+  role_name = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_arns = compact(concat([
+    aws_iam_policy.giantswarm_capa_controller_policy.arn,
+    one(aws_iam_policy.giantswarm_capa_controller_vpc_policy[*].arn),
+    aws_iam_policy.giantswarm_dns_controller_policy.arn,
+    one(aws_iam_policy.giantswarm_eks_controller_policy[*].arn),
+    aws_iam_policy.giantswarm_iam_controller_policy.arn,
+    aws_iam_policy.giantswarm_irsa_controller_policy.arn,
+    aws_iam_policy.giantswarm_network_topology_controller_policy.arn,
+    one(aws_iam_policy.giantswarm_resolver_rules_operator_policy[*].arn),
+    aws_iam_policy.giantswarm_mc_bootstrap_policy.arn,
+    aws_iam_policy.giantswarm_crossplane_policy.arn
+  ], var.additional_policies_arns))
+}
+
+resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
+  role_name    = aws_iam_role.giantswarm_capa_controller_role.name
+  policy_names = keys(var.additional_policies)
+}

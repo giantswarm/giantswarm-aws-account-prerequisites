@@ -206,3 +206,15 @@ resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
   role       = aws_iam_role.giantswarm_admin.name
   policy_arn = each.value
 }
+
+// Ensure exclusivity of attached policies and inline policies
+
+resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
+  role_name   = aws_iam_role.giantswarm_admin.name
+  policy_arns = concat([aws_iam_policy.giantswarm_admin_policy.arn], var.additional_policies_arns)
+}
+
+resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
+  role_name    = aws_iam_role.giantswarm_admin.name
+  policy_names = keys(var.additional_policies)
+}
