@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Ensure exclusivity of attached policies and inline policies to the GiantSwarmAdmin and GiantSwarmReadOnly IAM roles. Any additional policies not defined in the Tofu configuration will be automatically removed on each apply.
+- Ensure exclusivity of attached policies and inline policies to the GiantSwarmAdmin, GiantSwarmReadOnly and the CAPA controller IAM roles. Any additional policies not defined in the Tofu configuration will be automatically removed on each apply.
 
 ## [6.0.0] - 2025-10-01
 
