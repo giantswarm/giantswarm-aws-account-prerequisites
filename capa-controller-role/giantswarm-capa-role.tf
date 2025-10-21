@@ -197,7 +197,7 @@ resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
 // Ensure exclusivity of attached policies and inline policies
 
 resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
-  role_name   = aws_iam_role.giantswarm_capa_controller_role.name
+  role_name = aws_iam_role.giantswarm_capa_controller_role.name
   policy_arns = compact(concat([
     aws_iam_policy.giantswarm_capa_controller_policy.arn,
     one(aws_iam_policy.giantswarm_capa_controller_vpc_policy[*].arn),
