@@ -179,7 +179,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudtrail:StopLogging",
       "cloudtrail:PutEventSelectors",
       "cloudtrail:PutInsightSelectors",
-      
+
       # ECR deletion actions
       "ecr:DeleteRepository",
       "ecr:DeleteRepositoryPolicy",
@@ -187,7 +187,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "ecr:DeleteLifecyclePolicy",
       "ecr:DeleteRegistryPolicy",
       "ecr:DeletePullThroughCacheRule",
-      
+
       # CloudWatch deletion actions
       "cloudwatch:DeleteAlarms",
       "cloudwatch:DeleteAnomalyDetector",
