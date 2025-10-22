@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.1] - 2025-10-22
+
 ### Changed
 
 - Limit some of the `GiantSwarmAdmin` role permissions
@@ -251,7 +253,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.1...HEAD
+[7.0.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v6.0.0...v7.0.0
 [6.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.6.0...v6.0.0
 [5.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.5.1...v5.6.0
