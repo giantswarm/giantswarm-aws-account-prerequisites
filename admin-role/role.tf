@@ -9,11 +9,9 @@ data "aws_iam_policy_document" "giantswarm_admin" {
     actions = [
       "acm:*",
       "autoscaling:*",
-      "cloudformation:*",
       "cloudfront:*",
       "cloudtrail:*",
       "cloudwatch:*",
-      "dynamodb:*",
       "ecr:*",
       "elasticfilesystem:*",
       "elasticloadbalancing:*",
@@ -56,7 +54,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "iam:UpdateAssumeRolePolicy",
       "iam:UpdateOpenIDConnectProviderThumbprint",
       "iam:UpdateRoleDescription",
-      "kms:*",
       "logs:*",
       "ram:*",
       "route53:*",
@@ -69,6 +66,25 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "sts:GetFederationToken",
       "support:*",
       "trustedadvisor:*",
+
+      # Grant read-only access to the following services
+      "cloudformation:Describe*",
+      "cloudformation:Get*",
+      "cloudformation:List*",
+      "cloudformation:Validate*",
+      "cloudformation:Estimate*",
+      "dynamodb:Describe*",
+      "dynamodb:Get*",
+      "dynamodb:List*",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:BatchGet*",
+      "kms:Describe*",
+      "kms:Get*",
+      "kms:List*",
+      "kms:Verify*",
+      "kms:Decrypt",
+      "kms:GenerateDataKey*",
     ]
   }
 
@@ -151,6 +167,35 @@ data "aws_iam_policy_document" "giantswarm_admin" {
         "ec2:ReplaceRouteTableAssociation",
       ]
     }
+  }
+
+  # Deny deletion actions for CloudTrail, ECR, and CloudWatch
+  statement {
+    effect    = "Deny"
+    resources = ["*"]
+    actions = [
+      # CloudTrail deletion actions
+      "cloudtrail:DeleteTrail",
+      "cloudtrail:StopLogging",
+      "cloudtrail:PutEventSelectors",
+      "cloudtrail:PutInsightSelectors",
+      
+      # ECR deletion actions
+      "ecr:DeleteRepository",
+      "ecr:DeleteRepositoryPolicy",
+      "ecr:BatchDeleteImage",
+      "ecr:DeleteLifecyclePolicy",
+      "ecr:DeleteRegistryPolicy",
+      "ecr:DeletePullThroughCacheRule",
+      
+      # CloudWatch deletion actions
+      "cloudwatch:DeleteAlarms",
+      "cloudwatch:DeleteAnomalyDetector",
+      "cloudwatch:DeleteDashboards",
+      "cloudwatch:DeleteInsightRules",
+      "cloudwatch:DeleteMetricFilter",
+      "cloudwatch:DeleteMetricStream",
+    ]
   }
 }
 
