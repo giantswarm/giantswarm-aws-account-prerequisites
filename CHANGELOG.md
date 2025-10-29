@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.0] - 2025-10-29
+
 ### Added
 
 - Added permissions to the Crossplane policy to be able to manage the instance profiles that will be used for the nodes in the clusters.
@@ -257,7 +259,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.0...HEAD
+[7.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.1...v7.1.0
 [7.0.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v6.0.0...v7.0.0
 [6.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v5.6.0...v6.0.0
