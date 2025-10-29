@@ -54,6 +54,23 @@
                 "s3:PutBucketOwnershipControls"
             ],
             "Resource": "*"
+        },
+        {
+            "Sid": "ManageInstanceProfiles",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateInstanceProfile",
+                "iam:GetInstanceProfile",
+                "iam:DeleteInstanceProfile",
+                "iam:AddRoleToInstanceProfile",
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:ListInstanceProfiles",
+                "iam:ListInstanceProfilesForRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:instance-profile/*-control-plane",
+                "arn:aws:iam::*:instance-profile/*-worker"
+            ]
         }
     ]
 }

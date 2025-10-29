@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added permissions to the Crossplane policy to be able to manage the instance profiles that will be used for the nodes in the clusters.
+
 ## [7.0.1] - 2025-10-22
 
 ### Changed
