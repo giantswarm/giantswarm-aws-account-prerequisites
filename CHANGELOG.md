@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.1.1] - 2025-11-11
+
 ### Added
 
 - Add permissions to access EKS to admin and readonly roles
@@ -263,7 +265,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.1...HEAD
+[7.1.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.1...v7.1.0
 [7.0.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v6.0.0...v7.0.0
