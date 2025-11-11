@@ -13,6 +13,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudtrail:*",
       "cloudwatch:*",
       "ecr:*",
+      "eks:*",
       "elasticfilesystem:*",
       "elasticloadbalancing:*",
       "events:*",
