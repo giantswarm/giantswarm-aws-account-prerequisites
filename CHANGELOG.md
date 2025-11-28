@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add permissions to read service quotas to read role
+- Add permissions to additionally manage service quotas to admin role
+
 ## [7.1.2] - 2025-11-28
 
 ### Fixed

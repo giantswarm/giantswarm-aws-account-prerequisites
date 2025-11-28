@@ -68,6 +68,20 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "support:*",
       "trustedadvisor:*",
 
+      # Service Quotas
+      "servicequotas:GetAWSDefaultServiceQuota",
+      "servicequotas:GetRequestedServiceQuotaChange",
+      "servicequotas:GetServiceQuota",
+      "servicequotas:ListAWSDefaultServiceQuotas",
+      "servicequotas:ListRequestedServiceQuotaChangeHistory",
+      "servicequotas:ListRequestedServiceQuotaChangeHistoryByQuota",
+      "servicequotas:ListServiceQuotas",
+      "servicequotas:ListServices",
+      "servicequotas:ListTagsForResource",
+      "servicequotas:RequestServiceQuotaIncrease",
+      "servicequotas:TagResource",
+      "servicequotas:UntagResource",
+
       # Grant read-only access to the following services
       "cloudformation:Describe*",
       "cloudformation:Get*",
