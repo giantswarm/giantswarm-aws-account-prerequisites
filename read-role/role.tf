@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
     resources = ["*"]
 
     actions = [
-      # ACM - Certificate Manager
+      # ACM
       "acm:DescribeCertificate",
       "acm:GetCertificate",
       "acm:ListCertificates",
@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
       "ecr:Get*",
       "ecr:List*",
 
-      # EFS (Elastic File System)
+      # EFS
       "elasticfilesystem:Describe*",
       "elasticfilesystem:List*",
 
@@ -74,7 +74,7 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
       "events:Describe*",
       "events:List*",
 
-      # IAM - Read-only actions only
+      # IAM
       "iam:Get*",
       "iam:List*",
       "iam:GenerateServiceLastAccessedDetails",
@@ -90,7 +90,7 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
       "logs:List*",
       "logs:FilterLogEvents",
 
-      # RAM (Resource Access Manager)
+      # RAM
       "ram:Get*",
       "ram:List*",
 
@@ -110,11 +110,22 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
       "s3:Get*",
       "s3:List*",
 
+      # Service Quotas
+      "servicequotas:GetAWSDefaultServiceQuota",
+      "servicequotas:GetRequestedServiceQuotaChange",
+      "servicequotas:GetServiceQuota",
+      "servicequotas:ListAWSDefaultServiceQuotas",
+      "servicequotas:ListRequestedServiceQuotaChangeHistory",
+      "servicequotas:ListRequestedServiceQuotaChangeHistoryByQuota",
+      "servicequotas:ListServiceQuotas",
+      "servicequotas:ListServices",
+      "servicequotas:ListTagsForResource",
+
       # SQS
       "sqs:Get*",
       "sqs:List*",
 
-      # STS - Read-only actions only
+      # STS
       "sts:DecodeAuthorizationMessage",
       "sts:GetCallerIdentity",
       "sts:GetFederationToken",
