@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.2.0] - 2025-11-28
+
 ### Added
 
 - Add permissions to read service quotas to read role
@@ -276,7 +278,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.2...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.2.0...HEAD
+[7.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.2...v7.2.0
 [7.1.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.1...v7.1.2
 [7.1.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.0...v7.1.1
 [7.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.0.1...v7.1.0
