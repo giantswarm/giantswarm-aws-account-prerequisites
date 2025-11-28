@@ -68,8 +68,8 @@
                 "iam:ListInstanceProfilesForRole"
             ],
             "Resource": [
-                "arn:aws:iam::*:instance-profile/*-control-plane",
-                "arn:aws:iam::*:instance-profile/*-worker"
+                "arn:*:iam::*:instance-profile/*-control-plane",
+                "arn:*:iam::*:instance-profile/*-worker"
             ]
         }
     ]
