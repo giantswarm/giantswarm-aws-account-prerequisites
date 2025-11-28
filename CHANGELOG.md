@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Change partition to wildcard in ARN in Crossplane policy.
+
 ## [7.1.1] - 2025-11-11
 
 ### Added
