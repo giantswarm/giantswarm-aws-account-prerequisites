@@ -24,7 +24,6 @@ EOF
       "VPCs per Region"                    = 50
       "NAT gateways per Availability Zone" = 50
       "IPv4 CIDR blocks per VPC"           = 50
-      "Routes per route table"             = 200
     }
     "Route 53 Resolver" = {
       "Maximum number of resolver endpoints per AWS Region" = 100
