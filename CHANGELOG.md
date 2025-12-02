@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.3.0] - 2025-12-02
+
 ### Added
 
 - Add module for applying default service quotas.
@@ -282,7 +284,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.2.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.3.0...HEAD
+[7.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.2.0...v7.3.0
 [7.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.2...v7.2.0
 [7.1.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.1...v7.1.2
 [7.1.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.0...v7.1.1
