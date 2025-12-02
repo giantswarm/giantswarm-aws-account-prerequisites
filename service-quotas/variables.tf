@@ -32,17 +32,15 @@ EOF
     "Amazon Elastic Compute Cloud (Amazon EC2)" = {
       "EC2-VPC Elastic IPs" = 100
       # Value is the number of vCPUs for all running or requested instances.
-      "All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests" = 250
+      "All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests" = 1152
       # Value is the number of vCPUs for all running or requested instances.
-      "Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances" = 250
+      "Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances" = 1152
     }
     "Elastic Load Balancing (ELB)" = {
-      "Classic Load Balancers per Region"     = 50
-      "Application Load Balancers per Region" = 50
-      "Network Load Balancers per Region"     = 50
+      "Classic Load Balancers per Region" = 50
     }
     "Amazon EC2 Auto Scaling" = {
-      "Auto Scaling groups per region"   = 250
+      "Auto Scaling groups per region"   = 500
       "Launch configurations per region" = 500
     }
   }
