@@ -48,3 +48,7 @@ Follow the instructions in the [onboarding directory](./onboarding/README.md) to
 - **IRSA and network topology**: Support for IAM Roles for Service Accounts and network topology management
 
 **Trust Relationships**: Can be assumed by Giant Swarm's CAPA controller user and by specific Kubernetes service accounts via OIDC (Web Identity).
+
+### service-quotas
+
+**Purpose**: A set of sensible default AWS Service Quotas for running Giant Swarm clusters.
