@@ -5,16 +5,18 @@ AWS Service Quotas define the limits for usage of various AWS services.
 This variable is a nested map, where the parent key is the name of the service,
 and the child key is the name of the quota. The value is the requested limit.
 
+The aws_servicequotas_service_quota resource in this module expects service and quota codes.
+Instead, we use the defined names and look up the codes using data sources.
+This ensures that the quotas defined here are understandable without relying on comments
+that may be forgotten or out of date.
+
 You can find a list of service names using the AWS CLI:
 `aws service-quotas list-services`
 
 Using code for the service (not the name), you can list the available quotas for that service:
 `aws service-quotas list-service-quotas --service=$SERVICE_CODE`
 
-The aws_servicequotas_service_quota resource expects service and quota codes.
-Instead, we use the define names and look up the codes using data sources.
-This ensures that the quotas defined here are understandable without relying on comments
-that may be forgotten or out of date.
+Service and quota names are also shown in the AWS console.
 EOF
 
   default = {
