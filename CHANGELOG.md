@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Allow editing and deleting Giant Swarm vintage CloudFormation stacks
+- Add module to separate Crossplane permissions into its own IAM role and policies, to be used with a new, separate IAM user per installation
 
 ## [7.3.0] - 2025-12-02
 
