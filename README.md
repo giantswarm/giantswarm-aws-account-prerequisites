@@ -44,10 +44,14 @@ Follow the instructions in the [onboarding directory](./onboarding/README.md) to
 - **EKS support** (optional): Full EKS cluster and node group management, including add-ons and Fargate profiles
 - **Storage**: S3 bucket management for cluster artifacts and backups
 - **Service integration**: EventBridge rules, SQS queues, Secrets Manager, and service-linked role creation
-- **Crossplane support**: Additional permissions for infrastructure provisioning via Crossplane
+- **Crossplane support**: Additional permissions for infrastructure provisioning via Crossplane (this part will be moved to a separate IAM role; see below)
 - **IRSA and network topology**: Support for IAM Roles for Service Accounts and network topology management
 
 **Trust Relationships**: Can be assumed by Giant Swarm's CAPA controller user and by specific Kubernetes service accounts via OIDC (Web Identity).
+
+### crossplane
+
+**Purpose**: IAM role for Crossplane and installed providers to create and manage cloud resources. Crossplane is used for basic CAPA cluster creation in the Giant Swarm platform, but can also be used for customer application infrastructure.
 
 ### service-quotas
 
