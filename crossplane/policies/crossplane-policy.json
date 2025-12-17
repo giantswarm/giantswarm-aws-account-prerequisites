@@ -58,6 +58,15 @@
             "Resource": "*"
         },
         {
+            "Sid": "CrossplaneFnIrsa",
+            "Effect": "Allow",
+            "Action": [
+                "route53:ListHostedZones",
+                "route53:ListTagsForResource"
+            ],
+            "Resource": "*"
+        },
+        {
             "Sid": "ManageInstanceProfiles",
             "Effect": "Allow",
             "Action": [
