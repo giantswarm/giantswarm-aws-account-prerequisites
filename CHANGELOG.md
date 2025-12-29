@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow editing and deleting Giant Swarm vintage CloudFormation stacks
+
 ## [7.3.0] - 2025-12-02
 
 ### Added
