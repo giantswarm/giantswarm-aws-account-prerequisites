@@ -103,6 +103,16 @@ data "aws_iam_policy_document" "giantswarm_admin" {
     ]
   }
 
+  statement {
+    effect    = "Allow"
+    resources = ["arn:${data.aws_partition.current.partition}:cloudformation:*:*:stack/cluster-*-tc*/*"]
+
+    actions = [
+      # Allow editing and deleting Giant Swarm vintage CloudFormation stacks
+      "cloudformation:*",
+    ]
+  }
+
   # Allow all EC2 actions
   statement {
     effect    = "Allow"
