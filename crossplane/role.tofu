@@ -7,15 +7,12 @@ locals {
   principal_arn = "arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:user/${var.installation_name}-crossplane"
 }
 
-data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 
 resource "aws_iam_role" "giantswarm_crossplane_role" {
   name = "giantswarm-${var.installation_name}-crossplane"
   assume_role_policy = templatefile("${path.module}/policies/trusted-entities.json", {
     PRINCIPAL_ARN                    = local.principal_arn
-    AWS_ACCOUNT_ID                   = data.aws_caller_identity.current.account_id
-    AWS_PARTITION                    = data.aws_partition.current.partition
   })
   tags        = local.tags
   description = "Giant Swarm managed role for Crossplane"
