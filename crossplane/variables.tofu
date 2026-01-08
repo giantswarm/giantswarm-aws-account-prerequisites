@@ -13,13 +13,3 @@ variable "gs_user_account" {
     error_message = "AWS account ID must consist of exactly 12 digits"
   }
 }
-
-variable "management_cluster_oidc_provider" {
-  type        = string
-  description = "OIDC provider name of the management cluster"
-
-  validation {
-    condition     = can(regex("^([0-9a-z-]+)(\\.[0-9a-z-]+)+(\\/[0-9a-z-]+)*$", var.management_cluster_oidc_provider))
-    error_message = "Invalid OIDC provider name"
-  }
-}

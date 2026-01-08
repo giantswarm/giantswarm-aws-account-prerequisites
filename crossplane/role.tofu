@@ -15,7 +15,6 @@ resource "aws_iam_role" "giantswarm_crossplane_role" {
   assume_role_policy = templatefile("${path.module}/policies/trusted-entities.json", {
     PRINCIPAL_ARN                    = local.principal_arn
     AWS_ACCOUNT_ID                   = data.aws_caller_identity.current.account_id
-    MANAGEMENT_CLUSTER_OIDC_PROVIDER = var.management_cluster_oidc_provider
     AWS_PARTITION                    = data.aws_partition.current.partition
   })
   tags        = local.tags
