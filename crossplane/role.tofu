@@ -20,10 +20,6 @@ resource "aws_iam_role" "giantswarm_crossplane_role" {
   })
   tags        = local.tags
   description = "Giant Swarm managed role for Crossplane"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
 }
 
 resource "aws_iam_policy" "giantswarm_crossplane_policy" {
@@ -31,10 +27,6 @@ resource "aws_iam_policy" "giantswarm_crossplane_policy" {
   policy      = file("${path.module}/policies/crossplane-policy.json")
   tags        = local.tags
   description = "Giant Swarm managed policy for Crossplane"
-  lifecycle {
-    # Avoid recreation due to these fields in case the object was initially created with different values
-    ignore_changes = [description]
-  }
 }
 resource "aws_iam_role_policy_attachment" "giantswarm_crossplane_policy_attachment" {
   role       = aws_iam_role.giantswarm_crossplane_role.name
