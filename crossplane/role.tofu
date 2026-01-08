@@ -12,7 +12,7 @@ data "aws_partition" "current" {}
 resource "aws_iam_role" "giantswarm_crossplane_role" {
   name = "giantswarm-${var.installation_name}-crossplane"
   assume_role_policy = templatefile("${path.module}/policies/trusted-entities.json", {
-    PRINCIPAL_ARN                    = local.principal_arn
+    PRINCIPAL_ARN = local.principal_arn
   })
   tags        = local.tags
   description = "Giant Swarm managed role for Crossplane"
