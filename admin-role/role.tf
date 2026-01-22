@@ -66,6 +66,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "sts:DecodeAuthorizationMessage",
       "sts:GetFederationToken",
       "support:*",
+      "tag:GetResources",
       "trustedadvisor:*",
 
       # Service Quotas
