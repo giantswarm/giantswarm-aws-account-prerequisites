@@ -146,11 +146,23 @@
                 "iam:GetInstanceProfile",
                 "iam:ListInstanceProfiles",
                 "iam:ListInstanceProfilesForRole",
-                "iam:RemoveRoleFromInstanceProfile"
+                "iam:RemoveRoleFromInstanceProfile",
+                "iam:TagInstanceProfile"
             ],
             "Resource": [
                 "arn:*:iam::*:instance-profile/*-control-plane",
                 "arn:*:iam::*:instance-profile/*-worker"
+            ]
+        },
+        {
+            "Sid": "ManageInstanceProfilesPassRole",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:*:iam::*:role/*-control-plane",
+                "arn:*:iam::*:role/*-worker"
             ]
         }
     ]
