@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add tag-based AWS resource retrieval permission `tag:GetResources` (speeds up AWS Console and can be helpful to find cluster-related resources)
 
+### Fixed
+
+- Add `iam:PassRole` and `iam:TagInstanceProfile` Crossplane permissions to reconcile control-plane and worker instance profiles
+
 ## [7.4.0] - 2026-01-08
 
 ### Added
