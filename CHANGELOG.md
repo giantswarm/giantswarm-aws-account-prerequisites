@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add tag-based AWS resource retrieval permission `tag:GetResources` (speeds up AWS Console and can be helpful to find cluster-related resources)
+- Add S3 permissions to manage Observability Buckets via Crossplane.
 
 ### Fixed
 
