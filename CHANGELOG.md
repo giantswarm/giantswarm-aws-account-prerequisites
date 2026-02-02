@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.5.0] - 2026-02-02
+
 ### Added
 
 - Add tag-based AWS resource retrieval permission `tag:GetResources` (speeds up AWS Console and can be helpful to find cluster-related resources)
@@ -302,7 +304,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.5.0...HEAD
+[7.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.4.0...v7.5.0
 [7.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.3.0...v7.4.0
 [7.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.2.0...v7.3.0
 [7.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.1.2...v7.2.0
