@@ -163,17 +163,17 @@
             ],
             "Resource": "arn:*:s3:::giantswarm-*",
             "Condition": {
-              "StringLike": {
-                  "s3:bucketname": [
-                      "giantswarm-*-loki",
-                      "giantswarm-*-mimir",
-                      "giantswarm-*-mimir-ruler",
-                      "giantswarm-*-mimir-alertmanager",
-                      "giantswarm-*-tempo",
-                      "giantswarm-*-grafana-postgresql"
-                  ]
-              }
-          }
+                "StringLike": {
+                    "s3:bucketname": [
+                        "giantswarm-*-loki",
+                        "giantswarm-*-mimir",
+                        "giantswarm-*-mimir-ruler",
+                        "giantswarm-*-mimir-alertmanager",
+                        "giantswarm-*-tempo",
+                        "giantswarm-*-grafana-postgresql"
+                    ]
+                }
+            }
         },
         {
             "Sid": "ManageInstanceProfiles",
