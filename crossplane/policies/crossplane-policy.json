@@ -165,12 +165,12 @@
             "Condition": {
                 "StringLike": {
                     "s3:bucketname": [
+                        "giantswarm-*-grafana-postgresql",
                         "giantswarm-*-loki",
-                        "giantswarm-*-mimir",
-                        "giantswarm-*-mimir-ruler",
                         "giantswarm-*-mimir-alertmanager",
-                        "giantswarm-*-tempo",
-                        "giantswarm-*-grafana-postgresql"
+                        "giantswarm-*-mimir-ruler",
+                        "giantswarm-*-mimir",
+                        "giantswarm-*-tempo"
                     ]
                 }
             }
