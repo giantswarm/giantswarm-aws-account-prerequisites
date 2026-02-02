@@ -167,9 +167,10 @@
               "s3:bucketname": [
                 "giantswarm-*-loki",
                 "giantswarm-*-mimir",
-                "giantswarm-*-mimir-*",
+                "giantswarm-*-mimir-ruler",
+                "giantswarm-*-mimir-alertmanager",
                 "giantswarm-*-tempo",
-                "giantswarm-*-grafana-*"
+                "giantswarm-*-grafana-postgresql"
               ]
             }
           }
