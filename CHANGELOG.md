@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Add `iam:UntagInstanceProfile` permission for Crossplane in order to update node instance profiles
+
 ## [7.5.0] - 2026-02-02
 
 ### Added
