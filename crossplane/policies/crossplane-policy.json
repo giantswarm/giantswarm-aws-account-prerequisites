@@ -186,7 +186,8 @@
                 "iam:ListInstanceProfiles",
                 "iam:ListInstanceProfilesForRole",
                 "iam:RemoveRoleFromInstanceProfile",
-                "iam:TagInstanceProfile"
+                "iam:TagInstanceProfile",
+                "iam:UntagInstanceProfile"
             ],
             "Resource": [
                 "arn:*:iam::*:instance-profile/*-control-plane",
