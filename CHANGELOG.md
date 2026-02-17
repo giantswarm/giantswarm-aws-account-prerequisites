@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.6.1] - 2026-02-17
+
 ### Fixed
 
 - Add `ec2:CreateTags` on crossplane role policy
@@ -314,7 +316,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.1...HEAD
+[7.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.0...v7.6.1
 [7.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.5.0...v7.6.0
 [7.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.4.0...v7.5.0
 [7.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.3.0...v7.4.0
