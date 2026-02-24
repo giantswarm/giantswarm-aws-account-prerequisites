@@ -35,6 +35,7 @@
                 "iam:TagRole",
                 "iam:UntagPolicy",
                 "iam:UntagRole",
+                "iam:UpdateAssumeRolePolicy",
                 "s3:GetAccelerateConfiguration",
                 "s3:GetBucketAcl",
                 "s3:GetBucketCORS",
