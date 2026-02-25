@@ -4,9 +4,6 @@ Follow these steps to onboard a new AWS account to use with the Giant Swarm plat
 
 *Note* that the OpenTofu code in this repository is only provided as a means of onboarding a new AWS account, but it shouldn't be used by customers for active maintenance. Giant Swarm will take over maintenance of these and the CAPA controller IAM roles for all the management clusters that operate under that account. Therefore, you do not need to persist the OpenTofu state file.
 
-## Before starting
-
-Make sure to adjust AWS account limits according to [these docs](https://docs.giantswarm.io/getting-started/prepare-your-provider-infrastructure/aws/#quotas).
 
 ## IAM roles setup
 
