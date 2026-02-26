@@ -16,6 +16,7 @@
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
                 "ec2:CreateTags",
+                "elasticfilesystem:*",
                 "events:*",
                 "iam:AttachRolePolicy",
                 "iam:CreateRole",

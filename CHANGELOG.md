@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `elasticfilesystem:*` permissions to the Crossplane policy for EFS support
+
 ## [7.6.2] - 2026-02-24
 
 ### Fixed
