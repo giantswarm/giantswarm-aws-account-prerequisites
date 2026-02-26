@@ -15,6 +15,7 @@
                 "cloudwatch:*",
                 "sqs:*",
                 "events:*",
+                "elasticfilesystem:*",
                 "iam:GetRole",
                 "iam:CreateRole",
                 "iam:DeleteRole",
