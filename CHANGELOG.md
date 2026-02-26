@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.6.3] - 2026-02-26
+
 ### Added
 
 - Add `elasticfilesystem:*` permissions to the Crossplane policy for EFS support
@@ -326,7 +328,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.2...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...HEAD
+[7.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.2...v7.6.3
 [7.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.1...v7.6.2
 [7.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.0...v7.6.1
 [7.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.5.0...v7.6.0
