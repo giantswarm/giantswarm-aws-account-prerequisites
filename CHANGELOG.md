@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for removing some IAM permissions from the capa controller role in BYOVPC installations.
 - CAPA role CloudFormation template: switch from inline to managed policies for the CAPA IAM role.
 - Add CAPA permissions for ASG lifecycle hooks
+
+### Added
 - Add `elasticfilesystem:*` permissions to the Crossplane policy for EFS support
 
 ## [4.2.0] - 2024-09-04
