@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `ec2:*NetworkInterface*` permissions to the Crossplane policy for objects like `securitygroup.ec2.aws.upbound.io`
+
 ## [7.6.3] - 2026-02-26
 
 ### Added
