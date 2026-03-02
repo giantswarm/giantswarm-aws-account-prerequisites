@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.6.4] - 2026-03-02
+
 ### Added
 
 - Add `ec2:*NetworkInterface*` permissions to the Crossplane policy for objects like `securitygroup.ec2.aws.upbound.io`
@@ -332,7 +334,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.4...HEAD
+[7.6.4]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...v7.6.4
 [7.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.2...v7.6.3
 [7.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.1...v7.6.2
 [7.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.0...v7.6.1
