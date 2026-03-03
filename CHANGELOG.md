@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `additional_policies` and `additional_policies_arns` support to the crossplane module
+
 ## [7.6.4] - 2026-03-02
 
 ### Added
