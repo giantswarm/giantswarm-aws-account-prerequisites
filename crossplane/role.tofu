@@ -29,16 +29,29 @@ resource "aws_iam_role_policy_attachment" "giantswarm_crossplane_policy_attachme
   policy_arn = aws_iam_policy.giantswarm_crossplane_policy.arn
 }
 
+resource "aws_iam_role_policy" "additional_inline_policies" {
+  for_each = var.additional_policies
+  name     = each.key
+  role     = aws_iam_role.giantswarm_crossplane_role.name
+  policy   = each.value
+}
+
+resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
+  for_each   = toset(var.additional_policies_arns)
+  role       = aws_iam_role.giantswarm_crossplane_role.name
+  policy_arn = each.value
+}
+
 // Ensure exclusivity of attached policies and inline policies
 
 resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
   role_name = aws_iam_role.giantswarm_crossplane_role.name
-  policy_arns = [
+  policy_arns = concat([
     aws_iam_policy.giantswarm_crossplane_policy.arn
-  ]
+  ], var.additional_policies_arns)
 }
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_crossplane_role.name
-  policy_names = []
+  policy_names = keys(var.additional_policies)
 }
