@@ -13,3 +13,15 @@ variable "gs_user_account" {
     error_message = "AWS account ID must consist of exactly 12 digits"
   }
 }
+
+variable "additional_policies" {
+  type        = map(string)
+  description = "Map of additional policy documents to attach to the Crossplane IAM role"
+  default     = {}
+}
+
+variable "additional_policies_arns" {
+  type        = list(string)
+  description = "List of ARNs of additional managed policies to attach to the Crossplane role"
+  default     = []
+}
