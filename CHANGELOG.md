@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.7.0] - 2026-03-03
+
 ### Added
 
 - Add `additional_policies` and `additional_policies_arns` support to the crossplane module
@@ -338,7 +340,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.4...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.7.0...HEAD
+[7.7.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.4...v7.7.0
 [7.6.4]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...v7.6.4
 [7.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.2...v7.6.3
 [7.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.1...v7.6.2
