@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `GiantSwarmAdminCustomer` role to start migrating to stricter IAM role trust relationship
+
 ### Fixed
 
 - Fix incorrect IAM permission `cloudwatch:DeleteMetricFilter` to `logs:DeleteMetricFilter` in admin role
