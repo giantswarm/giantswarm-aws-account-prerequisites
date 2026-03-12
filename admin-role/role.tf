@@ -219,7 +219,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "cloudwatch:DeleteAnomalyDetector",
       "cloudwatch:DeleteDashboards",
       "cloudwatch:DeleteInsightRules",
-      "cloudwatch:DeleteMetricFilter",
+      "logs:DeleteMetricFilter",
       "cloudwatch:DeleteMetricStream",
     ]
   }
