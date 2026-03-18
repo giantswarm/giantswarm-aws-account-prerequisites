@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add `GiantSwarmAdminCustomer` role to start migrating to stricter IAM role trust relationship
+- Trust new intermediary `GiantSwarmCustomerAccessAdmin` and `GiantSwarmCustomerAccessReadOnly` IAM roles which will become the exclusive way of accessing customer accounts after migration
 
 ### Fixed
 

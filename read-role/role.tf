@@ -149,6 +149,31 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume" {
 
     actions = ["sts:AssumeRole"]
   }
+
+  # Allow both the admin role (privileged users) and read-only role in the root account to
+  # assume the read-only role in the customer account:
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessReadOnly"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
 }
 
 resource "aws_iam_role" "giantswarm_read_only" {

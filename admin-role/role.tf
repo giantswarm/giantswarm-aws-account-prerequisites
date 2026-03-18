@@ -226,12 +226,28 @@ data "aws_iam_policy_document" "giantswarm_admin" {
 }
 
 data "aws_iam_policy_document" "giantswarm_admin_assume" {
+  # Migration to stricter IAM role trust relationship
+  #
+  # Trusting the whole Giant Swarm root account will be removed, and first assuming
+  # one of the `GiantSwarmCustomer*` roles will be required to access customer accounts.
+
   statement {
     effect = "Allow"
 
     principals {
       type        = "AWS"
       identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:root"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
     }
 
     actions = ["sts:AssumeRole"]
@@ -287,73 +303,5 @@ resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachmen
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_admin.name
-  policy_names = keys(var.additional_policies)
-}
-
-// Migration to stricter IAM role trust relationship
-//
-// Compared to the previous `GiantSwarm` role, `GiantSwarmAdminCustomer` doesn't trust the whole Giant Swarm
-// root account, but only `role/GiantSwarmAdminInCustomerAccount`.
-
-data "aws_iam_policy_document" "giantswarm_admin_customer_assume" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmAdminInCustomerAccount"]
-    }
-
-    actions = ["sts:AssumeRole"]
-  }
-}
-
-resource "aws_iam_role" "giantswarm_admin_customer" {
-  name               = "GiantSwarmAdminCustomer"
-  assume_role_policy = data.aws_iam_policy_document.giantswarm_admin_customer_assume.json
-
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
-}
-
-resource "aws_iam_policy" "giantswarm_admin_customer" {
-  name   = "GiantSwarmAdminCustomer"
-  policy = data.aws_iam_policy_document.giantswarm_admin.json
-
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
-}
-
-resource "aws_iam_role_policy_attachment" "giantswarm_admin_customer" {
-  role       = aws_iam_role.giantswarm_admin_customer.name
-  policy_arn = aws_iam_policy.giantswarm_admin_customer.arn
-
-  # lifecycle {
-  #   prevent_destroy = true
-  # }
-}
-
-resource "aws_iam_role_policy" "giantswarm_admin_customer_additional" {
-  for_each = var.additional_policies
-  name     = each.key
-  role     = aws_iam_role.giantswarm_admin_customer.name
-  policy   = each.value
-}
-
-resource "aws_iam_role_policy_attachment" "giantswarm_admin_customer_additional" {
-  for_each   = toset(var.additional_policies_arns)
-  role       = aws_iam_role.giantswarm_admin_customer.name
-  policy_arn = each.value
-}
-
-resource "aws_iam_role_policy_attachments_exclusive" "giantswarm_admin_customer" {
-  role_name   = aws_iam_role.giantswarm_admin_customer.name
-  policy_arns = concat([aws_iam_policy.giantswarm_admin_customer.arn], var.additional_policies_arns)
-}
-
-resource "aws_iam_role_policies_exclusive" "giantswarm_admin_customer" {
-  role_name    = aws_iam_role.giantswarm_admin_customer.name
   policy_names = keys(var.additional_policies)
 }
