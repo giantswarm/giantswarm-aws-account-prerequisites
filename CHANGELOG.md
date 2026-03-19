@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Trust new intermediary `GiantSwarmCustomerAccessAdmin` and `GiantSwarmCustomerAccessReadOnly` IAM roles which will become the exclusive way of accessing customer accounts after migration
+
 ### Fixed
 
 - Fix incorrect IAM permission `cloudwatch:DeleteMetricFilter` to `logs:DeleteMetricFilter` in admin role

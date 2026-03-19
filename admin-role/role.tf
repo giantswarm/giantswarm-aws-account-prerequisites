@@ -226,12 +226,28 @@ data "aws_iam_policy_document" "giantswarm_admin" {
 }
 
 data "aws_iam_policy_document" "giantswarm_admin_assume" {
+  # Migration to stricter IAM role trust relationship
+  #
+  # Trusting the whole Giant Swarm root account will be removed, and first assuming
+  # one of the `GiantSwarmCustomer*` roles will be required to access customer accounts.
+
   statement {
     effect = "Allow"
 
     principals {
       type        = "AWS"
       identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:root"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
     }
 
     actions = ["sts:AssumeRole"]
