@@ -250,7 +250,7 @@ data "aws_iam_policy_document" "giantswarm_admin_assume" {
       identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
     }
 
-    actions = ["sts:AssumeRole"]
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
   }
 }
 
