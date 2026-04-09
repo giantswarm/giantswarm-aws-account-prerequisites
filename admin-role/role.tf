@@ -250,6 +250,8 @@ data "aws_iam_policy_document" "giantswarm_admin_assume" {
       identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
     }
 
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
     actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
   }
 }
