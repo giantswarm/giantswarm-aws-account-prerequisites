@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.0.0] - 2026-04-15
+
+### Added
+
+- Trust new intermediary `GiantSwarmCustomerAccessAdmin` and `GiantSwarmCustomerAccessReadOnly` IAM roles which will become the exclusive way of accessing customer accounts after migration
+
 ### Fixed
 
 - Fix incorrect IAM permission `cloudwatch:DeleteMetricFilter` to `logs:DeleteMetricFilter` in admin role
@@ -344,7 +350,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.7.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.0.0...HEAD
+[8.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.7.0...v8.0.0
 [7.7.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.4...v7.7.0
 [7.6.4]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...v7.6.4
 [7.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.2...v7.6.3

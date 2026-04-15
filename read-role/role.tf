@@ -149,6 +149,35 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume" {
 
     actions = ["sts:AssumeRole"]
   }
+
+  # Allow both the admin role (privileged users) and read-only role in the root account to
+  # assume the read-only role in the customer account:
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
+    }
+
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessReadOnly"]
+    }
+
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
+  }
 }
 
 resource "aws_iam_role" "giantswarm_read_only" {
