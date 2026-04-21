@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Add `s3:DeleteBucketPolicy` permission for Crossplane wherever creation of such policies was allowed. This is to support deletion/replacement.
+
 ## [8.0.0] - 2026-04-15
 
 ### Added
