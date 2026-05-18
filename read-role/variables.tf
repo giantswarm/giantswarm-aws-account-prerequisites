@@ -20,3 +20,9 @@ variable "additional_policies_arns" {
   description = "List of ARNs of additional managed policies to attach to the IAM role"
   default     = []
 }
+
+variable "trust_full_root_account" {
+  type        = bool
+  description = "If true, the full Giant Swarm root account will be trusted to assume the customer account GiantSwarmReadOnly IAM role. We are moving away to a stricter trust model, and this is a temporary helper variable for the migration."
+  default     = true
+}

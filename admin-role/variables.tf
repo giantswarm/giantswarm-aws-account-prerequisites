@@ -26,3 +26,9 @@ variable "byovpc" {
   description = "If true, the IAM role will be created without the permissions needed to manage VPCs"
   default     = false
 }
+
+variable "trust_full_root_account" {
+  type        = bool
+  description = "If true, the full Giant Swarm root account will be trusted to assume the customer account GiantSwarmAdmin IAM role. We are moving away to a stricter trust model, and this is a temporary helper variable for the migration."
+  default     = true
+}

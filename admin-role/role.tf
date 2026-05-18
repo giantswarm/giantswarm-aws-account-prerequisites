@@ -226,6 +226,21 @@ data "aws_iam_policy_document" "giantswarm_admin" {
 }
 
 data "aws_iam_policy_document" "giantswarm_admin_assume" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
+    }
+
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
+  }
+}
+
+data "aws_iam_policy_document" "giantswarm_admin_assume_trust_full_root_account" {
   # Migration to stricter IAM role trust relationship
   #
   # Trusting the whole Giant Swarm root account will be removed, and first assuming
@@ -258,7 +273,7 @@ data "aws_iam_policy_document" "giantswarm_admin_assume" {
 
 resource "aws_iam_role" "giantswarm_admin" {
   name               = "GiantSwarmAdmin"
-  assume_role_policy = data.aws_iam_policy_document.giantswarm_admin_assume.json
+  assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_admin_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_admin_assume.json
 
   lifecycle {
     prevent_destroy = true

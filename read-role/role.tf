@@ -139,6 +139,42 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
 }
 
 data "aws_iam_policy_document" "giantswarm_read_only_assume" {
+  # Allow both the admin role (privileged users) and read-only role in the root account to
+  # assume the read-only role in the customer account:
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessAdmin"]
+    }
+
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
+  }
+
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/GiantSwarmCustomerAccessReadOnly"]
+    }
+
+    # `sts:SetSourceIdentity` is used to allow passing a session description in the role chain
+    # so that audit logs (CloudTrail) show it.
+    actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
+  }
+}
+
+data "aws_iam_policy_document" "giantswarm_read_only_assume_trust_full_root_account" {
+  # Migration to stricter IAM role trust relationship
+  #
+  # Trusting the whole Giant Swarm root account will be removed, and first assuming
+  # one of the `GiantSwarmCustomer*` roles will be required to access customer accounts.
+
   statement {
     effect = "Allow"
 
@@ -182,7 +218,7 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume" {
 
 resource "aws_iam_role" "giantswarm_read_only" {
   name               = "GiantSwarmReadOnly"
-  assume_role_policy = data.aws_iam_policy_document.giantswarm_read_only_assume.json
+  assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_read_only_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_read_only_assume.json
 }
 
 resource "aws_iam_policy" "giantswarm_read_only" {
