@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.1.0] - 2026-05-18
+
 ### Added
 
 - Add `trust_full_root_account` variable (default `true`) to `admin-role` and `read-role` modules to allow opting into the stricter trust model that only trusts the `GiantSwarmCustomerAccess*` IAM roles.
@@ -358,7 +360,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.0.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.1.0...HEAD
+[8.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.0.0...v8.1.0
 [8.0.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.7.0...v8.0.0
 [7.7.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.4...v7.7.0
 [7.6.4]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v7.6.3...v7.6.4
