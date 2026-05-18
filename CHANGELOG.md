@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `trust_full_root_account` variable (default `true`) to `admin-role` and `read-role` modules to allow opting into the stricter trust model that only trusts the `GiantSwarmCustomerAccess*` IAM roles.
+
 ### Fixed
 
 - Add `s3:DeleteBucketPolicy` permission for Crossplane wherever creation of such policies was allowed. This is to support deletion/replacement.
