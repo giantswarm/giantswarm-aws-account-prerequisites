@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Trust Giant Swarm automation roles that handle changes to customer accounts through GitHub pull requests / actions
+
 ## [8.1.0] - 2026-05-18
 
 ### Added
