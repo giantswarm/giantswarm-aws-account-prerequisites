@@ -167,6 +167,19 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume" {
     # so that audit logs (CloudTrail) show it.
     actions = ["sts:AssumeRole", "sts:SetSourceIdentity"]
   }
+
+  # Allow Giant Swarm automation roles that handle changes to customer accounts
+  # through GitHub pull requests / actions.
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:${data.aws_partition.current.partition}:iam::${var.gs_user_account}:role/TofuPlan"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
 }
 
 data "aws_iam_policy_document" "giantswarm_read_only_assume_trust_full_root_account" {
