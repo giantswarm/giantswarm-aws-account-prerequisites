@@ -26,7 +26,8 @@ EOF
       "IPv4 CIDR blocks per VPC"           = 50
     }
     "Route 53 Resolver" = {
-      "Maximum number of resolver endpoints per AWS Region" = 100
+      # From experience, 50 is the auto-approve maximum
+      "Maximum number of resolver endpoints per AWS Region" = 50
     }
     "Amazon Elastic Compute Cloud (Amazon EC2)" = {
       "EC2-VPC Elastic IPs" = 100
@@ -40,7 +41,6 @@ EOF
     }
     "Amazon EC2 Auto Scaling" = {
       "Auto Scaling groups per region"   = 500
-      "Launch configurations per region" = 500
     }
   }
 }

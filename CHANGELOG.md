@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Decrease "Maximum number of resolver endpoints per AWS Region" default service quota request to 50 which is the auto-approve maximum
+- Remove service quota "Launch configurations per region" since it's not used and deprecated at AWS (we use launch templates which have high default limits)
+
 ## [8.2.1] - 2026-06-02
 
 ### Added
