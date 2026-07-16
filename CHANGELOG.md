@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.2.2] - 2026-07-16
+
 ### Changed
 
 - Decrease "Maximum number of resolver endpoints per AWS Region" default service quota request to 50 which is the auto-approve maximum
@@ -377,7 +379,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.2...HEAD
+[8.2.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.1...v8.2.2
 [8.2.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.0...v8.2.1
 [8.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.1.0...v8.2.0
 [8.1.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.0.0...v8.1.0
