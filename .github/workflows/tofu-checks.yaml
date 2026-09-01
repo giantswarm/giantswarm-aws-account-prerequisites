@@ -17,7 +17,7 @@ jobs:
         run: |
           set -eu
 
-          for d in admin-role capa-controller-role; do (
+          for d in admin-role agent-read-role capa-controller-role; do (
               cd "${d}"
 
               echo "Initializing Tofu for ${d}"

@@ -31,6 +31,18 @@ Follow the instructions in the [onboarding directory](./onboarding/README.md) to
 - **Read-only access** to all major AWS services including EC2, S3, IAM, CloudWatch, Route53, Auto Scaling, ELB, ECR, EFS, CloudTrail, and EventBridge
 - **No write/modify permissions** - strictly limited to describe, get, and list operations
 
+### agent-read-role
+
+**Purpose**: Used by AI agents to access AWS resources.
+
+**Key Permissions**:
+
+- **Read-only access** to all major AWS services
+- **No stored data reads** - S3 objects, DynamoDB items and image layers are excluded. Log contents are the exception, so that agents can investigate incidents
+- **No credential minting** - no permitted action returns a credential
+
+**Trust Relationships**: Can be assumed only by the `GiantSwarmAgentAccessReadOnly` role in the Giant Swarm root account.
+
 ### capa-controller-role
 
 **Purpose**: IAM role for the Cluster API Provider AWS (CAPA) controller to create and manage Kubernetes clusters and supporting infrastructure.
