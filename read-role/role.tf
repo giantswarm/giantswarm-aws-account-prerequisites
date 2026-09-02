@@ -63,7 +63,6 @@ data "aws_iam_policy_document" "giantswarm_read_only" {
 
       # EKS (Elastic Kubernetes Service)
       "eks:Describe*",
-      "eks:Get*",
       "eks:List*",
 
       # Elastic Load Balancing

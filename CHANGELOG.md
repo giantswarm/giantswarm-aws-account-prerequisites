@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Remove `eks:Get*` from the `GiantSwarmReadOnly` role since EKS has no IAM action with the `Get` prefix.
+
 ## [8.2.2] - 2026-07-16
 
 ### Changed
