@@ -177,6 +177,7 @@
                 "StringLike": {
                     "s3:bucketname": [
                         "giantswarm-*-grafana-postgresql",
+                        "giantswarm-*-kagent-pg",
                         "giantswarm-*-loki",
                         "giantswarm-*-mimir-alertmanager",
                         "giantswarm-*-mimir-ruler",
