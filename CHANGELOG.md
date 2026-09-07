@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.3.0] - 2026-09-07
+
 ### Added
 
 - Allow Crossplane to manage the `giantswarm-*-kagent-pg` S3 buckets (the same actions as the observability buckets): the Agent Platform's CloudNativePG cluster `kagent-pg` backs up to a bucket of that name, provisioned through Crossplane by the `agent-platform-connectivity` chart. Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`.
@@ -383,7 +385,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.2...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.3.0...HEAD
+[8.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.2...v8.3.0
 [8.2.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.1...v8.2.2
 [8.2.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.0...v8.2.1
 [8.2.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.1.0...v8.2.0
