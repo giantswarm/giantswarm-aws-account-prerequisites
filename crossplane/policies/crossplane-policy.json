@@ -17,8 +17,8 @@
                 "ec2:DescribeNetworkInterfaces",
                 "ec2:DescribeSecurityGroupRules",
                 "ec2:DescribeSecurityGroups",
-                "ec2:DetachNetworkInterface",
                 "ec2:DescribeSubnets",
+                "ec2:DetachNetworkInterface",
                 "ec2:ModifyNetworkInterfaceAttribute",
                 "ec2:RevokeSecurityGroupEgress",
                 "ec2:RevokeSecurityGroupIngress",
@@ -203,7 +203,8 @@
             ],
             "Resource": [
                 "arn:*:iam::*:instance-profile/*-control-plane",
-                "arn:*:iam::*:instance-profile/*-worker"
+                "arn:*:iam::*:instance-profile/*-worker",
+                "arn:*:iam::*:instance-profile/nodes-karpenter-*"
             ]
         },
         {

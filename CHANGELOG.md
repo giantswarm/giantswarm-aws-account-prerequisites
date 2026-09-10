@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow managing instance profiles named `nodes-karpenter-*` in the Crossplane policy
+
 ## [8.3.0] - 2026-09-07
 
 ### Added
