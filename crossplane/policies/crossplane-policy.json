@@ -216,7 +216,7 @@
             "Resource": [
                 "arn:*:iam::*:role/*-control-plane",
                 "arn:*:iam::*:role/*-worker",
-                "arn:*:iam::*:instance-profile/nodes-karpenter-*"
+                "arn:*:iam::*:role/nodes-karpenter-*"
             ]
         }
     ]
