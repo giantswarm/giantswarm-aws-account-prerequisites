@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow Crossplane to manage the `giantswarm-*-substrate` S3 buckets (the same actions as the observability buckets): Agent Substrate's snapshot store, provisioned through Crossplane by the `agent-platform-connectivity` chart (giantswarm/agent-platform#411).
+
 ## [8.3.0] - 2026-09-07
 
 ### Added

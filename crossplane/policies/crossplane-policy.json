@@ -182,6 +182,7 @@
                         "giantswarm-*-mimir-alertmanager",
                         "giantswarm-*-mimir-ruler",
                         "giantswarm-*-mimir",
+                        "giantswarm-*-substrate",
                         "giantswarm-*-tempo"
                     ]
                 }
