@@ -29,11 +29,14 @@ data "aws_servicequotas_service_quota" "this" {
   quota_name   = each.value.quota
 }
 
-# Apply a service quota request if the requested quota is higher than the actual quota.
-# If it is lower, the Tofu plan will simply apply without making an API call.
-# This will only error if the requested quota is lower than the default.
+# Request a quota increase only where the account is below the target. AWS has no
+# "set" operation, so asking for a value at or below the current one fails with
+# IllegalArgumentException and breaks the whole apply.
 resource "aws_servicequotas_service_quota" "this" {
-  for_each = local.service_quotas
+  for_each = {
+    for key, quota in local.service_quotas : key => quota
+    if quota.limit > data.aws_servicequotas_service_quota.this[key].value
+  }
 
   service_code = data.aws_servicequotas_service_quota.this[each.key].service_code
   quota_code   = data.aws_servicequotas_service_quota.this[each.key].quota_code

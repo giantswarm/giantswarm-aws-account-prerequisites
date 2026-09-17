@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `service-quotas` requests an increase only where the account is below the target value. An account already above it failed the whole apply with `IllegalArgumentException: You must provide a quota value greater than the current quota value`.
+
 ## [8.4.0] - 2026-09-12
 
 ### Added
