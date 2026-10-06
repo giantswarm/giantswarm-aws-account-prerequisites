@@ -104,6 +104,7 @@
                 "acm:DeleteCertificate",
                 "acm:DescribeCertificate",
                 "acm:ListCertificates",
+                "acm:RemoveTagsFromCertificate",
                 "acm:RequestCertificate"
             ],
             "Resource": "*"
