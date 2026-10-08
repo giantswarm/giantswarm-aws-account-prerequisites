@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.5.1] - 2026-10-08
+
 ### Changed
 
 - Forget the `GiantSwarmReadOnly` IAM role, policy, and policy attachment instead of destroying them, like `GiantSwarmAdmin`. `aws-account-setup` plans with this role, so destroying it broke the plans of a customer whose accounts were being removed. The `read-role` module now requires OpenTofu 1.12.0 or newer.
@@ -401,7 +403,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...HEAD
+[8.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.0...v8.5.1
 [8.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.4.0...v8.5.0
 [8.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.3.0...v8.4.0
 [8.3.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.2.2...v8.3.0
