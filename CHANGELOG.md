@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use inline IAM policies instead of managed policies for the `GiantSwarmAdmin`, `GiantSwarmReadOnly`, and Crossplane roles. The former managed policies stay in place but get detached, and a later release deletes them. Apply this version before destroying these modules, otherwise the managed policy gets detached without the inline policy replacing it. The CAPA controller role keeps its managed policies since together they exceed the size limit for inline policies of a role.
+
 ## [8.5.1] - 2026-10-08
 
 ### Changed
