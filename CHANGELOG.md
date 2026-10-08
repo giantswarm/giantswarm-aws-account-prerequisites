@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Forget the `GiantSwarmAdmin` IAM role, policy, and policy attachment instead of failing on destroy (OpenTofu `lifecycle.destroy = false` instead of `prevent_destroy`). Removing an AWS account from management no longer fails, and the role stays usable until it is deleted manually. The `admin-role` module now requires OpenTofu 1.12.0 or newer.
+
 ## [8.4.0] - 2026-09-12
 
 ### Added
