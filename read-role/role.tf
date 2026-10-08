@@ -229,19 +229,34 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume_trust_full_root_acco
   }
 }
 
+# Forget instead of destroy the read-only role, policy, and attachment since
+# `aws-account-setup` plans with this role, also for accounts listed in its
+# `removed_aws_accounts`. Delete them manually once access is no longer needed.
 resource "aws_iam_role" "giantswarm_read_only" {
   name               = "GiantSwarmReadOnly"
   assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_read_only_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_read_only_assume.json
+
+  lifecycle {
+    destroy = false
+  }
 }
 
 resource "aws_iam_policy" "giantswarm_read_only" {
   name   = "GiantSwarmReadOnly"
   policy = data.aws_iam_policy_document.giantswarm_read_only.minified_json
+
+  lifecycle {
+    destroy = false
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "giantswarm_read_only" {
   role       = aws_iam_role.giantswarm_read_only.name
   policy_arn = aws_iam_policy.giantswarm_read_only.arn
+
+  lifecycle {
+    destroy = false
+  }
 }
 
 resource "aws_iam_role_policy" "additional" {
