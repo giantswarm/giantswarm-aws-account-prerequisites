@@ -284,12 +284,15 @@ data "aws_iam_policy_document" "giantswarm_admin_assume_trust_full_root_account"
   }
 }
 
+# Forget instead of destroy the admin role, policy, and attachment since we lose
+# access to the account without them. Delete them manually once access is no
+# longer needed.
 resource "aws_iam_role" "giantswarm_admin" {
   name               = "GiantSwarmAdmin"
   assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_admin_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_admin_assume.json
 
   lifecycle {
-    prevent_destroy = true
+    destroy = false
   }
 }
 
@@ -298,7 +301,7 @@ resource "aws_iam_policy" "giantswarm_admin_policy" {
   policy = data.aws_iam_policy_document.giantswarm_admin.json
 
   lifecycle {
-    prevent_destroy = true
+    destroy = false
   }
 }
 
@@ -307,7 +310,7 @@ resource "aws_iam_role_policy_attachment" "giantswarm_policy_attachment" {
   policy_arn = aws_iam_policy.giantswarm_admin_policy.arn
 
   lifecycle {
-    prevent_destroy = true
+    destroy = false
   }
 }
 
