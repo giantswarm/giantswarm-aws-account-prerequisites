@@ -284,9 +284,9 @@ data "aws_iam_policy_document" "giantswarm_admin_assume_trust_full_root_account"
   }
 }
 
-# Forget instead of destroy the admin role, policy, and attachment since we lose
-# access to the account without them. Delete them manually once access is no
-# longer needed.
+# Forget instead of destroy the admin role and policies since we lose access to
+# the account without them. Delete them manually once access is no longer
+# needed.
 resource "aws_iam_role" "giantswarm_admin" {
   name               = "GiantSwarmAdmin"
   assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_admin_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_admin_assume.json
@@ -296,6 +296,9 @@ resource "aws_iam_role" "giantswarm_admin" {
   }
 }
 
+# Former managed policy, no longer attached. Remove it in a follow-up release
+# once `exclusive_policy_attachments` detached it in all accounts, since
+# OpenTofu would otherwise try to delete it before detaching it.
 resource "aws_iam_policy" "giantswarm_admin_policy" {
   name   = "GiantSwarmAdmin"
   policy = data.aws_iam_policy_document.giantswarm_admin.json
@@ -305,9 +308,20 @@ resource "aws_iam_policy" "giantswarm_admin_policy" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "giantswarm_policy_attachment" {
-  role       = aws_iam_role.giantswarm_admin.name
-  policy_arn = aws_iam_policy.giantswarm_admin_policy.arn
+resource "aws_iam_role_policy" "giantswarm_admin" {
+  name   = "GiantSwarmAdmin"
+  role   = aws_iam_role.giantswarm_admin.name
+  policy = data.aws_iam_policy_document.giantswarm_admin.json
+
+  lifecycle {
+    destroy = false
+  }
+}
+
+# Leave detaching to `exclusive_policy_attachments` so that it happens only once
+# the inline policy grants access
+removed {
+  from = aws_iam_role_policy_attachment.giantswarm_policy_attachment
 
   lifecycle {
     destroy = false
@@ -331,10 +345,13 @@ resource "aws_iam_role_policy_attachment" "additional_policy_attachments" {
 
 resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
   role_name   = aws_iam_role.giantswarm_admin.name
-  policy_arns = concat([aws_iam_policy.giantswarm_admin_policy.arn], var.additional_policies_arns)
+  policy_arns = var.additional_policies_arns
+
+  # Detach the former managed policy only once the inline policy grants access
+  depends_on = [aws_iam_role_policy.giantswarm_admin]
 }
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_admin.name
-  policy_names = keys(var.additional_policies)
+  policy_names = concat([aws_iam_role_policy.giantswarm_admin.name], keys(var.additional_policies))
 }
