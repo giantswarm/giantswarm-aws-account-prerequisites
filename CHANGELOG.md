@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow Crossplane to create EC2 network interfaces (`ec2:CreateNetworkInterface`). EFS `CreateMountTarget` creates a network interface in the mount target's subnet and [requires this action](https://docs.aws.amazon.com/efs/latest/ug/API_CreateMountTarget.html) next to `ec2:DescribeSubnets` and `ec2:DescribeNetworkInterfaces`, which the role already has. Without it an EFS `MountTarget` managed resource stays `Synced=False` with `AccessDeniedException` although its file system is created (read-write-many volumes of the Agent Platform, giantswarm/agent-platform#887).
+
 ## [8.5.1] - 2026-10-08
 
 ### Changed
