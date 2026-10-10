@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.0] - 2026-10-10
+
 ### Added
 
 - Allow Crossplane to create EC2 network interfaces (`ec2:CreateNetworkInterface`). EFS `CreateMountTarget` creates a network interface in the mount target's subnet and [requires this action](https://docs.aws.amazon.com/efs/latest/ug/API_CreateMountTarget.html) next to `ec2:DescribeSubnets` and `ec2:DescribeNetworkInterfaces`, which the role already has. Without it an EFS `MountTarget` managed resource stays `Synced=False` with `AccessDeniedException` although its file system is created (read-write-many volumes of the Agent Platform, giantswarm/agent-platform#887).
@@ -407,7 +409,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...HEAD
+[8.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...v8.6.0
 [8.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.0...v8.5.1
 [8.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.4.0...v8.5.0
 [8.4.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.3.0...v8.4.0
