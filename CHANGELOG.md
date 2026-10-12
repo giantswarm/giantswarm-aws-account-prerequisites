@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use inline IAM policies instead of managed policies for the `GiantSwarmAdmin`, `GiantSwarmReadOnly`, and Crossplane roles, to try if the roles can then be destroyed completely with Tofu when cleaning up the last remainders of an AWS account, without needing the customer to delete the rest. The managed policies stay attached for now, so the roles never lose permissions during the switch, and a later release deletes them. The CAPA controller role keeps its managed policies since together they exceed the size limit for inline policies of a role.
+
 ## [8.6.0] - 2026-10-10
 
 ### Added
