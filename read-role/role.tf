@@ -229,7 +229,7 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume_trust_full_root_acco
   }
 }
 
-# Forget instead of destroy the read-only role and policies since
+# Forget instead of destroy the read-only role, policies, and attachment since
 # `aws-account-setup` plans with this role, also for accounts listed in its
 # `removed_aws_accounts`. Delete them manually once access is no longer needed.
 resource "aws_iam_role" "giantswarm_read_only" {
@@ -241,12 +241,20 @@ resource "aws_iam_role" "giantswarm_read_only" {
   }
 }
 
-# Former managed policy, no longer attached. Remove it in a follow-up release
-# once `exclusive_policy_attachments` detached it in all accounts, since
-# OpenTofu would otherwise try to delete it before detaching it.
+# Superseded by the inline policy. Keep it attached until a follow-up release
+# deletes it, so that switching never leaves the role without permissions.
 resource "aws_iam_policy" "giantswarm_read_only" {
   name   = "GiantSwarmReadOnly"
   policy = data.aws_iam_policy_document.giantswarm_read_only.minified_json
+
+  lifecycle {
+    destroy = false
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "giantswarm_read_only" {
+  role       = aws_iam_role.giantswarm_read_only.name
+  policy_arn = aws_iam_policy.giantswarm_read_only.arn
 
   lifecycle {
     destroy = false
@@ -257,16 +265,6 @@ resource "aws_iam_role_policy" "giantswarm_read_only" {
   name   = "GiantSwarmReadOnly"
   role   = aws_iam_role.giantswarm_read_only.name
   policy = data.aws_iam_policy_document.giantswarm_read_only.minified_json
-
-  lifecycle {
-    destroy = false
-  }
-}
-
-# Leave detaching to `exclusive_policy_attachments` so that it happens only once
-# the inline policy grants access
-removed {
-  from = aws_iam_role_policy_attachment.giantswarm_read_only
 
   lifecycle {
     destroy = false
@@ -291,10 +289,7 @@ resource "aws_iam_role_policy_attachment" "additional" {
 
 resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachments" {
   role_name   = aws_iam_role.giantswarm_read_only.name
-  policy_arns = var.additional_policies_arns
-
-  # Detach the former managed policy only once the inline policy grants access
-  depends_on = [aws_iam_role_policy.giantswarm_read_only]
+  policy_arns = concat([aws_iam_policy.giantswarm_read_only.arn], var.additional_policies_arns)
 }
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
