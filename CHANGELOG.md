@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow `GiantSwarmAdmin` to attach and detach `GiantSwarmAssumeRolePolicy` on the `*-capa-controller` and `*-crossplane` IAM users. In the China partition, the root account is also a customer account whose `GiantSwarmAdmin` role comes from this module, so `aws-account-setup` failed to apply with `AccessDenied ... iam:AttachUserPolicy`.
+
 ## [8.6.0] - 2026-10-10
 
 ### Added
