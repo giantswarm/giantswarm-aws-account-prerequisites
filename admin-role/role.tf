@@ -121,7 +121,7 @@ data "aws_iam_policy_document" "giantswarm_admin" {
     actions   = ["ec2:*"]
   }
 
-  # Let `aws-account-setup` attach `GiantSwarmAssumeRolePolicy` to the per-installation IAM users in the root account
+  # Let `aws-account-setup` attach policies to the per-installation IAM users in the root account
   statement {
     effect = "Allow"
     resources = [
@@ -132,12 +132,6 @@ data "aws_iam_policy_document" "giantswarm_admin" {
       "iam:AttachUserPolicy",
       "iam:DetachUserPolicy",
     ]
-
-    condition {
-      test     = "ArnLike"
-      variable = "iam:PolicyARN"
-      values   = ["arn:${data.aws_partition.current.partition}:iam::*:policy/GiantSwarmAssumeRolePolicy"]
-    }
   }
 
   # Deny write/modify VPC-related EC2 actions when byovpc is true
