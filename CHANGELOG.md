@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow Crossplane to remove tags from ACM certificates (`acm:RemoveTagsFromCertificate`). Without it, the IRSA CloudFront certificates of `crossplane-fn-irsa` stay `Synced=False` with `AccessDeniedException` whenever the live certificate has tags missing from the managed resource's spec.
+
 ## [8.6.1] - 2026-10-13
 
 ### Fixed
