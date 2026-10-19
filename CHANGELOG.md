@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.2] - 2026-10-19
+
 ### Added
 
 - Allow Crossplane to remove tags from ACM certificates (`acm:RemoveTagsFromCertificate`). Without it, the IRSA CloudFront certificates of `crossplane-fn-irsa` stay `Synced=False` with `AccessDeniedException` whenever the live certificate has tags missing from the managed resource's spec.
@@ -419,7 +421,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...HEAD
+[8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
 [8.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...v8.6.1
 [8.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...v8.6.0
 [8.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.0...v8.5.1
