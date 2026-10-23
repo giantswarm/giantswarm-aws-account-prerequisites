@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Allow Crossplane to manage the `giantswarm-*-support-portal` S3 buckets (the same actions as the observability buckets): the Giant Swarm Support Portal's attachments bucket `giantswarm-gazelle-support-portal`, provisioned through Crossplane on gazelle (giantswarm/workload-clusters-fleet#2262). Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
+
 ## [8.6.2] - 2026-10-19
 
 ### Added

@@ -185,6 +185,7 @@
                         "giantswarm-*-mimir-ruler",
                         "giantswarm-*-mimir",
                         "giantswarm-*-substrate",
+                        "giantswarm-*-support-portal",
                         "giantswarm-*-tempo"
                     ]
                 }
