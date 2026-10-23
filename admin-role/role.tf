@@ -297,9 +297,9 @@ data "aws_iam_policy_document" "giantswarm_admin_assume_trust_full_root_account"
   }
 }
 
-# Forget instead of destroy the admin role, policy, and attachment since we lose
-# access to the account without them. Delete them manually once access is no
-# longer needed.
+# Forget instead of destroy the admin role, policies, and attachment since we
+# lose access to the account without them. Delete them manually once access is
+# no longer needed.
 resource "aws_iam_role" "giantswarm_admin" {
   name               = "GiantSwarmAdmin"
   assume_role_policy = var.trust_full_root_account ? data.aws_iam_policy_document.giantswarm_admin_assume_trust_full_root_account.json : data.aws_iam_policy_document.giantswarm_admin_assume.json
@@ -309,6 +309,8 @@ resource "aws_iam_role" "giantswarm_admin" {
   }
 }
 
+# Superseded by the inline policy. Keep it attached until a follow-up release
+# deletes it, so that switching never leaves the role without permissions.
 resource "aws_iam_policy" "giantswarm_admin_policy" {
   name   = "GiantSwarmAdmin"
   policy = data.aws_iam_policy_document.giantswarm_admin.json
@@ -321,6 +323,16 @@ resource "aws_iam_policy" "giantswarm_admin_policy" {
 resource "aws_iam_role_policy_attachment" "giantswarm_policy_attachment" {
   role       = aws_iam_role.giantswarm_admin.name
   policy_arn = aws_iam_policy.giantswarm_admin_policy.arn
+
+  lifecycle {
+    destroy = false
+  }
+}
+
+resource "aws_iam_role_policy" "giantswarm_admin" {
+  name   = "GiantSwarmAdmin"
+  role   = aws_iam_role.giantswarm_admin.name
+  policy = data.aws_iam_policy_document.giantswarm_admin.json
 
   lifecycle {
     destroy = false
@@ -349,5 +361,5 @@ resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachmen
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_admin.name
-  policy_names = keys(var.additional_policies)
+  policy_names = concat([aws_iam_role_policy.giantswarm_admin.name], keys(var.additional_policies))
 }
