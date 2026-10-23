@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use inline IAM policies instead of managed policies for the `GiantSwarmAdmin`, `GiantSwarmReadOnly`, and Crossplane roles, to try if the roles can then be destroyed completely with Tofu when cleaning up the last remainders of an AWS account, without needing the customer to delete the rest. The managed policies stay attached for now, so the roles never lose permissions during the switch, and a later release deletes them. The CAPA controller role keeps its managed policies since together they exceed the size limit for inline policies of a role.
 
+## [8.6.2] - 2026-10-19
+
+### Added
+
+- Allow Crossplane to remove tags from ACM certificates (`acm:RemoveTagsFromCertificate`). Without it, the IRSA CloudFront certificates of `crossplane-fn-irsa` stay `Synced=False` with `AccessDeniedException` whenever the live certificate has tags missing from the managed resource's spec.
+
+## [8.6.1] - 2026-10-13
+
+### Fixed
+
+- Allow `GiantSwarmAdmin` to attach and detach managed policies on the `*-capa-controller` and `*-crossplane` IAM users
+
 ## [8.6.0] - 2026-10-10
 
 ### Added
@@ -413,7 +425,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...HEAD
+[8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
+[8.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...v8.6.1
 [8.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...v8.6.0
 [8.5.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.0...v8.5.1
 [8.5.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.4.0...v8.5.0
