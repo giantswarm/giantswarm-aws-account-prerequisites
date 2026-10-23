@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.6.3] - 2026-10-23
+
 ### Added
 
 - Allow Crossplane to manage the `giantswarm-*-support-portal` S3 buckets (the same actions as the observability buckets): the Giant Swarm Support Portal's attachments bucket `giantswarm-gazelle-support-portal`, provisioned through Crossplane on gazelle (giantswarm/workload-clusters-fleet#2262). Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
@@ -425,7 +427,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.3...HEAD
+[8.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...v8.6.3
 [8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
 [8.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...v8.6.1
 [8.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...v8.6.0
