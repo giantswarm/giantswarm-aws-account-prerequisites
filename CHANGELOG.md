@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use inline IAM policies instead of managed policies for the `GiantSwarmAdmin`, `GiantSwarmReadOnly`, and Crossplane roles, to try if the roles can then be destroyed completely with Tofu when cleaning up the last remainders of an AWS account, without needing the customer to delete the rest. The managed policies stay attached for now, so the roles never lose permissions during the switch, and a later release deletes them. The CAPA controller role keeps its managed policies since together they exceed the size limit for inline policies of a role.
 
+## [8.6.3] - 2026-10-23
+
+### Added
+
+- Allow Crossplane to manage the `giantswarm-*-support-portal` S3 buckets (the same actions as the observability buckets): the Giant Swarm Support Portal's attachments bucket `giantswarm-gazelle-support-portal`, provisioned through Crossplane on gazelle (giantswarm/workload-clusters-fleet#2262). Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
+
 ## [8.6.2] - 2026-10-19
 
 ### Added
@@ -425,7 +431,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.3...HEAD
+[8.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...v8.6.3
 [8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
 [8.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...v8.6.1
 [8.6.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.5.1...v8.6.0
