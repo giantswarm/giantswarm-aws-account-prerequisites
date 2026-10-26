@@ -229,7 +229,7 @@ data "aws_iam_policy_document" "giantswarm_read_only_assume_trust_full_root_acco
   }
 }
 
-# Forget instead of destroy the read-only role, policy, and attachment since
+# Forget instead of destroy the read-only role, policies, and attachment since
 # `aws-account-setup` plans with this role, also for accounts listed in its
 # `removed_aws_accounts`. Delete them manually once access is no longer needed.
 resource "aws_iam_role" "giantswarm_read_only" {
@@ -241,6 +241,8 @@ resource "aws_iam_role" "giantswarm_read_only" {
   }
 }
 
+# Superseded by the inline policy. Keep it attached until a follow-up release
+# deletes it, so that switching never leaves the role without permissions.
 resource "aws_iam_policy" "giantswarm_read_only" {
   name   = "GiantSwarmReadOnly"
   policy = data.aws_iam_policy_document.giantswarm_read_only.minified_json
@@ -253,6 +255,16 @@ resource "aws_iam_policy" "giantswarm_read_only" {
 resource "aws_iam_role_policy_attachment" "giantswarm_read_only" {
   role       = aws_iam_role.giantswarm_read_only.name
   policy_arn = aws_iam_policy.giantswarm_read_only.arn
+
+  lifecycle {
+    destroy = false
+  }
+}
+
+resource "aws_iam_role_policy" "giantswarm_read_only" {
+  name   = "GiantSwarmReadOnly"
+  role   = aws_iam_role.giantswarm_read_only.name
+  policy = data.aws_iam_policy_document.giantswarm_read_only.minified_json
 
   lifecycle {
     destroy = false
@@ -282,5 +294,5 @@ resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachmen
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_read_only.name
-  policy_names = keys(var.additional_policies)
+  policy_names = concat([aws_iam_role_policy.giantswarm_read_only.name], keys(var.additional_policies))
 }

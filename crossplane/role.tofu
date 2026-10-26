@@ -18,6 +18,8 @@ resource "aws_iam_role" "giantswarm_crossplane_role" {
   description = "Giant Swarm managed role for Crossplane"
 }
 
+# Superseded by the inline policy. Keep it attached until a follow-up release
+# deletes it, so that switching never leaves the role without permissions.
 resource "aws_iam_policy" "giantswarm_crossplane_policy" {
   name        = "giantswarm-${var.installation_name}-crossplane"
   policy      = file("${path.module}/policies/crossplane-policy.json")
@@ -27,6 +29,12 @@ resource "aws_iam_policy" "giantswarm_crossplane_policy" {
 resource "aws_iam_role_policy_attachment" "giantswarm_crossplane_policy_attachment" {
   role       = aws_iam_role.giantswarm_crossplane_role.name
   policy_arn = aws_iam_policy.giantswarm_crossplane_policy.arn
+}
+
+resource "aws_iam_role_policy" "giantswarm_crossplane" {
+  name   = "giantswarm-${var.installation_name}-crossplane"
+  role   = aws_iam_role.giantswarm_crossplane_role.name
+  policy = file("${path.module}/policies/crossplane-policy.json")
 }
 
 resource "aws_iam_role_policy" "additional_inline_policies" {
@@ -53,5 +61,5 @@ resource "aws_iam_role_policy_attachments_exclusive" "exclusive_policy_attachmen
 
 resource "aws_iam_role_policies_exclusive" "exclusive_inline_policies" {
   role_name    = aws_iam_role.giantswarm_crossplane_role.name
-  policy_names = keys(var.additional_policies)
+  policy_names = concat([aws_iam_role_policy.giantswarm_crossplane.name], keys(var.additional_policies))
 }
