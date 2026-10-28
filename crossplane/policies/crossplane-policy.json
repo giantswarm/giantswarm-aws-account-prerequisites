@@ -184,6 +184,7 @@
                         "giantswarm-*-mimir-alertmanager",
                         "giantswarm-*-mimir-ruler",
                         "giantswarm-*-mimir",
+                        "giantswarm-*-oneonone-backup",
                         "giantswarm-*-substrate",
                         "giantswarm-*-support-portal",
                         "giantswarm-*-tempo"
