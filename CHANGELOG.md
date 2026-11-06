@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Allow Crossplane to manage the `giantswarm-*-oneonone-backup` S3 buckets (the same actions as the observability buckets): the database backups of oneonone (`giantswarm/oneonone`), bucket `giantswarm-operations-oneonone-backup`, provisioned through Crossplane on gazelle. Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
+- Allow Crossplane to manage the `giantswarm-*-oneonone-backup` S3 buckets (the same actions as the observability buckets), for the database backups of oneonone. Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
 
 ### Changed
 
