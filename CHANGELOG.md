@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.7.0] - 2026-11-09
+
 ### Added
 
 - Allow Crossplane to manage the `giantswarm-*-oneonone-backup` S3 buckets (the same actions as the observability buckets), for the database backups of oneonone. Without this the `Bucket` managed resource stays `Synced=False` with `AccessDenied ... s3:CreateBucket`, and `ClusterCrossplaneResourcesNotReady` pages.
@@ -435,7 +437,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.3...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.7.0...HEAD
+[8.7.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.3...v8.7.0
 [8.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...v8.6.3
 [8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
 [8.6.1]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.0...v8.6.1
