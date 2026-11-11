@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Delete the managed policies and policy attachments of the `GiantSwarmAdmin`, `GiantSwarmReadOnly`, and Crossplane roles, which the inline policies replaced. Apply v8.7.0, which adds the inline policies, first, otherwise the roles lose their permissions.
+
 ## [8.7.0] - 2026-11-09
 
 ### Added
