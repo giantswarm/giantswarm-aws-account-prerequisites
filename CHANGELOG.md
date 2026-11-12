@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.8.0] - 2026-11-12
+
 ### Fixed
 
 - Stop the `service-quotas` module from requesting quota values below the current quota. Once a quota was raised above the configured value, for example by AWS or a manual request, every apply failed with `IllegalArgumentException: You must provide a quota value greater than the current quota value`.
@@ -441,7 +443,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First release.
 
-[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.7.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.8.0...HEAD
+[8.8.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.7.0...v8.8.0
 [8.7.0]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.3...v8.7.0
 [8.6.3]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.2...v8.6.3
 [8.6.2]: https://github.com/giantswarm/giantswarm-aws-account-prerequisites/compare/v8.6.1...v8.6.2
