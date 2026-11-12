@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Stop the `service-quotas` module from requesting quota values below the current quota. Once a quota was raised above the configured value, for example by AWS or a manual request, every apply failed with `IllegalArgumentException: You must provide a quota value greater than the current quota value`.
+
 ## [8.7.0] - 2026-11-09
 
 ### Added
